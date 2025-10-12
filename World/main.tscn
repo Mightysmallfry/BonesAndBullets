@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bes2m1ih8wyfj"]
+
+[ext_resource type="Script" uid="uid://b2u0b1aphoqw8" path="res://World/main.gd" id="1_njf5y"]
+[ext_resource type="PackedScene" uid="uid://8mcs68hhsnug" path="res://StoryEvents/story_event_display.tscn" id="2_qf6be"]
+[ext_resource type="PackedScene" uid="uid://c5uncovgc3rkm" path="res://Assets/ProgressBars/timed_progress_bar.tscn" id="3_cwkwy"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_njf5y")
+
+[node name="StoryProgressionTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StoryEventTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="UI" type="Node" parent="."]
+
+[node name="StoryEventDisplay" parent="UI" instance=ExtResource("2_qf6be")]
+unique_name_in_owner = true
+
+[node name="StoryEventBar" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("3_cwkwy")]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 55.0
+offset_top = 47.0
+offset_right = 314.0
+offset_bottom = 79.0
+grow_horizontal = 1
+grow_vertical = 1
+timer = NodePath("../../StoryEventTimer")
+
+[node name="StoryProgressionBar" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("3_cwkwy")]
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -94.0
+offset_bottom = -62.0
+grow_vertical = 0
+timer = NodePath("../../StoryProgressionTimer")
+
+[connection signal="timeout" from="StoryEventTimer" to="." method="_on_story_event_timer_timeout"]
