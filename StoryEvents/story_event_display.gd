@@ -8,10 +8,14 @@ extends Control
 # we don't really need the export but it's useful for creating the resource
 @export var storyEventData: StoryEventData
 
+
+signal finished_story_event
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = false
 	clear_vbox(choiceList)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -42,30 +46,34 @@ func create_choice_list() -> void:
 		choiceList.add_child(button)
 
 func _on_choice_pressed(choiceData: StoryChoice):
-	print("Choices have been made as: %s", choiceData.ChoiceDescription)
+	print("Choices have been made as: " + choiceData.ChoiceDescription)
 	# Here is where we do a switch based off of the enum
 
 	match choiceData.ChoiceType:
 		StoryChoice.ChoiceTypeEnum.CONTINUE:
-			visible = false
+			finish_story_event()
 			# Emit continue signal to resume immediately
 			return
 		StoryChoice.ChoiceTypeEnum.BULLET:
 			print("No man outsmarts bullet")
-			visible = false
 			#Process effects of choice
-			
+			finish_story_event()
 			# Emit continue signal
 			return
 		StoryChoice.ChoiceTypeEnum.HEALTH:
 			print("No man outsmarts Health")
-			visible = false
+			finish_story_event()
 			return
 		StoryChoice.ChoiceTypeEnum.PROGRESS:
 			print("No man outsmarts Progress")
-			visible = false
+			finish_story_event()
 			return
 		StoryChoice.ChoiceTypeEnum.GAMBLE:
 			print("No man outsmarts Gamble")
-			visible = false
+			finish_story_event()
 			return
+			
+			
+func finish_story_event() -> void:
+	visible = false
+	emit_signal("finished_story_event")

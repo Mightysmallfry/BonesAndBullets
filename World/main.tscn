@@ -8,9 +8,11 @@
 script = ExtResource("1_njf5y")
 
 [node name="StoryProgressionTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
 
 [node name="StoryEventTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
 
 [node name="UI" type="Node" parent="."]

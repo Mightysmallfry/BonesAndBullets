@@ -11,8 +11,11 @@ const STORY_EVENT_DIR: String = "res://StoryEvents/EventCache"
 var _CachedEventFiles: Array[String] = []
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	StoryEventDisplay.connect("finished_story_event", Callable(self, "_on_finished_story_event"))
+	
 	Globals.set_max_time(DestinationTimer, Globals.DestinationTime)
 	Globals.set_max_time(StoryEventTimer, Globals.TimeBetweenStoryEvents)
 	
@@ -36,7 +39,7 @@ func load_story_events(dirPath: String) -> Array[String]:
 	var files: Array[String] = []
 	
 	if dir == null:
-		push_error("Could not find story event cache directory: %s", %dirPath)
+		push_error("Could not find story event cache directory: " + dirPath)
 		return files
 	
 	dir.list_dir_begin()
@@ -60,7 +63,7 @@ func get_random_story_event_data() -> StoryEventData:
 	
 	var storyDataAsResource: Resource = load(storyEventPath)
 	if storyDataAsResource == null or not storyDataAsResource is StoryEventData:
-		push_error("Failed to load valid StoryEventData at: %s", storyEventPath)
+		push_error("Failed to load valid StoryEventData at: " + storyEventPath)
 		return null
 	
 	return storyDataAsResource as StoryEventData
@@ -70,7 +73,18 @@ func _on_story_event_timer_timeout() -> void:
 	
 	var storyEventData: StoryEventData = get_random_story_event_data()
 	if (storyEventData):
-		print("Loaded StoryEvent: %s", storyEventData.Title)
+		print("Loaded StoryEvent: " + storyEventData.Title)
 	
 	StoryEventDisplay.load_story_event_data(storyEventData)
 	StoryEventDisplay.visible = true
+	
+	
+	
+func _on_finished_story_event() -> void:
+	# Continue Destination, restart eventTimer
+	# If we want slight variations in time, this is where we would implement it.
+	# then we also have to update the bars
+	DestinationTimer.set_paused(false)
+	StoryEventTimer.start()
+	
+	print("Game has resumed")
