@@ -23,8 +23,8 @@ func _process(delta: float) -> void:
 
 func load_story_event_data(data: StoryEventData) -> void:
 	storyEventData = data;
-	storyEventTitle.text = storyEventData.Title
-	dialogBox.set_dialog(storyEventData.Dialog)
+	storyEventTitle.text = storyEventData.title
+	dialogBox.set_dialog(storyEventData.dialog)
 	create_choice_list()
 	
 func clear_vbox(vbox: VBoxContainer):
@@ -39,7 +39,7 @@ func create_choice_list() -> void:
 	clear_vbox(choiceList)
 	
 	# Add the current choices
-	for choice: StoryChoice in storyEventData.Choices:
+	for choice: StoryChoice in storyEventData.choices:
 		var button: ChoiceButton = choiceButton.instantiate() as ChoiceButton
 		button.choiceData = choice
 		button.connect("choice_pressed", Callable(self, "_on_choice_pressed"))		

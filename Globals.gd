@@ -1,17 +1,17 @@
 extends Node
 
 
-@export var PlayerHealth: int = 100
-@export var StartingBones: int = 319
-@export var Bullets: int = 6
+@export var playerHealth: int = 100
+@export var startingBones: int = 319
+@export var bullets: int = 6
 
 # Measured in seconds ~5 minutes
-@export var DestinationTime: float = 300
+@export var destinationTime: float = 300
 # This could change as a range of 20-40 seconds
 # When story event happens, pause the time until destination.
-@export var TimeBetweenStoryEvents: float = 10
+@export var timeBetweenStoryEvents: float = 10
 
-var timer_max_times: Dictionary = { }
+var timerMaxTimes: Dictionary = { }
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,12 +22,12 @@ func _process(delta: float) -> void:
 	pass
 
 func set_max_time(timer: Timer, max_time: float):
-	timer_max_times[timer] = max_time
+	timerMaxTimes[timer] = max_time
 	
 func has_timer(timer: Timer) -> bool:
-	return timer in timer_max_times
+	return timer in timerMaxTimes
 	
 func get_max_time(timer: Timer) -> float:
-	if timer in timer_max_times:
-		return timer_max_times[timer]
+	if timer in timerMaxTimes:
+		return timerMaxTimes[timer]
 	return 0.0 

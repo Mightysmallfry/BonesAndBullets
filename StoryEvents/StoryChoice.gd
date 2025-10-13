@@ -10,6 +10,6 @@ enum ChoiceTypeEnum { CONTINUE, BULLET, HEALTH, PROGRESS, GAMBLE }
 # Progress - effects progress, +- time on the timer
 # Gamble - better or worse future outcomes. It's ok if we fail to implement
 
-@export var ChoiceType: ChoiceTypeEnum
-@export var ChoiceDescription: String
-@export var Rewards: Array[int]
+@export var choiceType: ChoiceTypeEnum
+@export var choiceDescription: String
+@export var rewards: Array[int]

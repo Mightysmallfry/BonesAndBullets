@@ -1,9 +1,9 @@
 extends Resource
 class_name StoryEventData
 
-@export var Title: String
-@export var Dialog: String
-@export var Choices: Array[StoryChoice]
+@export var title: String
+@export var dialog: String
+@export var choices: Array[StoryChoice]
 
 # Perhaps an array of StoryEventButtons?
 # They are resource of enum, reward(array of ints) and string vals?

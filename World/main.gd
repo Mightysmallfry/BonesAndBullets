@@ -1,33 +1,32 @@
 extends Node2D
 
 # Both timers must be started again if we want to have them run once more
-@onready var DestinationTimer: Timer = get_node("StoryProgressionTimer")
-@onready var StoryEventTimer: Timer = get_node("StoryEventTimer")
-
-@onready var StoryEventDisplay: Control = get_node("%StoryEventDisplay")
+@onready var destinationTimer: Timer = get_node("StoryProgressionTimer")
+@onready var storyEventTimer: Timer = get_node("StoryEventTimer")
+@onready var storyEventDisplay: Control = get_node("%StoryEventDisplay")
 
 
 const STORY_EVENT_DIR: String = "res://StoryEvents/EventCache"
-var _CachedEventFiles: Array[String] = []
+var _cachedEventFiles: Array[String] = []
 
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	StoryEventDisplay.connect("finished_story_event", Callable(self, "_on_finished_story_event"))
+	storyEventDisplay.connect("finished_story_event", Callable(self, "_on_finished_story_event"))
 	
-	Globals.set_max_time(DestinationTimer, Globals.DestinationTime)
-	Globals.set_max_time(StoryEventTimer, Globals.TimeBetweenStoryEvents)
+	Globals.set_max_time(destinationTimer, Globals.destinationTime)
+	Globals.set_max_time(storyEventTimer, Globals.timeBetweenStoryEvents)
 	
-	DestinationTimer.wait_time = Globals.get_max_time(DestinationTimer)
-	StoryEventTimer.wait_time = Globals.get_max_time(StoryEventTimer)
+	destinationTimer.wait_time = Globals.get_max_time(destinationTimer)
+	storyEventTimer.wait_time = Globals.get_max_time(storyEventTimer)
 	
-	_CachedEventFiles = load_story_events(STORY_EVENT_DIR)
+	_cachedEventFiles = load_story_events(STORY_EVENT_DIR)
 
-	if (Globals.has_timer(DestinationTimer)):
-		DestinationTimer.start()
-	if (Globals.has_timer(StoryEventTimer)):
-		StoryEventTimer.start()
+	if (Globals.has_timer(destinationTimer)):
+		destinationTimer.start()
+	if (Globals.has_timer(storyEventTimer)):
+		storyEventTimer.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,12 +53,12 @@ func load_story_events(dirPath: String) -> Array[String]:
 	return files
 
 func get_random_story_event_data() -> StoryEventData:
-	if _CachedEventFiles.is_empty():
+	if _cachedEventFiles.is_empty():
 		push_error("No events resources found in: %s", STORY_EVENT_DIR)
 		return null
 		
-	var randomIndex: int = randi() % _CachedEventFiles.size()
-	var storyEventPath: String = _CachedEventFiles[randomIndex]
+	var randomIndex: int = randi() % _cachedEventFiles.size()
+	var storyEventPath: String = _cachedEventFiles[randomIndex]
 	
 	var storyDataAsResource: Resource = load(storyEventPath)
 	if storyDataAsResource == null or not storyDataAsResource is StoryEventData:
@@ -69,14 +68,14 @@ func get_random_story_event_data() -> StoryEventData:
 	return storyDataAsResource as StoryEventData
 
 func _on_story_event_timer_timeout() -> void:
-	DestinationTimer.set_paused(true)
+	destinationTimer.set_paused(true)
 	
 	var storyEventData: StoryEventData = get_random_story_event_data()
 	if (storyEventData):
 		print("Loaded StoryEvent: " + storyEventData.Title)
 	
-	StoryEventDisplay.load_story_event_data(storyEventData)
-	StoryEventDisplay.visible = true
+	storyEventDisplay.load_story_event_data(storyEventData)
+	storyEventDisplay.visible = true
 	
 	
 	
@@ -84,7 +83,7 @@ func _on_finished_story_event() -> void:
 	# Continue Destination, restart eventTimer
 	# If we want slight variations in time, this is where we would implement it.
 	# then we also have to update the bars
-	DestinationTimer.set_paused(false)
-	StoryEventTimer.start()
+	destinationTimer.set_paused(false)
+	storyEventTimer.start()
 	
 	print("Game has resumed")

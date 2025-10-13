@@ -8,7 +8,7 @@ signal choice_pressed(data: StoryChoice)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if choiceData != null:
-		text = choiceData.ChoiceDescription
+		text = choiceData.choiceDescription
 	self.pressed.connect(_on_pressed)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
