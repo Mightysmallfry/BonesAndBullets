@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://d13yw33pf5jfv"]
+
+[ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://c31nidxfv8nf" path="res://main_menu.gd" id="1_fu7sn"]
+[ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://SnowEffect.gd" id="2_7vrkn"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vrkn"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_fu7sn"]
+_data = [Vector2(0, 0.20621163), 0.0, 0.0, 0, 0, Vector2(0.16337523, 0.6841326), 2.0416834, 2.0416834, 0, 0, Vector2(0.49730703, 1), 0.0, 0.0, 0, 0, Vector2(0.83482945, 0.78575945), -1.6010544, -1.6010544, 0, 0, Vector2(1, 0.1869849), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_jix8l"]
+curve = SubResource("Curve_fu7sn")
+
+[sub_resource type="Gradient" id="Gradient_glbon"]
+colors = PackedColorArray(1, 1, 1, 0.078431375, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nlkkf"]
+gradient = SubResource("Gradient_glbon")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qe12f"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -324, 0)
+emission_shape = 3
+emission_box_extents = Vector3(648, 1, 1)
+gravity = Vector3(0, 30, 0)
+scale_min = 0.19999999
+color = Color(0.54509807, 0.8980392, 1, 1)
+color_initial_ramp = SubResource("GradientTexture1D_nlkkf")
+alpha_curve = SubResource("CurveTexture_jix8l")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fu7sn")
+
+[node name="UiElements" type="Node" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="UiElements"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_06t4h")
+
+[node name="MarginContainer" type="MarginContainer" parent="UiElements"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 36.0
+offset_right = 128.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UiElements/MarginContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="UiElements/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Begin Your Expedition"
+
+[node name="QuitButton" type="Button" parent="UiElements/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="Label" type="Label" parent="UiElements"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = 96.0
+offset_right = 128.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Bloodied Bones"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/Node2D"]
+material = SubResource("CanvasItemMaterial_7vrkn")
+position = Vector2(576, 320)
+amount = 1000
+lifetime = 7.0
+preprocess = 0.5
+visibility_rect = Rect2(-576, -324, 1152, 648)
+process_material = SubResource("ParticleProcessMaterial_qe12f")
+script = ExtResource("2_7vrkn")
+
+[connection signal="pressed" from="UiElements/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="UiElements/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -7,11 +7,13 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_njf5y")
 
-[node name="StoryProgressionTimer" type="Timer" parent="."]
+[node name="Timers" type="Node" parent="."]
+
+[node name="StoryProgressionTimer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
 one_shot = true
 
-[node name="StoryEventTimer" type="Timer" parent="."]
+[node name="StoryEventTimer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
 one_shot = true
 
@@ -32,7 +34,7 @@ offset_right = 314.0
 offset_bottom = 79.0
 grow_horizontal = 1
 grow_vertical = 1
-timer = NodePath("../../StoryEventTimer")
+timer = NodePath("../../Timers/StoryEventTimer")
 
 [node name="StoryProgressionBar" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("3_cwkwy")]
 anchors_preset = 7
@@ -41,6 +43,6 @@ anchor_bottom = 1.0
 offset_top = -94.0
 offset_bottom = -62.0
 grow_vertical = 0
-timer = NodePath("../../StoryProgressionTimer")
+timer = NodePath("../../Timers/StoryProgressionTimer")
 
-[connection signal="timeout" from="StoryEventTimer" to="." method="_on_story_event_timer_timeout"]
+[connection signal="timeout" from="Timers/StoryEventTimer" to="." method="_on_story_event_timer_timeout"]

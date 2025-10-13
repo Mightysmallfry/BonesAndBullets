@@ -46,10 +46,10 @@ func create_choice_list() -> void:
 		choiceList.add_child(button)
 
 func _on_choice_pressed(choiceData: StoryChoice):
-	print("Choices have been made as: " + choiceData.ChoiceDescription)
+	print("Choices have been made as: " + choiceData.choiceDescription)
 	# Here is where we do a switch based off of the enum
 
-	match choiceData.ChoiceType:
+	match choiceData.choiceType:
 		StoryChoice.ChoiceTypeEnum.CONTINUE:
 			finish_story_event()
 			# Emit continue signal to resume immediately

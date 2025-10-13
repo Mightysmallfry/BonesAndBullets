@@ -72,7 +72,7 @@ func _on_story_event_timer_timeout() -> void:
 	
 	var storyEventData: StoryEventData = get_random_story_event_data()
 	if (storyEventData):
-		print("Loaded StoryEvent: " + storyEventData.Title)
+		print("Loaded StoryEvent: " + storyEventData.title)
 	
 	storyEventDisplay.load_story_event_data(storyEventData)
 	storyEventDisplay.visible = true

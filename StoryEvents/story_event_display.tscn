@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxngyqdhchio2" path="res://StoryEvents/story_event_display.gd" id="1_gtd4a"]
 [ext_resource type="Script" uid="uid://ckf7oqtj1e72q" path="res://StoryEvents/dialog_box.gd" id="2_hbgmf"]
-[ext_resource type="Resource" uid="uid://di4id81lti10m" path="res://StoryEvents/EventCache/Outlaws.tres" id="3_bg2dx"]
+[ext_resource type="Resource" uid="uid://bplt53ciknggg" path="res://StoryEvents/EventCache/OutlawStoryEvent.tres" id="3_bg2dx"]
 [ext_resource type="PackedScene" uid="uid://dq587ufv1bnf8" path="res://StoryEvents/ChoiceButton.tscn" id="3_q4lvn"]
 
 [node name="StoryEventDisplay" type="Control"]
