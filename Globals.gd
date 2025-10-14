@@ -1,5 +1,4 @@
-extends Node
-
+extends Node2D
 
 @export var playerHealth: int = 100
 @export var startingBones: int = 319
@@ -11,11 +10,23 @@ extends Node
 # When story event happens, pause the time until destination.
 @export var timeBetweenStoryEvents: float = 10
 
+@export var baseScreenSize: Vector2 = Vector2(1152, 648) # baseline to scale from
+@export var baseAmount: int = 1000  # particle amount at base resolution
+@export var baseScale: float = 1.0 # particle scale at base resolution
+
 var timerMaxTimes: Dictionary = { }
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+
+func get_scale_factor() -> float:
+	var viewport_size: Vector2 = get_viewport_rect().size
+	var screenHeight: float = viewport_size.y
+	var screenWidth: float = viewport_size.x
+	
+	return ((screenWidth * screenHeight) / (baseScreenSize.x * baseScreenSize.y))
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

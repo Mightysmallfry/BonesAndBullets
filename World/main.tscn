@@ -1,8 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://bes2m1ih8wyfj"]
+[gd_scene load_steps=13 format=3 uid="uid://bes2m1ih8wyfj"]
 
 [ext_resource type="Script" uid="uid://b2u0b1aphoqw8" path="res://World/main.gd" id="1_njf5y"]
+[ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="2_8pwpp"]
 [ext_resource type="PackedScene" uid="uid://8mcs68hhsnug" path="res://StoryEvents/story_event_display.tscn" id="2_qf6be"]
 [ext_resource type="PackedScene" uid="uid://c5uncovgc3rkm" path="res://Assets/ProgressBars/timed_progress_bar.tscn" id="3_cwkwy"]
+[ext_resource type="Texture2D" uid="uid://bhpttfampob5" path="res://Assets/WorldWallpaper/GameJamForeground.png" id="3_xpxos"]
+[ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://SnowEffect.gd" id="4_d55jh"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h5rms"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_8pwpp"]
+_data = [Vector2(0, 0.20621163), 0.0, 0.0, 0, 0, Vector2(0.16337523, 0.6841326), 2.0416834, 2.0416834, 0, 0, Vector2(0.49730703, 1), 0.0, 0.0, 0, 0, Vector2(0.83482945, 0.78575945), -1.6010544, -1.6010544, 0, 0, Vector2(1, 0.1869849), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_jix8l"]
+curve = SubResource("Curve_8pwpp")
+
+[sub_resource type="Gradient" id="Gradient_xpxos"]
+colors = PackedColorArray(1, 1, 1, 0.078431375, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nlkkf"]
+gradient = SubResource("Gradient_xpxos")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1hcjw"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -324, 0)
+emission_shape = 3
+emission_box_extents = Vector3(648, 1, 1)
+gravity = Vector3(0, 30, 0)
+scale_min = 0.19999999
+color = Color(0.54509807, 0.8980392, 1, 1)
+color_initial_ramp = SubResource("GradientTexture1D_nlkkf")
+alpha_curve = SubResource("CurveTexture_jix8l")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_njf5y")
@@ -16,6 +46,20 @@ one_shot = true
 [node name="StoryEventTimer" type="Timer" parent="Timers"]
 unique_name_in_owner = true
 one_shot = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Parallax2D" type="Parallax2D" parent="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Parallax2D"]
+position = Vector2(160, 90)
+texture = ExtResource("2_8pwpp")
+
+[node name="Parallax2D2" type="Parallax2D" parent="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Parallax2D2"]
+position = Vector2(160, 90)
+texture = ExtResource("3_xpxos")
 
 [node name="UI" type="Node" parent="."]
 
@@ -44,5 +88,17 @@ offset_top = -94.0
 offset_bottom = -62.0
 grow_vertical = 0
 timer = NodePath("../../Timers/StoryProgressionTimer")
+
+[node name="VFX" type="Node" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="VFX"]
+material = SubResource("CanvasItemMaterial_h5rms")
+position = Vector2(576, 320)
+amount = 1000
+lifetime = 7.0
+preprocess = 0.5
+visibility_rect = Rect2(-576, -324, 1152, 648)
+process_material = SubResource("ParticleProcessMaterial_1hcjw")
+script = ExtResource("4_d55jh")
 
 [connection signal="timeout" from="Timers/StoryEventTimer" to="." method="_on_story_event_timer_timeout"]

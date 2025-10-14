@@ -15,8 +15,6 @@ func _ready() -> void:
 		process_material = particleProcessMaterial
 	
 	get_viewport().connect("size_changed", Callable(self, "_on_viewport_resized"))
-	
-	
 	update_particle_settings()
 
 func _on_viewport_resized() -> void:
@@ -27,6 +25,7 @@ func update_particle_settings() -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
 	var screenHeight: float = viewport_size.y
 	var screenWidth: float = viewport_size.x
+	var scaleFactor = Globals.get_scale_factor()
 
 	particleProcessMaterial.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
 	particleProcessMaterial.emission_box_extents = Vector3(screenWidth * 0.5, screenHeight * 0.5, 0.0)
@@ -36,7 +35,6 @@ func update_particle_settings() -> void:
 	var half_size: Vector2 = viewport_size * 0.5
 	visibility_rect = Rect2(-half_size, viewport_size)
 	
-	var scaleFactor = ((screenWidth * screenHeight) / (baseScreenSize.x * baseScreenSize.y))
 	particleProcessMaterial.scale_min = baseScale * sqrt(scaleFactor)
 	particleProcessMaterial.scale_max = baseScale * sqrt(scaleFactor)
 	

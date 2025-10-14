@@ -11,13 +11,13 @@ blend_mode = 1
 _data = [Vector2(0, 0.20621163), 0.0, 0.0, 0, 0, Vector2(0.16337523, 0.6841326), 2.0416834, 2.0416834, 0, 0, Vector2(0.49730703, 1), 0.0, 0.0, 0, 0, Vector2(0.83482945, 0.78575945), -1.6010544, -1.6010544, 0, 0, Vector2(1, 0.1869849), 0.0, 0.0, 0, 0]
 point_count = 5
 
-[sub_resource type="CurveTexture" id="CurveTexture_jix8l"]
+[sub_resource type="CurveTexture" id="CurveTexture_fu7sn"]
 curve = SubResource("Curve_fu7sn")
 
 [sub_resource type="Gradient" id="Gradient_glbon"]
 colors = PackedColorArray(1, 1, 1, 0.078431375, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_nlkkf"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jix8l"]
 gradient = SubResource("Gradient_glbon")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qe12f"]
@@ -28,8 +28,8 @@ emission_box_extents = Vector3(648, 1, 1)
 gravity = Vector3(0, 30, 0)
 scale_min = 0.19999999
 color = Color(0.54509807, 0.8980392, 1, 1)
-color_initial_ramp = SubResource("GradientTexture1D_nlkkf")
-alpha_curve = SubResource("CurveTexture_jix8l")
+color_initial_ramp = SubResource("GradientTexture1D_jix8l")
+alpha_curve = SubResource("CurveTexture_fu7sn")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -90,9 +90,7 @@ vertical_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Node2D" type="Node2D" parent="CanvasLayer"]
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/Node2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
 material = SubResource("CanvasItemMaterial_7vrkn")
 position = Vector2(576, 320)
 amount = 1000

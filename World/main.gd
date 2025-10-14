@@ -1,8 +1,8 @@
 extends Node2D
 
 # Both timers must be started again if we want to have them run once more
-@onready var destinationTimer: Timer = get_node("StoryProgressionTimer")
-@onready var storyEventTimer: Timer = get_node("StoryEventTimer")
+@onready var destinationTimer: Timer = get_node("%StoryProgressionTimer")
+@onready var storyEventTimer: Timer = get_node("%StoryEventTimer")
 @onready var storyEventDisplay: Control = get_node("%StoryEventDisplay")
 
 
