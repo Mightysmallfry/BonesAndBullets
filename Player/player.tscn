@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://6j000qlyjlus"]
+[gd_scene load_steps=24 format=3 uid="uid://6j000qlyjlus"]
 
 [ext_resource type="Texture2D" uid="uid://bsr7r6hlxq6en" path="res://Player/knight.png" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://bo667vdwroai8" path="res://Player/ResizeAnimatedSprite.gd" id="2_4ntmi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
 atlas = ExtResource("1_l8h54")
@@ -162,3 +163,4 @@ sprite_frames = SubResource("SpriteFrames_hshwv")
 animation = &"running"
 frame = 11
 frame_progress = 0.118425205
+script = ExtResource("2_4ntmi")

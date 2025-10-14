@@ -25,7 +25,7 @@ func update_particle_settings() -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
 	var screenHeight: float = viewport_size.y
 	var screenWidth: float = viewport_size.x
-	var scaleFactor = Globals.get_scale_factor()
+	var scaleFactor = Globals.scaleFactor
 
 	particleProcessMaterial.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
 	particleProcessMaterial.emission_box_extents = Vector3(screenWidth * 0.5, screenHeight * 0.5, 0.0)

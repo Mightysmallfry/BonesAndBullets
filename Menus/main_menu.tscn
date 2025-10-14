@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://d13yw33pf5jfv"]
 
 [ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="1_06t4h"]
-[ext_resource type="Script" uid="uid://c31nidxfv8nf" path="res://main_menu.gd" id="1_fu7sn"]
-[ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://SnowEffect.gd" id="2_7vrkn"]
+[ext_resource type="Script" uid="uid://c31nidxfv8nf" path="res://Menus/main_menu.gd" id="1_fu7sn"]
+[ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="2_7vrkn"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vrkn"]
 blend_mode = 1

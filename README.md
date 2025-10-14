@@ -17,6 +17,6 @@ https://lospec.com/palette-list/wish-gb
 - 16 frames for MC walk cycles
 
 ## Plan
-- Parallax scrolling background
+- Fix the Parallax scrolling background
 - Create a Main Character (16 frame walk cycle)
 - UI design and implementation

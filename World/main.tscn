@@ -1,11 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://bes2m1ih8wyfj"]
+[gd_scene load_steps=19 format=3 uid="uid://bes2m1ih8wyfj"]
 
 [ext_resource type="Script" uid="uid://b2u0b1aphoqw8" path="res://World/main.gd" id="1_njf5y"]
+[ext_resource type="Script" uid="uid://da8p27yhbpckh" path="res://World/parallax_manager.gd" id="2_1hcjw"]
 [ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="2_8pwpp"]
 [ext_resource type="PackedScene" uid="uid://8mcs68hhsnug" path="res://StoryEvents/story_event_display.tscn" id="2_qf6be"]
+[ext_resource type="Script" uid="uid://bsk0meg0wwj8w" path="res://World/ScaleSpriteToScreen.gd" id="3_1hcjw"]
 [ext_resource type="PackedScene" uid="uid://c5uncovgc3rkm" path="res://Assets/ProgressBars/timed_progress_bar.tscn" id="3_cwkwy"]
 [ext_resource type="Texture2D" uid="uid://bhpttfampob5" path="res://Assets/WorldWallpaper/GameJamForeground.png" id="3_xpxos"]
-[ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://SnowEffect.gd" id="4_d55jh"]
+[ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="4_d55jh"]
+[ext_resource type="Texture2D" uid="uid://b44badmwt5my8" path="res://Assets/WorldWallpaper/GameJamFoliage.png" id="5_td74h"]
+[ext_resource type="Texture2D" uid="uid://dwpg8r38p66fd" path="res://Assets/WorldWallpaper/GameJamFocus.png" id="6_6qnxk"]
+[ext_resource type="PackedScene" uid="uid://cvjad2jradgig" path="res://Menus/pause_menu.tscn" id="8_6qnxk"]
+[ext_resource type="PackedScene" uid="uid://6j000qlyjlus" path="res://Player/player.tscn" id="11_ps454"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h5rms"]
 blend_mode = 1
@@ -47,24 +53,58 @@ one_shot = true
 unique_name_in_owner = true
 one_shot = true
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="ParallaxManager" type="Node2D" parent="." node_paths=PackedStringArray("background", "foliage", "focus", "foreground")]
+script = ExtResource("2_1hcjw")
+background = NodePath("Background")
+foliage = NodePath("Foliage")
+focus = NodePath("Focus")
+foreground = NodePath("Foreground")
 
-[node name="Parallax2D" type="Parallax2D" parent="Node2D"]
+[node name="Background" type="Parallax2D" parent="ParallaxManager"]
+repeat_size = Vector2(1152, 0)
+repeat_times = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Parallax2D"]
-position = Vector2(160, 90)
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxManager/Background"]
+position = Vector2(576, 323.98004)
+scale = Vector2(3.5999994, 3.6002223)
 texture = ExtResource("2_8pwpp")
+script = ExtResource("3_1hcjw")
 
-[node name="Parallax2D2" type="Parallax2D" parent="Node2D"]
+[node name="Foliage" type="Parallax2D" parent="ParallaxManager"]
+repeat_size = Vector2(1152, 0)
+repeat_times = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Parallax2D2"]
-position = Vector2(160, 90)
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxManager/Foliage"]
+position = Vector2(576, 323.98004)
+scale = Vector2(3.5999994, 3.6002223)
+texture = ExtResource("5_td74h")
+script = ExtResource("3_1hcjw")
+
+[node name="Focus" type="Parallax2D" parent="ParallaxManager"]
+repeat_size = Vector2(1152, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxManager/Focus"]
+position = Vector2(576, 323.98004)
+scale = Vector2(3.5999994, 3.6002223)
+texture = ExtResource("6_6qnxk")
+script = ExtResource("3_1hcjw")
+
+[node name="Foreground" type="Parallax2D" parent="ParallaxManager"]
+repeat_size = Vector2(1152, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxManager/Foreground"]
+position = Vector2(576, 324)
+scale = Vector2(3.6124995, 3.6)
 texture = ExtResource("3_xpxos")
+script = ExtResource("3_1hcjw")
 
 [node name="UI" type="Node" parent="."]
 
 [node name="StoryEventDisplay" parent="UI" instance=ExtResource("2_qf6be")]
 unique_name_in_owner = true
+visible = false
 
 [node name="StoryEventBar" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("3_cwkwy")]
 anchors_preset = 0
@@ -72,26 +112,40 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 55.0
-offset_top = 47.0
-offset_right = 314.0
-offset_bottom = 79.0
+offset_left = 43.0
+offset_top = 37.0
+offset_right = 302.0
+offset_bottom = 69.0
 grow_horizontal = 1
 grow_vertical = 1
 timer = NodePath("../../Timers/StoryEventTimer")
 
 [node name="StoryProgressionBar" parent="UI" node_paths=PackedStringArray("timer") instance=ExtResource("3_cwkwy")]
-anchors_preset = 7
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -94.0
-offset_bottom = -62.0
-grow_vertical = 0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -578.0
+offset_top = 37.0
+offset_right = -39.0
+offset_bottom = 69.0
+grow_horizontal = 0
+grow_vertical = 1
 timer = NodePath("../../Timers/StoryProgressionTimer")
+
+[node name="PauseMenu" parent="UI" instance=ExtResource("8_6qnxk")]
+process_mode = 3
+visible = false
+
+[node name="Player" parent="." instance=ExtResource("11_ps454")]
+position = Vector2(576, 471)
+scale = Vector2(3.6, 3.6)
 
 [node name="VFX" type="Node" parent="."]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="VFX"]
+process_mode = 3
 material = SubResource("CanvasItemMaterial_h5rms")
 position = Vector2(576, 320)
 amount = 1000
