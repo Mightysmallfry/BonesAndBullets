@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://uppqbbrbo8c1"]
+
+[sub_resource type="GDScript" id="GDScript_rpa3q"]
+script/source = "extends Node
+
+## cross_input_handler handles switching from keyboard to controler and vice versa
+
+func _init() -> void:
+	# Confine the mouse within the game on start
+	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
+
+func _input(event: InputEvent) -> void:
+	if ( \\
+	event is InputEventKey \\
+	or event is InputEventMouseButton \\
+	or event is InputEventMouseMotion \\
+	) and Globals.on_controller:
+		# If switched from controler to keyboard, reveal the mouse and free it
+		Globals.on_controller = false
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
+	elif (event is InputEventJoypadButton or event is InputEventJoypadMotion) and Globals.on_controller:
+		# If switched from controler to keyboard, hide the mouse and capture it in the middle
+		Globals.on_controller = true
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
+		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CAPTURED)
+"
+
+[node name="CrossInputHandler" type="Node"]
+script = SubResource("GDScript_rpa3q")

@@ -16,6 +16,9 @@ extends Node2D
 
 var IsPaused: bool = false
 
+## Boolean if player is using a controler or keyboard
+var on_controller:bool = false
+
 var timerMaxTimes: Dictionary = { }
 var scaleFactor: float = 1.0
 
@@ -26,7 +29,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func set_max_time(timer: Timer, max_time: float):

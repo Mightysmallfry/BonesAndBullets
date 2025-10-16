@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://d13yw33pf5jfv"]
+[gd_scene load_steps=11 format=3 uid="uid://d13yw33pf5jfv"]
 
 [ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="1_06t4h"]
 [ext_resource type="Script" uid="uid://c31nidxfv8nf" path="res://Menus/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="2_7vrkn"]
+[ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_11gta"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vrkn"]
 blend_mode = 1
@@ -39,6 +40,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fu7sn")
+
+[node name="CrossInputHandler" parent="." instance=ExtResource("2_11gta")]
 
 [node name="UiElements" type="Node" parent="."]
 
