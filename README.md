@@ -10,6 +10,7 @@ https://lospec.com/palette-list/wish-gb
 ## Possible Names
 - Blood and Bones
 - Bloodied Bones
+- Bones and Brass
 
 ## Canvas Sizing and Art
 - 380 x 160
