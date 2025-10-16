@@ -14,3 +14,8 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Added by Camden
+# I'm pretty sure this is system specific, godot should automatically re-import
+# all assets, this is just so I can push easier without having to deselect all em
+*.import
