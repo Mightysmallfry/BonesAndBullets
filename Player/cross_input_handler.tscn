@@ -7,7 +7,8 @@ script/source = "extends Node
 
 func _init() -> void:
 	# Confine the mouse within the game on start
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
+	#DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
+	pass
 
 func _input(event: InputEvent) -> void:
 	if ( \\
@@ -18,7 +19,7 @@ func _input(event: InputEvent) -> void:
 		# If switched from controler to keyboard, reveal the mouse and free it
 		Globals.on_controller = false
 		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_VISIBLE)
-		DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
+		#DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_CONFINED)
 	elif (event is InputEventJoypadButton or event is InputEventJoypadMotion) and Globals.on_controller:
 		# If switched from controler to keyboard, hide the mouse and capture it in the middle
 		Globals.on_controller = true
