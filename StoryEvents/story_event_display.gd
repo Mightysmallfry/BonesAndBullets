@@ -29,6 +29,8 @@ func load_story_event_data(data: StoryEventData) -> void:
 	
 func clear_vbox(vbox: VBoxContainer):
 	for child in vbox.get_children():
+		# added this for the auto focus to work
+		vbox.remove_child(child)
 		child.queue_free()
 	
 func create_choice_list() -> void:
