@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://bes2m1ih8wyfj"]
+[gd_scene load_steps=20 format=3 uid="uid://bes2m1ih8wyfj"]
 
 [ext_resource type="Script" uid="uid://b2u0b1aphoqw8" path="res://World/main.gd" id="1_njf5y"]
 [ext_resource type="Script" uid="uid://da8p27yhbpckh" path="res://World/parallax_manager.gd" id="2_1hcjw"]
 [ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="2_8pwpp"]
+[ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_eso2c"]
 [ext_resource type="PackedScene" uid="uid://8mcs68hhsnug" path="res://StoryEvents/story_event_display.tscn" id="2_qf6be"]
 [ext_resource type="Script" uid="uid://bsk0meg0wwj8w" path="res://World/ScaleSpriteToScreen.gd" id="3_1hcjw"]
 [ext_resource type="PackedScene" uid="uid://c5uncovgc3rkm" path="res://Assets/ProgressBars/timed_progress_bar.tscn" id="3_cwkwy"]
@@ -42,6 +43,8 @@ alpha_curve = SubResource("CurveTexture_jix8l")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_njf5y")
+
+[node name="CrossInputHandler" parent="." instance=ExtResource("2_eso2c")]
 
 [node name="Timers" type="Node" parent="."]
 

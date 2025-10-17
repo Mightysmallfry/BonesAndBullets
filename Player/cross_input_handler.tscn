@@ -28,4 +28,5 @@ func _input(event: InputEvent) -> void:
 "
 
 [node name="CrossInputHandler" type="Node"]
+process_mode = 3
 script = SubResource("GDScript_rpa3q")
