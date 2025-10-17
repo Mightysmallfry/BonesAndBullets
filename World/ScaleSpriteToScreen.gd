@@ -4,8 +4,8 @@ extends Sprite2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	get_viewport().connect("size_changed", Callable(self, "_on_viewport_resized"))
-	update_scale()
+	#get_viewport().connect("size_changed", Callable(self, "_on_viewport_resized"))
+	#update_scale()
 	
 	pass # Replace with function body.
 
