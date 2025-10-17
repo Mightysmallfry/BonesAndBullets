@@ -71,10 +71,12 @@ layout_mode = 2
 
 [node name="StartButton" type="Button" parent="UiElements/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../QuitButton")
 text = "Begin Your Expedition"
 
 [node name="QuitButton" type="Button" parent="UiElements/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
 text = "Quit"
 
 [node name="Label" type="Label" parent="UiElements"]
@@ -103,5 +105,7 @@ visibility_rect = Rect2(-576, -324, 1152, 648)
 process_material = SubResource("ParticleProcessMaterial_qe12f")
 script = ExtResource("2_7vrkn")
 
+[connection signal="mouse_entered" from="UiElements/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="UiElements/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="UiElements/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="UiElements/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

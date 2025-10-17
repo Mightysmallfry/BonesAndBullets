@@ -27,3 +27,11 @@ func _on_resume_button_pressed() -> void:
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()
+
+
+func _on_resume_button_mouse_entered() -> void:
+	$PanelContainer/MarginContainer/VBoxContainer/ResumeButton.grab_focus()
+
+
+func _on_quit_button_mouse_entered() -> void:
+	$PanelContainer/MarginContainer/VBoxContainer/QuitButton.grab_focus()
