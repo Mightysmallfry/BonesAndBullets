@@ -14,13 +14,9 @@ func _ready() -> void:
 		particleProcessMaterial = ParticleProcessMaterial.new()
 		process_material = particleProcessMaterial
 	
-	get_viewport().connect("size_changed", Callable(self, "_on_viewport_resized"))
 	update_particle_settings()
 
-func _on_viewport_resized() -> void:
-	update_particle_settings()
-	
-	
+
 func update_particle_settings() -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
 	var screenHeight: float = viewport_size.y

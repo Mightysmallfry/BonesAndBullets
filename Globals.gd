@@ -24,8 +24,6 @@ var scaleFactor: float = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	get_viewport().connect("size_changed", Callable(self, "_on_viewport_resized"))
-	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -43,9 +41,3 @@ func get_max_time(timer: Timer) -> float:
 		return timerMaxTimes[timer]
 	return 0.0 
 	
-func _on_viewport_resized() ->void:
-	var viewport_size: Vector2 = get_viewport_rect().size
-	var screenHeight: float = viewport_size.y
-	var screenWidth: float = viewport_size.x
-	
-	scaleFactor = ((screenWidth * screenHeight) / (baseScreenSize.x * baseScreenSize.y))
