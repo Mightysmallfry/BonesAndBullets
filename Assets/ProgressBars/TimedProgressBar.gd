@@ -20,7 +20,7 @@ func _ready() -> void:
 		push_warning("Timer not registered yet, delaying max_value assignment")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not initialized:
 		if Globals.has_timer(timer):
 			max_value = Globals.get_max_time(timer)

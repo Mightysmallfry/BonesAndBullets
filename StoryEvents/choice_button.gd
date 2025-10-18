@@ -30,7 +30,7 @@ func _find_focus_order() ->void:
 		self.focus_neighbor_bottom = _choiceList.get_child(myIndex + 1).get_path()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func _on_pressed():

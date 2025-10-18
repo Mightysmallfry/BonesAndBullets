@@ -18,10 +18,9 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	
-	background.scroll_offset.x -= parallaxSpeed * backgroundScrollScale
-	foliage.scroll_offset.x -= parallaxSpeed * foliageScrollScale
-	focus.scroll_offset.x -= parallaxSpeed * focusScrollScale
-	foreground.scroll_offset.x -= parallaxSpeed * foregroundScrollScale
+func _process(delta: float) -> void:
+	background.scroll_offset.x -= parallaxSpeed * backgroundScrollScale * 200 * delta
+	foliage.scroll_offset.x -= parallaxSpeed * foliageScrollScale * 200 * delta
+	focus.scroll_offset.x -= parallaxSpeed * focusScrollScale * 200 * delta
+	foreground.scroll_offset.x -= parallaxSpeed * foregroundScrollScale * 200 * delta
 	
