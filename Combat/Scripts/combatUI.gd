@@ -36,9 +36,14 @@ func update_selector_theme(action:bool = true)->void:
 	for i in container.get_children():
 		i.switch_theme(action)
 
+var battle_lines_index:int = -1
 func battle_lines(index:int)->void:
+	battle_lines_index = index
 	var container:GridContainer = $"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"
-	container.get_children()[index].get_focus()
+	for i in container.get_children():
+		i.enable()
+	container.get_children()[index].enable(false)
+
 
 func _update_focus_pairs()->void:
 	var container:GridContainer = $"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"

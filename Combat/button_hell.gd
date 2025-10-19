@@ -16,8 +16,10 @@ func _ready() -> void:
 func connect_enemySelectors()->void:
 	for i in range(selectorGrid.get_child_count()):
 		var selector = selectorGrid.get_child(i)
-		selector.connect("pressed", on_selector_pressed)
-		selector.connect("hover", on_selector_hover)
+		if !selector.is_connected("pressed", on_selector_pressed):
+			selector.connect("pressed", on_selector_pressed)
+		if !selector.is_connected("hover", on_selector_hover):
+			selector.connect("hover", on_selector_hover)
 		selector.enable(false)
 
 func player_turn()->void:

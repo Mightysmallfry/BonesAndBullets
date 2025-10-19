@@ -254,7 +254,7 @@ func _take_damage(damage:int)->void:
 	player.health -= damage
 	combatUI.update_player(player)
 	if player.health < 1:
-		get_tree().change_scene_to_file("res://World/main.tscn")
+		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
 
 func _start_turn()->void:
 	combatUI.update_selector_theme(false)
