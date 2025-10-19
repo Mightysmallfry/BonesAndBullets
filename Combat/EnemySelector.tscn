@@ -1,6 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bswvxaiu2v1uw"]
+[gd_scene load_steps=7 format=3 uid="uid://bswvxaiu2v1uw"]
 
 [ext_resource type="Script" uid="uid://dovl68m21vekw" path="res://Combat/Scripts/enemy_selector.gd" id="1_tttnu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o58d"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fb8fk"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -12,6 +15,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="Theme" id="Theme_tttnu"]
+Button/styles/disabled = SubResource("StyleBoxFlat_2o58d")
 Button/styles/hover = SubResource("StyleBoxFlat_fb8fk")
 Button/styles/normal = SubResource("StyleBoxFlat_uksdw")
 Button/styles/pressed = SubResource("StyleBoxFlat_tttnu")

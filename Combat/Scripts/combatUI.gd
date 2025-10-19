@@ -13,6 +13,7 @@ func add_enemy_selector(enemy_name:String, health:int, distance:float, aims:Arra
 	enemySelector.createButton(enemy_name, health, distance, aims)
 	$"Main Console/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer".add_child(enemySelector)
 	_update_focus_pairs()
+	$Container.connect_enemySelectors()
 
 func remove_enemy_selector(index:int)->void:
 	var button = $"Main Console/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer".get_child(index)
@@ -30,16 +31,26 @@ func update_selector(index:int, health:int, distance:float, aims:Array[float])->
 	$"Main Console/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer".get_child(index).update_Details(health, distance, aims)
 
 func _update_focus_pairs()->void:
+	return
 	var container:GridContainer = $"Main Console/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"
 	var selectorNumber:int = container.get_child_count()
 	for i in range(selectorNumber):
 		var selector = container.get_child(i)
 		var button:Button = selector.get_child(-1).get_child(-1).get_child(-1)
-		if i > 0:
-			button.focus_neighbor_left = container.get_child((i-1)).get_child(-1).get_child(-1).get_path()
-		if i > 2:
-			button.focus_neighbor_top = container.get_child(i-3).get_child(-1).get_child(-1).get_path()
-		if (i+1) < selectorNumber:
-			button.focus_neighbor_right = container.get_child(i+1).get_child(-1).get_child(-1).get_path()
-		if (i+3) < selectorNumber:
-			button.focus_neighbor_bottom = container.get_child(i+3).get_child(-1).get_child(-1).get_path()
+		_null_all_neigbors(button)
+		if i > 0 and (i % 2) == 1:
+			button.focus_neighbor_left = container.get_child(i-1).get_child(-1).get_child(-1).get_child(-1).get_path()
+		if i > 1:
+			button.focus_neighbor_top = container.get_child(i-2).get_child(-1).get_child(-1).get_child(-1).get_path()
+		if (i+1) < selectorNumber and (i % 2) == 0:
+			button.focus_neighbor_right = container.get_child(i+1).get_child(-1).get_child(-1).get_child(-1).get_path()
+		if (i+2) < selectorNumber:
+			button.focus_neighbor_bottom = container.get_child(i+2).get_child(-1).get_child(-1).get_child(-1).get_path()
+
+func _null_all_neigbors(button:Button)->void:
+	button.focus_neighbor_left = NodePath("")
+	button.focus_neighbor_top = NodePath("")
+	button.focus_neighbor_right = NodePath("")
+	button.focus_neighbor_bottom = NodePath("")
+	button.focus_next = NodePath("")
+	button.focus_previous = NodePath("")

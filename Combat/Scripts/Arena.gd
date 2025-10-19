@@ -104,10 +104,10 @@ func _process_enemies_turn()->void:
 		_first = false
 		var current_enemy = thisCombatEvent.enemies[_current_turn]
 		current_enemy.action_points = floor(current_enemy.speed / 33.0) + 1
-		if !current_enemy.attack_type:
+		if current_enemy.attack_type == 0:
 			current_enemy.movement = 2
 		else:
-			current_enemy.movement = 2
+			current_enemy.movement = 1
 		action(current_enemy)
 		current_enemy.action_points -= 1
 	else:
@@ -128,13 +128,10 @@ func _calculate_melee(a_enemy:enemy) -> float:
 ## Calculates the chance for the shooter to hit the target
 func _calculate_aim_chance(shooter, target=player)->float:
 	if shooter is enemy:
-		if !shooter.attack_type:
+		if shooter.attack_type == 0:
 			return -1
 		return (shooter.aim * max((max(20, shooter.distance)/-64.0 + 1.3125), 0)  * ((100 - (target.cover * min((shooter.distance/5.0), 1)))/100)/100)
 	else:
-		print(shooter.aim)
-		print(max((max(20, target.distance)/-64.0 + 1.3125), 0))
-		print(((100 - (target.cover * min((target.distance/5.0), 1)))/100))
 		return min((shooter.aim * max((max(20, target.distance)/-64.0 + 1.3125), 0)  * ((100 - (target.cover * min((target.distance/5.0), 1)))/100) + player.improve_acuracy)/100, 1)
 
 ## Generate cover from a parialy skewed distribution with the mean of 40.
@@ -191,19 +188,19 @@ func _move(acting_enemy:enemy, away:bool=false)->void:
 	acting_enemy.movement -= 1
 	if !away:
 		combatUI.update_battle_log(acting_enemy.name + " moved towards you")
-		acting_enemy.distance = max(acting_enemy.distance - (acting_enemy.speed / 10.0), 0)
+		acting_enemy.distance = move_toward(acting_enemy.distance, prefered_distance[acting_enemy.prefered_distance], (acting_enemy.speed / 10.0))
 	else:
 		combatUI.update_battle_log(acting_enemy.name + " moved away from you")
 		acting_enemy.distance += (acting_enemy.speed / 10.0)
 
 ## Attack player if capible
 func _attack(acting_enemy:enemy)->void:
-	if acting_enemy.attack_type:
+	if acting_enemy.attack_type == 1:
 		if rng.randf() < _calculate_aim_chance(acting_enemy):
 			combatUI.update_battle_log(acting_enemy.name + " Shot you")
 			_take_damage(shot_damage)
 		else:
-			combatUI.update_battle_log(acting_enemy.name + " At You But Missed")
+			combatUI.update_battle_log(acting_enemy.name + " Shot at You but Missed")
 		return
 	elif acting_enemy.distance < 1:
 		var melee = _calculate_melee(acting_enemy)

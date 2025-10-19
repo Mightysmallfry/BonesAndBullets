@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="enemy" load_steps=2 format=3 uid="uid://cuh0y57o5oimd"]
+
+[ext_resource type="Script" uid="uid://bmvj0urqjcfch" path="res://Combat/Scripts/enemy_class.gd" id="1_1snfd"]
+
+[resource]
+script = ExtResource("1_1snfd")
+name = "Crazy Sam"
+health_variance = 0
+moral_variance = 0
+aim = 70
+melee = 30
+attack_type = 1
+cover_seeking = 2
+prefered_distance = 3
+movement_reaction = 2
+distance = 55.0
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
