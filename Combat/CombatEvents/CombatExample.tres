@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CombatEvent" load_steps=4 format=3 uid="uid://dv7ovnm131l8r"]
+
+[ext_resource type="Script" uid="uid://bmvj0urqjcfch" path="res://Combat/Scripts/enemy_class.gd" id="1_uapx2"]
+[ext_resource type="Resource" uid="uid://dp15hh8acj4ep" path="res://Combat/Enemies/Wolf.tres" id="2_nnl5b"]
+[ext_resource type="Script" uid="uid://cylvhb4uifafa" path="res://Combat/Scripts/Combat.gd" id="3_uf4b2"]
+
+[resource]
+script = ExtResource("3_uf4b2")
+player_moves_first = false
+enemies = Array[ExtResource("1_uapx2")]([ExtResource("2_nnl5b"), ExtResource("2_nnl5b"), ExtResource("2_nnl5b"), ExtResource("2_nnl5b"), ExtResource("2_nnl5b")])
+metadata/_custom_type_script = "uid://cylvhb4uifafa"

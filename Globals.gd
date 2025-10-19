@@ -5,6 +5,11 @@ extends Node2D
 @export var startingBones: int = 319
 @export var bullets: int = 6
 
+@export_category("Player Combat Skills")
+@export_range(1,100,1) var combat_speed:int = 50
+@export_range(1,100,1) var combat_aim:int = 50
+@export_range(1,100,1) var combat_melee:int = 50
+
 @export_category("Timing Variables")
 # Measured in seconds ~5 minutes
 @export var destinationTime: float = 300

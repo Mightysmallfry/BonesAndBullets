@@ -1,0 +1,254 @@
+[gd_scene load_steps=12 format=3 uid="uid://b3tioju63ftu0"]
+
+[ext_resource type="Script" uid="uid://c7hcmvqfxa2fy" path="res://Combat/Scripts/Arena.gd" id="1_y84q4"]
+[ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="2_1mj86"]
+[ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_wtktk"]
+[ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="3_obj01"]
+[ext_resource type="Script" uid="uid://jxm3k2ac7oqr" path="res://Combat/Scripts/combatUI.gd" id="4_wtktk"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eemgk"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_wtktk"]
+_data = [Vector2(0, 0.20621163), 0.0, 0.0, 0, 0, Vector2(0.16337523, 0.6841326), 2.0416834, 2.0416834, 0, 0, Vector2(0.49730703, 1), 0.0, 0.0, 0, 0, Vector2(0.83482945, 0.78575945), -1.6010544, -1.6010544, 0, 0, Vector2(1, 0.1869849), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_fu7sn"]
+curve = SubResource("Curve_wtktk")
+
+[sub_resource type="Gradient" id="Gradient_o6ykf"]
+colors = PackedColorArray(1, 1, 1, 0.078431375, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jix8l"]
+gradient = SubResource("Gradient_o6ykf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qqhc2"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -324, 0)
+emission_shape = 3
+emission_box_extents = Vector3(648, 1, 1)
+gravity = Vector3(0, 30, 0)
+scale_min = 0.19999999
+color = Color(0.54509807, 0.8980392, 1, 1)
+color_initial_ramp = SubResource("GradientTexture1D_jix8l")
+alpha_curve = SubResource("CurveTexture_fu7sn")
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_y84q4")
+
+[node name="CrossInputHandler" parent="." instance=ExtResource("2_wtktk")]
+
+[node name="EnemyAction" type="Timer" parent="."]
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
+material = SubResource("CanvasItemMaterial_eemgk")
+position = Vector2(576, 320)
+amount = 1000
+lifetime = 7.0
+preprocess = 0.5
+visibility_rect = Rect2(-576, -324, 1152, 648)
+process_material = SubResource("ParticleProcessMaterial_qqhc2")
+script = ExtResource("3_obj01")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1149.0
+offset_bottom = 650.0
+script = ExtResource("4_wtktk")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.003
+anchor_bottom = 0.99700004
+offset_right = -0.44702148
+offset_bottom = -0.050048828
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_1mj86")
+
+[node name="Point Counter" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 75.0
+offset_right = 107.0
+offset_bottom = 118.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Point Counter"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Control/Point Counter/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Point Counter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Action Points: 9"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Point Counter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "React Points: 1"
+horizontal_alignment = 1
+
+[node name="Stats" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 31.0
+offset_right = 267.0
+offset_bottom = 71.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Stats"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Stats/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Health"
+
+[node name="TextureRect2" type="TextureRect" parent="Control/Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Control/Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Bullets"
+
+[node name="Main Console" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Main Console"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/Main Console/HBoxContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Main Console/HBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 2
+text = "COMBAT"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/ScrollContainer"]
+custom_minimum_size = Vector2(400, 296)
+layout_mode = 2
+text = "The Battle has begun!
+"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+columns = 2
+
+[node name="Button" type="Button" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Attacking Actions"
+
+[node name="Button2" type="Button" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cover Actions"
+
+[node name="Button3" type="Button" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "Moving Actions"
+
+[node name="Button4" type="Button" parent="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer"]
+layout_mode = 2
+text = "End Turn"
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control/Main Console/HBoxContainer"]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Main Console/HBoxContainer/PanelContainer2"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Main Console/HBoxContainer/PanelContainer2/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Main Console/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Enemies"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/Main Console/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/Main Console/HBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+columns = 3
+
+[connection signal="timeout" from="EnemyAction" to="." method="_on_EnemyAction_timeout"]

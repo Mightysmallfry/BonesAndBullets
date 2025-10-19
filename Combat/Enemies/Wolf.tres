@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="enemy" load_steps=2 format=3 uid="uid://dp15hh8acj4ep"]
+
+[ext_resource type="Script" uid="uid://bmvj0urqjcfch" path="res://Combat/Scripts/enemy_class.gd" id="1_1rh4x"]
+
+[resource]
+script = ExtResource("1_1rh4x")
+name = "Wolf"
+health = 60
+health_variance = 12
+moral = 30
+moral_variance = 7
+speed = 80
+aim = 1
+melee = 70
+distance_variance = 16
+cover_variance = 0
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
