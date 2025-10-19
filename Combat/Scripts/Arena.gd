@@ -27,7 +27,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	loadCombat("res://Combat/CombatEvents/CombatExample.tres")
-	_process_enemies_turn()
+	
 
 ## Loads combat resource and initalizes combatants
 func loadCombat(combatScene:String)->void:
@@ -38,6 +38,14 @@ func loadCombat(combatScene:String)->void:
 	for i in range(thisCombatEvent.enemies.size()):
 		thisCombatEvent.enemies[i] = thisCombatEvent.enemies[i].duplicate(true)
 		_init_enemy(thisCombatEvent.enemies[i])
+	beginCombat()
+
+func beginCombat()->void:
+	if players_turn:
+		_start_turn()
+	else:
+		combatUI.update_selector_theme(true)
+		_process_enemies_turn()
 
 ## Resolves the combat
 func resolveCombat()->void:
@@ -98,7 +106,7 @@ func _process_enemies_turn()->void:
 	var numberLeft:int = thisCombatEvent.enemies.size()
 	if _current_turn == numberLeft:
 		players_turn = true
-		combatUI.update_battle_log("Your Turn!")
+		_start_turn()
 		return
 	elif _first:
 		_first = false
@@ -108,6 +116,7 @@ func _process_enemies_turn()->void:
 			current_enemy.movement = 2
 		else:
 			current_enemy.movement = 1
+		combatUI.battle_lines(_current_turn)
 		action(current_enemy)
 		current_enemy.action_points -= 1
 	else:
@@ -130,19 +139,30 @@ func _calculate_aim_chance(shooter, target=player)->float:
 	if shooter is enemy:
 		if shooter.attack_type == 0:
 			return -1
-		return (shooter.aim * max((max(20, shooter.distance)/-64.0 + 1.3125), 0)  * ((100 - (target.cover * min((shooter.distance/5.0), 1)))/100)/100)
+		var hit_probability = shooter.aim / 100.0 # base aim
+		hit_probability *= (max((max(20, shooter.distance)/-64.0 + 1.3125), 0)) # distance
+		var cover_falloff = 5.0
+		var cover_effect = target.cover * (1 - exp(-shooter.distance / cover_falloff))
+		var cover_factor = clamp((100 - cover_effect) / 100.0, 0, 1) 
+		return hit_probability * cover_factor
 	else:
-		return min((shooter.aim * max((max(20, target.distance)/-64.0 + 1.3125), 0)  * ((100 - (target.cover * min((target.distance/5.0), 1)))/100) + player.improve_acuracy)/100, 1)
+		var hit_probability = shooter.aim / 100.0 # base aim
+		hit_probability *= max((target.distance/-64.0 + 1.3125), 0) # distance
+		var cover_falloff = 5.0
+		var cover_effect = target.cover * (1 - exp(-target.distance / cover_falloff))
+		var cover_factor = clamp((100 - cover_effect) / 100.0, 0, 1) 
+		hit_probability *= cover_factor
+		return min(hit_probability + (player.improve_acuracy/100.0), 1)
 
 ## Generate cover from a parialy skewed distribution with the mean of 40.
 func _get_cover_type() -> int:
 	rng.randomize()
 	var raw = rng.randfn(50, 15)
-	raw -= rng.randi_range(-20,0)
+	raw += rng.randi_range(-40,0)
 	if raw < 0.0:
 		raw *= -1
 	if raw < 10.0:
-		raw += rng.randi_range(0,18)
+		raw += rng.randi_range(0,30)
 	elif raw > 100.0:
 		raw = 100.0
 	return round(raw)
@@ -153,8 +173,18 @@ func _get_cover_type() -> int:
 func _enemy_take_damage(a_enemy:enemy, damage:int)->void:
 	a_enemy.health -= damage
 	if a_enemy.health < 1:
+		print("DEATH!!!")
 		combatUI.update_battle_log(a_enemy.name + " died")
 		_free_enemy(a_enemy)
+	else:
+		_update_enemy_selector(get_enemy_index(a_enemy))
+
+func _update_all_enemy_selectors()->void:
+	for i in thisCombatEvent.enemies:
+		combatUI.update_selector(get_enemy_index(i), i.health, i.distance, [_calculate_aim_chance(player, i), _calculate_aim_chance(i), _calculate_melee(i)])
+
+func _update_enemy_selector(index:int)->void:
+	combatUI.update_selector(index, thisCombatEvent.enemies[index].health, thisCombatEvent.enemies[index].distance, [_calculate_aim_chance(player, thisCombatEvent.enemies[index]), _calculate_aim_chance(thisCombatEvent.enemies[index]), _calculate_melee(thisCombatEvent.enemies[index])])
 
 ## Enemy's action handeler
 func action(acting_enemy:enemy)->void:
@@ -224,28 +254,110 @@ func _take_damage(damage:int)->void:
 	player.health -= damage
 	combatUI.update_player(player)
 	if player.health < 1:
-		pass
+		get_tree().change_scene_to_file("res://World/main.tscn")
 
-func _on_move_towards_all()->void:
+func _start_turn()->void:
+	combatUI.update_selector_theme(false)
+	player.action_points = floor(Globals.combat_speed / 25.0) + 2
+	$Container.player_turn()
+	combatUI.update_player(player)
+	combatUI.update_battle_log("Your Turn!")
+
+func _on_action_submitted(selected_action: String, value1: int, value2: int) -> void:
+	match (selected_action):
+		"end":
+			combatUI.update_selector_theme(true)
+			players_turn = false
+			_current_turn = 0
+			_process_enemies_turn()
+		"aim":
+			player.action_points -= 1
+			_steady_aim()
+			_update_all_enemy_selectors()
+		"shoot":
+			player.action_points -= 1
+			_shoot(value1)
+		"melee":
+			player.action_points -= 1
+			_melee(value1)
+		"deck":
+			player.action_points -= 1
+			_hit_deck()
+			_update_all_enemy_selectors()
+		"cover":
+			_find_cover(value1, value2)
+			_update_all_enemy_selectors()
+		"MoveTo":
+			player.action_points -= 1
+			player.cover = 0
+			if value1 == -1:
+				_move_towards_all()
+				_update_all_enemy_selectors()
+			else:
+				_move_towards(value1)
+				_update_enemy_selector(value1)
+		"MoveAway":
+			player.action_points -= 1
+			player.cover = 0
+			if value1 == -1:
+				_move_away_all()
+				_update_all_enemy_selectors()
+			else:
+				_move_away(value1)
+				_update_enemy_selector(value1)
+				
+	combatUI.update_player(player)
+
+func _move_towards_all()->void:
 	player.improve_acuracy = 0.0
 	for i in thisCombatEvent.enemies:
-		i.distance = max(i.distance - (player.speed / 10.0), 0)
-	combatUI.update_battle_log("You Rush Towards the enemies")
+		i.distance = move_toward(i.distance, 0, (player.speed / 10.0))
+	combatUI.update_battle_log("You rush towards the enemies")
 
-func _on_move_away_all()->void:
+func _move_towards(index:int)->void:
+	combatUI.update_battle_log("You rush towards " + thisCombatEvent.enemies[index].name)
+	thisCombatEvent.enemies[index].distance = move_toward(thisCombatEvent.enemies[index].distance, 0, (player.speed / 10.0))
+
+func _move_away_all()->void:
 	player.improve_acuracy = 0.0
 	for i in thisCombatEvent.enemies:
 		i.distance += (player.speed / 10.0)
-	combatUI.update_battle_log("You run Away the enemies")
+	combatUI.update_battle_log("You run away the enemies")
 
-func _on_hit_deck()->void:
+func _move_away(index:int)->void:
+	combatUI.update_battle_log("You run away from " + thisCombatEvent.enemies[index].name)
+	thisCombatEvent.enemies[index].distance -= (player.speed / 10.0)
+
+func _shoot(index:int)->void:
+	player.bullets -= 1
+	if rng.randf() < _calculate_aim_chance(player, thisCombatEvent.enemies[index]):
+		combatUI.update_battle_log("You shoot " + thisCombatEvent.enemies[index].name + " for " + str(shot_damage) + " health")
+		_enemy_take_damage(thisCombatEvent.enemies[index], shot_damage)
+	else:
+		combatUI.update_battle_log("You shoot at " + thisCombatEvent.enemies[index].name + " but missed!")
+
+func _melee(index:int)->void:
+	var melee = _calculate_melee(thisCombatEvent.enemies[index])
+	if rng.randf() < melee:
+		# Player Wins
+		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee and won")
+		_enemy_take_damage(thisCombatEvent.enemies[index], melee * player.melee)
+	else:
+		# Player Loses
+		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee but beat you up")
+		_take_damage(melee * thisCombatEvent.enemies[index].melee)
+	pass
+
+func _hit_deck()->void:
 	player.improve_acuracy = 0.0
-	player.cover = 10
+	player.cover = 20
 	combatUI.update_battle_log("You quickly lay down on the floor")
 
-func _on_find_cover()->void:
-	player.improve_acuracy = 0.0
-	_get_cover_type()
+func _find_cover(cover:int, action_points_spent:int)->void:
+	combatUI.update_battle_log("You find and take cover")
+	player.cover = cover
+	player.action_points -= action_points_spent
 
-func _on_steady_aim()->void:
+func _steady_aim()->void:
+	combatUI.update_battle_log("You take a breath and steady your aim")
 	player.improve_acuracy = 7.0

@@ -1,24 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bswvxaiu2v1uw"]
+[gd_scene load_steps=3 format=3 uid="uid://bswvxaiu2v1uw"]
 
 [ext_resource type="Script" uid="uid://dovl68m21vekw" path="res://Combat/Scripts/enemy_selector.gd" id="1_tttnu"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o58d"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fb8fk"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uksdw"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tttnu"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="Theme" id="Theme_tttnu"]
-Button/styles/disabled = SubResource("StyleBoxFlat_2o58d")
-Button/styles/hover = SubResource("StyleBoxFlat_fb8fk")
-Button/styles/normal = SubResource("StyleBoxFlat_uksdw")
-Button/styles/pressed = SubResource("StyleBoxFlat_tttnu")
+[ext_resource type="Theme" uid="uid://dmts34yymy2wm" path="res://Combat/Scripts/Selector.tres" id="2_2o58d"]
 
 [node name="EnemySelector" type="MarginContainer"]
 anchors_preset = 15
@@ -84,7 +67,7 @@ horizontal_alignment = 1
 
 [node name="Control" type="Button" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-theme = SubResource("Theme_tttnu")
+theme = ExtResource("2_2o58d")
 
 [connection signal="mouse_entered" from="PanelContainer/MarginContainer/Control" to="." method="_on_control_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Control" to="." method="_on_control_pressed"]

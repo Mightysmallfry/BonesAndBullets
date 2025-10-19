@@ -18,6 +18,12 @@ func update_Details(health:int, distance:float, aims:Array[float])->void:
 		$PanelContainer/MarginContainer/VBoxContainer/Label4.text = ""
 	$PanelContainer/MarginContainer/VBoxContainer/Label5.text = ("My melee odds: " + str(snapped(aims[2], .001)*100) + "%")
 
+func switch_theme(action:bool)->void:
+	if action:
+		$PanelContainer/MarginContainer/Control.theme = load("res://Combat/Scripts/Moves.tres")
+	else:
+		$PanelContainer/MarginContainer/Control.theme = load("res://Combat/Scripts/Selector.tres")
+
 func get_focus():
 	$PanelContainer/MarginContainer/Control.grab_focus()
 
