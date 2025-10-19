@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://daao8mqc871p7"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/StoryChoice.gd" id="1_l7rrf"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/StoryEventData.gd" id="2_ag16w"]
+
+[sub_resource type="Resource" id="Resource_l7rrf"]
+script = ExtResource("1_l7rrf")
+choiceDescription = "Passed by each other without saying much"
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_ag16w"]
+script = ExtResource("1_l7rrf")
+choiceType = 2
+choiceDescription = " I asked for their aid, trading brass for medicine. They are more selfless than I thought."
+rewards = Array[int]([10])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_ag16w")
+title = "Shamans"
+dialog = "I saw a group of shamans the other day. They were huddled near one of their children. Seemed to just have recovered from an illness and some wounds, maybe from the wolves out here. Lucky boy. The shamans had sewn the kids' wounds and were proficient with the blade. Too proficient for any shamans I’ve seen come my way before. I spotted that they had leftover medicine. Now that the kid isn’t sick, maybe I could make use of them along my way."
+choices = Array[ExtResource("1_l7rrf")]([SubResource("Resource_l7rrf"), SubResource("Resource_ag16w")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

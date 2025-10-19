@@ -16,6 +16,8 @@ extends Node2D
 # This could change as a range of 20-40 seconds
 # When story event happens, pause the time until destination.
 @export var timeBetweenStoryEvents: float = 10
+@export var startingDay: int = 1
+@export var currentDay: int
 
 var IsPaused: bool = false
 
@@ -26,6 +28,7 @@ var timerMaxTimes: Dictionary = { }
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	currentDay = startingDay
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

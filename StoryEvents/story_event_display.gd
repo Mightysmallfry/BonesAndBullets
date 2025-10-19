@@ -1,6 +1,6 @@
 extends Control
 
-@onready var storyEventTitle: Label = get_node("%StoryEventLabel")
+@onready var storyEventTitle: RichTextLabel = get_node("%StoryEventLabel")
 @onready var dialogBox: RichTextLabel = get_node("%DialogBox")
 @onready var choiceList: VBoxContainer = get_node("%ChoiceList")
 
@@ -15,7 +15,6 @@ signal finished_story_event
 func _ready() -> void:
 	visible = false
 	clear_vbox(choiceList)
-	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -23,7 +22,7 @@ func _process(_delta: float) -> void:
 
 func load_story_event_data(data: StoryEventData) -> void:
 	storyEventData = data;
-	storyEventTitle.text = storyEventData.title
+	storyEventTitle.text = "[b]Travel Log:[/b] Day %s : " %Globals.currentDay + storyEventData.title
 	dialogBox.set_dialog(storyEventData.dialog)
 	create_choice_list()
 	
@@ -78,4 +77,5 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			
 func finish_story_event() -> void:
 	visible = false
+	Globals.currentDay += 1
 	emit_signal("finished_story_event")

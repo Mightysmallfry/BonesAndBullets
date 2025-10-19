@@ -5,7 +5,6 @@ extends Node2D
 @onready var storyEventTimer: Timer = get_node("%StoryEventTimer")
 @onready var storyEventDisplay: Control = get_node("%StoryEventDisplay")
 
-
 const STORY_EVENT_DIR: String = "res://StoryEvents/EventCache"
 var _cachedEventFiles: Array[String] = []
 
