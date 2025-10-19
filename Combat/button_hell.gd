@@ -100,14 +100,14 @@ func _submit_action(taken_action:String=action, value:int=-1, second_value:int =
 func _on_attacking_pressed() -> void:
 	_action_root = false
 	self.visible = true
-	$AttackActions.visible = true
-	$AttackActions/MarginContainer/GridContainer/GoBack.grab_focus()
+	$"../AttackActions".visible = true
+	$"../AttackActions/MarginContainer/GridContainer/GoBack".grab_focus()
 	if $"..".player.bullets == 0:
-		$AttackActions/MarginContainer/GridContainer/Aim.disabled = true
-		$AttackActions/MarginContainer/GridContainer/Shoot.disabled = true
+		$"../AttackActions/MarginContainer/GridContainer/Aim".disabled = true
+		$"../AttackActions/MarginContainer/GridContainer/Shoot".disabled = true
 	else:
-		$AttackActions/MarginContainer/GridContainer/Aim.disabled = false
-		$AttackActions/MarginContainer/GridContainer/Shoot.disabled = false
+		$"../AttackActions/MarginContainer/GridContainer/Aim".disabled = false
+		$"../AttackActions/MarginContainer/GridContainer/Shoot".disabled = false
 	
 	var _possible_melee:bool = false
 	for i in $"..".thisCombatEvent.enemies:
@@ -115,25 +115,25 @@ func _on_attacking_pressed() -> void:
 			_possible_melee = true
 			break
 	if _possible_melee:
-		$AttackActions/MarginContainer/GridContainer/Melee.disabled = false
+		$"../AttackActions/MarginContainer/GridContainer/Melee".disabled = false
 	else:
-		$AttackActions/MarginContainer/GridContainer/Melee.disabled = true
+		$"../AttackActions/MarginContainer/GridContainer/Melee".disabled = true
 
 func _on_cover_pressed() -> void:
 	_action_root = false
 	self.visible = true
-	$CoverActions.visible = true
-	$CoverActions/MarginContainer/GridContainer/GoBack.grab_focus()
+	$"../CoverActions".visible = true
+	$"../CoverActions/MarginContainer/GridContainer/GoBack".grab_focus()
 	if $"..".player.cover > 0:
-		$CoverActions/MarginContainer/GridContainer/Deck.disabled = true
+		$"../CoverActions/MarginContainer/GridContainer/Deck".disabled = true
 	else:
-		$CoverActions/MarginContainer/GridContainer/Deck.disabled = false
+		$"../CoverActions/MarginContainer/GridContainer/Deck".disabled = false
 
 func _on_moving_pressed() -> void:
 	_action_root = false
 	self.visible = true
-	$MovementActions.visible = true
-	$MovementActions/MarginContainer/GridContainer/GoBack.grab_focus()
+	$"../MovementActions".visible = true
+	$"../MovementActions/MarginContainer/GridContainer/GoBack".grab_focus()
 
 func _on_end_turn_pressed() -> void:
 	options = []
@@ -148,12 +148,12 @@ func _on_button_mouse_entered(source: Control) -> void:
 
 func _reset_main()->void:
 	$"../Blocker".visible = true
-	$AttackActions.visible = false
-	$CoverActions.visible = false
-	$CoverActions2.visible = false
-	$MovementActions.visible = false
-	$MovementActions2.visible = false
-	$MovementActions3.visible = false
+	$"../AttackActions".visible = false
+	$"../CoverActions".visible = false
+	$"../CoverActions2".visible = false
+	$"../MovementActions".visible = false
+	$"../MovementActions2".visible = false
+	$"../MovementActions3".visible = false
 	_deselect_selectors()
 	_select_main()
 
@@ -185,20 +185,20 @@ func _on_find_cover_pressed() -> void:
 			options.append($".."._get_cover_type())
 			ap.append(randi_range(1,4))
 	
-	$CoverActions2/MarginContainer/GridContainer/Option1.text = "cover: " + str(options[0]) + "\n A.P cost: " + str(ap[0])
-	if ap[0] > $"..".player.action_points: $CoverActions2/MarginContainer/GridContainer/Option1.disabled = true
-	else: $CoverActions2/MarginContainer/GridContainer/Option1.disabled = false
-	$CoverActions2/MarginContainer/GridContainer/Option2.text = "cover: " + str(options[1]) + "\n A.P cost: " + str(ap[1])
-	if ap[1] > $"..".player.action_points: $CoverActions2/MarginContainer/GridContainer/Option2.disabled = true
-	else: $CoverActions2/MarginContainer/GridContainer/Option2.disabled = false
-	$CoverActions2/MarginContainer/GridContainer/Option3.text = "cover: " + str(options[2]) + "\n A.P cost: " + str(ap[2])
-	if ap[2] > $"..".player.action_points: $CoverActions2/MarginContainer/GridContainer/Option3.disabled = true
-	else: $CoverActions2/MarginContainer/GridContainer/Option3.disabled = false
-	$CoverActions2/MarginContainer/GridContainer/Option4.text = "cover: " + str(options[3]) + "\n A.P cost: " + str(ap[3])
-	if ap[3] > $"..".player.action_points: $CoverActions2/MarginContainer/GridContainer/Option4.disabled = true
-	else: $CoverActions2/MarginContainer/GridContainer/Option4.disabled = false
-	$CoverActions2.visible = true
-	$CoverActions2/MarginContainer/GridContainer/Option1.grab_focus()
+	$"../CoverActions2/MarginContainer/GridContainer/Option1".text = "cover: " + str(options[0]) + "\n A.P cost: " + str(ap[0])
+	if ap[0] > $"..".player.action_points: $"../CoverActions2/MarginContainer/GridContainer/Option1".disabled = true
+	else: $"../CoverActions2/MarginContainer/GridContainer/Option1".disabled = false
+	$"../CoverActions2/MarginContainer/GridContainer/Option2".text = "cover: " + str(options[1]) + "\n A.P cost: " + str(ap[1])
+	if ap[1] > $"..".player.action_points: $"../CoverActions2/MarginContainer/GridContainer/Option2".disabled = true
+	else: $"../CoverActions2/MarginContainer/GridContainer/Option2".disabled = false
+	$"../CoverActions2/MarginContainer/GridContainer/Option3".text = "cover: " + str(options[2]) + "\n A.P cost: " + str(ap[2])
+	if ap[2] > $"..".player.action_points: $"../CoverActions2/MarginContainer/GridContainer/Option3".disabled = true
+	else: $"../CoverActions2/MarginContainer/GridContainer/Option3".disabled = false
+	$"../CoverActions2/MarginContainer/GridContainer/Option4".text = "cover: " + str(options[3]) + "\n A.P cost: " + str(ap[3])
+	if ap[3] > $"..".player.action_points: $"../CoverActions2/MarginContainer/GridContainer/Option4".disabled = true
+	else: $"../CoverActions2/MarginContainer/GridContainer/Option4".disabled = false
+	$"../CoverActions2".visible = true
+	$"../CoverActions2/MarginContainer/GridContainer/Option1".grab_focus()
 
 func _on_deck_pressed() -> void:
 	_submit_action("deck")
@@ -212,18 +212,18 @@ func _on_cover_option_pressed(source: BaseButton) -> void:
 # MOVEMENT OPTIONS 1
 
 func _on_move_to_pressed() -> void:
-	$MovementActions2.visible = true
-	$MovementActions2/MarginContainer/GridContainer/GoBack.grab_focus()
+	$"../MovementActions2".visible = true
+	$"../MovementActions2/MarginContainer/GridContainer/GoBack".grab_focus()
 
 
 func _on_move_aw_pressed() -> void:
-	$MovementActions3.visible = true
-	$MovementActions3/MarginContainer/GridContainer/GoBack.grab_focus()
+	$"../MovementActions3".visible = true
+	$"../MovementActions3/MarginContainer/GridContainer/GoBack".grab_focus()
 
 func _on_move_2_goBack_pressed() ->void:
-	$MovementActions2.visible = false
-	$MovementActions3.visible = false
-	$MovementActions/MarginContainer/GridContainer/GoBack.grab_focus()
+	$"../MovementActions2".visible = false
+	$"../MovementActions3".visible = false
+	$"../MovementActions/MarginContainer/GridContainer/GoBack".grab_focus()
 
 # MOVEMENT TO OPTIONS
 func _on_move_all_pressed() -> void:

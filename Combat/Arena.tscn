@@ -261,24 +261,27 @@ offset_bottom = 508.0
 scale = Vector2(1.03, 1.03)
 script = ExtResource("6_o6ykf")
 
-[node name="AttackActions" type="PanelContainer" parent="Container"]
+[node name="AttackActions" type="PanelContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
+offset_left = 124.0
+offset_top = 444.0
+offset_right = 594.0
+offset_bottom = 528.0
 theme = SubResource("Theme_o6ykf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/AttackActions"]
+[node name="MarginContainer" type="MarginContainer" parent="AttackActions"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="Container/AttackActions/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="AttackActions/MarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="GoBack" type="Button" parent="Container/AttackActions/MarginContainer/GridContainer"]
+[node name="GoBack" type="Button" parent="AttackActions/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -288,7 +291,7 @@ focus_next = NodePath("../Aim")
 focus_previous = NodePath("../Melee")
 text = "Go Back"
 
-[node name="Aim" type="Button" parent="Container/AttackActions/MarginContainer/GridContainer"]
+[node name="Aim" type="Button" parent="AttackActions/MarginContainer/GridContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../GoBack")
 focus_neighbor_bottom = NodePath("../Melee")
@@ -296,7 +299,7 @@ focus_next = NodePath("../Shoot")
 focus_previous = NodePath("../GoBack")
 text = "Steady Aim"
 
-[node name="Shoot" type="Button" parent="Container/AttackActions/MarginContainer/GridContainer"]
+[node name="Shoot" type="Button" parent="AttackActions/MarginContainer/GridContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../GoBack")
 focus_neighbor_right = NodePath("../Melee")
@@ -304,7 +307,7 @@ focus_next = NodePath("../Melee")
 focus_previous = NodePath("../Aim")
 text = "Shoot At Target"
 
-[node name="Melee" type="Button" parent="Container/AttackActions/MarginContainer/GridContainer"]
+[node name="Melee" type="Button" parent="AttackActions/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -314,24 +317,27 @@ focus_next = NodePath("../GoBack")
 focus_previous = NodePath("../Shoot")
 text = "Melee Target"
 
-[node name="CoverActions" type="PanelContainer" parent="Container"]
+[node name="CoverActions" type="PanelContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
+offset_left = 126.0
+offset_top = 444.0
+offset_right = 596.0
+offset_bottom = 528.0
 theme = SubResource("Theme_o6ykf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/CoverActions"]
+[node name="MarginContainer" type="MarginContainer" parent="CoverActions"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="Container/CoverActions/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="CoverActions/MarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="GoBack" type="Button" parent="Container/CoverActions/MarginContainer/GridContainer"]
+[node name="GoBack" type="Button" parent="CoverActions/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -341,7 +347,7 @@ focus_next = NodePath("../Cover")
 focus_previous = NodePath("../Deck")
 text = "Go Back"
 
-[node name="Cover" type="Button" parent="Container/CoverActions/MarginContainer/GridContainer"]
+[node name="Cover" type="Button" parent="CoverActions/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -350,31 +356,34 @@ focus_next = NodePath("../Deck")
 focus_previous = NodePath("../GoBack")
 text = "Find Cover"
 
-[node name="Deck" type="Button" parent="Container/CoverActions/MarginContainer/GridContainer"]
+[node name="Deck" type="Button" parent="CoverActions/MarginContainer/GridContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../GoBack")
 focus_next = NodePath("../GoBack")
 focus_previous = NodePath("../Cover")
 text = "Hit the Deck"
 
-[node name="CoverActions2" type="PanelContainer" parent="Container"]
+[node name="CoverActions2" type="PanelContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
+offset_left = 124.0
+offset_top = 444.0
+offset_right = 594.0
+offset_bottom = 528.0
 theme = SubResource("Theme_o6ykf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/CoverActions2"]
+[node name="MarginContainer" type="MarginContainer" parent="CoverActions2"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="Container/CoverActions2/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="CoverActions2/MarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="Option1" type="Button" parent="Container/CoverActions2/MarginContainer/GridContainer"]
+[node name="Option1" type="Button" parent="CoverActions2/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -384,7 +393,7 @@ focus_next = NodePath("../Option2")
 focus_previous = NodePath("../Option4")
 text = "Option 1"
 
-[node name="Option2" type="Button" parent="Container/CoverActions2/MarginContainer/GridContainer"]
+[node name="Option2" type="Button" parent="CoverActions2/MarginContainer/GridContainer"]
 layout_mode = 2
 focus_neighbor_left = NodePath("../Option1")
 focus_neighbor_bottom = NodePath("../Option4")
@@ -392,7 +401,7 @@ focus_next = NodePath("../Option3")
 focus_previous = NodePath("../Option1")
 text = "Option 2"
 
-[node name="Option3" type="Button" parent="Container/CoverActions2/MarginContainer/GridContainer"]
+[node name="Option3" type="Button" parent="CoverActions2/MarginContainer/GridContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Option1")
 focus_neighbor_right = NodePath("../Option4")
@@ -400,7 +409,7 @@ focus_next = NodePath("../Option4")
 focus_previous = NodePath("../Option2")
 text = "Option 3"
 
-[node name="Option4" type="Button" parent="Container/CoverActions2/MarginContainer/GridContainer"]
+[node name="Option4" type="Button" parent="CoverActions2/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -410,24 +419,27 @@ focus_next = NodePath("../Option1")
 focus_previous = NodePath("../Option3")
 text = "Option 4"
 
-[node name="MovementActions" type="PanelContainer" parent="Container"]
+[node name="MovementActions" type="PanelContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
+offset_left = 125.0
+offset_top = 444.0
+offset_right = 595.0
+offset_bottom = 528.0
 theme = SubResource("Theme_o6ykf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/MovementActions"]
+[node name="MarginContainer" type="MarginContainer" parent="MovementActions"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="Container/MovementActions/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="MovementActions/MarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="GoBack" type="Button" parent="Container/MovementActions/MarginContainer/GridContainer"]
+[node name="GoBack" type="Button" parent="MovementActions/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -437,7 +449,7 @@ focus_next = NodePath("../MoveTo")
 focus_previous = NodePath("../MoveAw")
 text = "Go Back"
 
-[node name="MoveTo" type="Button" parent="Container/MovementActions/MarginContainer/GridContainer"]
+[node name="MoveTo" type="Button" parent="MovementActions/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -446,31 +458,34 @@ focus_next = NodePath("../MoveAw")
 focus_previous = NodePath("../GoBack")
 text = "Move Towards ..."
 
-[node name="MoveAw" type="Button" parent="Container/MovementActions/MarginContainer/GridContainer"]
+[node name="MoveAw" type="Button" parent="MovementActions/MarginContainer/GridContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../GoBack")
 focus_next = NodePath("../GoBack")
 focus_previous = NodePath("../MoveTo")
 text = "Move Away From ..."
 
-[node name="MovementActions2" type="PanelContainer" parent="Container"]
+[node name="MovementActions2" type="PanelContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
+offset_left = 124.0
+offset_top = 444.0
+offset_right = 594.0
+offset_bottom = 528.0
 theme = SubResource("Theme_o6ykf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/MovementActions2"]
+[node name="MarginContainer" type="MarginContainer" parent="MovementActions2"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="Container/MovementActions2/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="MovementActions2/MarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="GoBack" type="Button" parent="Container/MovementActions2/MarginContainer/GridContainer"]
+[node name="GoBack" type="Button" parent="MovementActions2/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -480,7 +495,7 @@ focus_next = NodePath("../All")
 focus_previous = NodePath("../One")
 text = "Go Back"
 
-[node name="All" type="Button" parent="Container/MovementActions2/MarginContainer/GridContainer"]
+[node name="All" type="Button" parent="MovementActions2/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -489,31 +504,34 @@ focus_next = NodePath("../One")
 focus_previous = NodePath("../GoBack")
 text = "Move Towards All"
 
-[node name="One" type="Button" parent="Container/MovementActions2/MarginContainer/GridContainer"]
+[node name="One" type="Button" parent="MovementActions2/MarginContainer/GridContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../GoBack")
 focus_next = NodePath("../GoBack")
 focus_previous = NodePath("../All")
 text = "Move Towards  ..."
 
-[node name="MovementActions3" type="PanelContainer" parent="Container"]
+[node name="MovementActions3" type="PanelContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
+offset_left = 125.0
+offset_top = 444.0
+offset_right = 595.0
+offset_bottom = 528.0
 theme = SubResource("Theme_o6ykf")
 
-[node name="MarginContainer" type="MarginContainer" parent="Container/MovementActions3"]
+[node name="MarginContainer" type="MarginContainer" parent="MovementActions3"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="GridContainer" type="GridContainer" parent="Container/MovementActions3/MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="MovementActions3/MarginContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="GoBack" type="Button" parent="Container/MovementActions3/MarginContainer/GridContainer"]
+[node name="GoBack" type="Button" parent="MovementActions3/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -523,7 +541,7 @@ focus_next = NodePath("../All")
 focus_previous = NodePath("../One")
 text = "Go Back"
 
-[node name="All" type="Button" parent="Container/MovementActions3/MarginContainer/GridContainer"]
+[node name="All" type="Button" parent="MovementActions3/MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -532,7 +550,7 @@ focus_next = NodePath("../One")
 focus_previous = NodePath("../GoBack")
 text = "Move Away From All"
 
-[node name="One" type="Button" parent="Container/MovementActions3/MarginContainer/GridContainer"]
+[node name="One" type="Button" parent="MovementActions3/MarginContainer/GridContainer"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../GoBack")
 focus_next = NodePath("../GoBack")
@@ -610,43 +628,43 @@ size_flags_vertical = 4
 [connection signal="mouse_entered" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/EndTurn" to="Container" method="_on_button_mouse_entered" flags=18]
 [connection signal="pressed" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/EndTurn" to="Container" method="_on_end_turn_pressed"]
 [connection signal="selected_action" from="Container" to="." method="_on_action_submitted"]
-[connection signal="mouse_entered" from="Container/AttackActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/AttackActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_go_back_pressed"]
-[connection signal="mouse_entered" from="Container/AttackActions/MarginContainer/GridContainer/Aim" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/AttackActions/MarginContainer/GridContainer/Aim" to="Container" method="_on_aim_pressed"]
-[connection signal="mouse_entered" from="Container/AttackActions/MarginContainer/GridContainer/Shoot" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/AttackActions/MarginContainer/GridContainer/Shoot" to="Container" method="_on_shoot_pressed"]
-[connection signal="mouse_entered" from="Container/AttackActions/MarginContainer/GridContainer/Melee" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/AttackActions/MarginContainer/GridContainer/Melee" to="Container" method="_on_melee_pressed"]
-[connection signal="mouse_entered" from="Container/CoverActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/CoverActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_go_back_pressed"]
-[connection signal="mouse_entered" from="Container/CoverActions/MarginContainer/GridContainer/Cover" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/CoverActions/MarginContainer/GridContainer/Cover" to="Container" method="_on_find_cover_pressed"]
-[connection signal="mouse_entered" from="Container/CoverActions/MarginContainer/GridContainer/Deck" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/CoverActions/MarginContainer/GridContainer/Deck" to="Container" method="_on_deck_pressed"]
-[connection signal="mouse_entered" from="Container/CoverActions2/MarginContainer/GridContainer/Option1" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/CoverActions2/MarginContainer/GridContainer/Option1" to="Container" method="_on_cover_option_pressed" flags=18]
-[connection signal="mouse_entered" from="Container/CoverActions2/MarginContainer/GridContainer/Option2" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/CoverActions2/MarginContainer/GridContainer/Option2" to="Container" method="_on_cover_option_pressed" flags=18]
-[connection signal="mouse_entered" from="Container/CoverActions2/MarginContainer/GridContainer/Option3" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/CoverActions2/MarginContainer/GridContainer/Option3" to="Container" method="_on_cover_option_pressed" flags=18]
-[connection signal="mouse_entered" from="Container/CoverActions2/MarginContainer/GridContainer/Option4" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/CoverActions2/MarginContainer/GridContainer/Option4" to="Container" method="_on_cover_option_pressed" flags=18]
-[connection signal="mouse_entered" from="Container/MovementActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_go_back_pressed"]
-[connection signal="mouse_entered" from="Container/MovementActions/MarginContainer/GridContainer/MoveTo" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions/MarginContainer/GridContainer/MoveTo" to="Container" method="_on_move_to_pressed"]
-[connection signal="mouse_entered" from="Container/MovementActions/MarginContainer/GridContainer/MoveAw" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions/MarginContainer/GridContainer/MoveAw" to="Container" method="_on_move_aw_pressed"]
-[connection signal="mouse_entered" from="Container/MovementActions2/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions2/MarginContainer/GridContainer/GoBack" to="Container" method="_on_move_2_goBack_pressed"]
-[connection signal="mouse_entered" from="Container/MovementActions2/MarginContainer/GridContainer/All" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions2/MarginContainer/GridContainer/All" to="Container" method="_on_move_all_pressed"]
-[connection signal="mouse_entered" from="Container/MovementActions2/MarginContainer/GridContainer/One" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions2/MarginContainer/GridContainer/One" to="Container" method="_on_one_pressed"]
-[connection signal="mouse_entered" from="Container/MovementActions3/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions3/MarginContainer/GridContainer/GoBack" to="Container" method="_on_move_2_goBack_pressed"]
-[connection signal="mouse_entered" from="Container/MovementActions3/MarginContainer/GridContainer/All" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions3/MarginContainer/GridContainer/All" to="Container" method="_on_away_all_pressed"]
-[connection signal="mouse_entered" from="Container/MovementActions3/MarginContainer/GridContainer/One" to="Container" method="_on_button_mouse_entered" flags=18]
-[connection signal="pressed" from="Container/MovementActions3/MarginContainer/GridContainer/One" to="Container" method="_on_oneAway_pressed"]
+[connection signal="mouse_entered" from="AttackActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="AttackActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_go_back_pressed"]
+[connection signal="mouse_entered" from="AttackActions/MarginContainer/GridContainer/Aim" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="AttackActions/MarginContainer/GridContainer/Aim" to="Container" method="_on_aim_pressed"]
+[connection signal="mouse_entered" from="AttackActions/MarginContainer/GridContainer/Shoot" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="AttackActions/MarginContainer/GridContainer/Shoot" to="Container" method="_on_shoot_pressed"]
+[connection signal="mouse_entered" from="AttackActions/MarginContainer/GridContainer/Melee" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="AttackActions/MarginContainer/GridContainer/Melee" to="Container" method="_on_melee_pressed"]
+[connection signal="mouse_entered" from="CoverActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="CoverActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_go_back_pressed"]
+[connection signal="mouse_entered" from="CoverActions/MarginContainer/GridContainer/Cover" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="CoverActions/MarginContainer/GridContainer/Cover" to="Container" method="_on_find_cover_pressed"]
+[connection signal="mouse_entered" from="CoverActions/MarginContainer/GridContainer/Deck" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="CoverActions/MarginContainer/GridContainer/Deck" to="Container" method="_on_deck_pressed"]
+[connection signal="mouse_entered" from="CoverActions2/MarginContainer/GridContainer/Option1" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="CoverActions2/MarginContainer/GridContainer/Option1" to="Container" method="_on_cover_option_pressed" flags=18]
+[connection signal="mouse_entered" from="CoverActions2/MarginContainer/GridContainer/Option2" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="CoverActions2/MarginContainer/GridContainer/Option2" to="Container" method="_on_cover_option_pressed" flags=18]
+[connection signal="mouse_entered" from="CoverActions2/MarginContainer/GridContainer/Option3" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="CoverActions2/MarginContainer/GridContainer/Option3" to="Container" method="_on_cover_option_pressed" flags=18]
+[connection signal="mouse_entered" from="CoverActions2/MarginContainer/GridContainer/Option4" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="CoverActions2/MarginContainer/GridContainer/Option4" to="Container" method="_on_cover_option_pressed" flags=18]
+[connection signal="mouse_entered" from="MovementActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_go_back_pressed"]
+[connection signal="mouse_entered" from="MovementActions/MarginContainer/GridContainer/MoveTo" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions/MarginContainer/GridContainer/MoveTo" to="Container" method="_on_move_to_pressed"]
+[connection signal="mouse_entered" from="MovementActions/MarginContainer/GridContainer/MoveAw" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions/MarginContainer/GridContainer/MoveAw" to="Container" method="_on_move_aw_pressed"]
+[connection signal="mouse_entered" from="MovementActions2/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions2/MarginContainer/GridContainer/GoBack" to="Container" method="_on_move_2_goBack_pressed"]
+[connection signal="mouse_entered" from="MovementActions2/MarginContainer/GridContainer/All" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions2/MarginContainer/GridContainer/All" to="Container" method="_on_move_all_pressed"]
+[connection signal="mouse_entered" from="MovementActions2/MarginContainer/GridContainer/One" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions2/MarginContainer/GridContainer/One" to="Container" method="_on_one_pressed"]
+[connection signal="mouse_entered" from="MovementActions3/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions3/MarginContainer/GridContainer/GoBack" to="Container" method="_on_move_2_goBack_pressed"]
+[connection signal="mouse_entered" from="MovementActions3/MarginContainer/GridContainer/All" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions3/MarginContainer/GridContainer/All" to="Container" method="_on_away_all_pressed"]
+[connection signal="mouse_entered" from="MovementActions3/MarginContainer/GridContainer/One" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="MovementActions3/MarginContainer/GridContainer/One" to="Container" method="_on_oneAway_pressed"]
