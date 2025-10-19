@@ -10,6 +10,7 @@ func createButton(_name:String, health:int, distance:float, aims:Array[float])->
 
 func update_Details(health:int, distance:float, aims:Array[float])->void:
 	$PanelContainer/MarginContainer/VBoxContainer/ProgressBar.value = health
+	$PanelContainer/MarginContainer/VBoxContainer/ProgressBar/Label.text = str(health)
 	$PanelContainer/MarginContainer/VBoxContainer/Label2.text = ("Distance: " + str(distance))
 	$PanelContainer/MarginContainer/VBoxContainer/Label3.text = ("My shot odds: " + str(snapped(aims[0], .001)*100) + "%")
 	if aims[1] != -1:

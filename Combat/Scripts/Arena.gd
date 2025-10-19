@@ -59,7 +59,7 @@ func resolveCombat()->void:
 	# Update Skills
 	
 	# return to main
-	print("CHANING SCENE")
+	print("WIN")
 	get_tree().change_scene_to_file("res://World/main.tscn")
 
 ## Adds variance to enemy stats
@@ -89,7 +89,6 @@ func _free_enemy(a_enemy:enemy)->void:
 		return
 	combatUI.remove_enemy_selector(index)
 	if thisCombatEvent.enemies.pop_at(index) == null || thisCombatEvent.enemies.size() == 0:
-		print("YOU WIN")
 		resolveCombat()
 
 ## Gets the enemy's index from combatEvent array
@@ -173,7 +172,7 @@ func _get_cover_type() -> int:
 func _enemy_take_damage(a_enemy:enemy, damage:int)->void:
 	a_enemy.health -= damage
 	if a_enemy.health < 1:
-		print("DEATH!!!")
+		print("YOU DIED!!!")
 		combatUI.update_battle_log(a_enemy.name + " died")
 		_free_enemy(a_enemy)
 	else:
@@ -227,7 +226,7 @@ func _move(acting_enemy:enemy, away:bool=false)->void:
 func _attack(acting_enemy:enemy)->void:
 	if acting_enemy.attack_type == 1:
 		if rng.randf() < _calculate_aim_chance(acting_enemy):
-			combatUI.update_battle_log(acting_enemy.name + " Shot you")
+			combatUI.update_battle_log(acting_enemy.name + " shot you for " + str(shot_damage) + " health")
 			_take_damage(shot_damage)
 		else:
 			combatUI.update_battle_log(acting_enemy.name + " Shot at You but Missed")
@@ -236,11 +235,11 @@ func _attack(acting_enemy:enemy)->void:
 		var melee = _calculate_melee(acting_enemy)
 		if randf() < melee:
 			# Player Wins
-			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you but you won")
+			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you but you won, causing " + str(melee) + " damage")
 			_enemy_take_damage(acting_enemy, melee * player.melee)
 		else:
 			# Player Loses
-			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you and beat you up")
+			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you and beat you up causing " + str(melee) + " damage")
 			_take_damage(melee * acting_enemy.melee)
 		return
 	combatUI.update_battle_log(acting_enemy.name + " stares at you angry")
@@ -340,11 +339,11 @@ func _melee(index:int)->void:
 	var melee = _calculate_melee(thisCombatEvent.enemies[index])
 	if rng.randf() < melee:
 		# Player Wins
-		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee and won")
+		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee and won, causing " + str(melee) + " damage")
 		_enemy_take_damage(thisCombatEvent.enemies[index], melee * player.melee)
 	else:
 		# Player Loses
-		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee but beat you up")
+		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee but beat you up, causing " + str(melee) + " damage")
 		_take_damage(melee * thisCombatEvent.enemies[index].melee)
 	pass
 

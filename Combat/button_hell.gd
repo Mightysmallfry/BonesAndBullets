@@ -36,7 +36,6 @@ func on_selector_pressed(index:int)->void:
 		return
 	else:
 		_submit_action(action, index)
-		print(index)
 		_reset_main()
 
 func _select_selectors()->void:

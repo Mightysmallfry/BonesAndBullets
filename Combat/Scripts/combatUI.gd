@@ -6,7 +6,17 @@ func update_battle_log(new_line:String)->void:
 	combatLog += (new_line + "\n")
 	$"Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/ScrollContainer/RichTextLabel".text = combatLog
 	var scrollContainer = $"Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/ScrollContainer"
+	#scrollContainer.call_deferred("scroll_vertical", scrollContainer.get_v_scroll_bar().max_value)
+	await get_tree().process_frame
 	scrollContainer.scroll_vertical = scrollContainer.get_v_scroll_bar().max_value
+
+func _process(_delta: float) -> void:
+	var scrollContainer = $"Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/ScrollContainer"
+	if Input.is_action_pressed("ui_text_scroll_up") and scrollContainer.scroll_vertical != 0:
+		scrollContainer.scroll_vertical -= 1
+	if Input.is_action_pressed("ui_text_scroll_down") and scrollContainer.scroll_vertical != scrollContainer.get_v_scroll_bar().max_value:
+		scrollContainer.scroll_vertical += 1
+
 
 func add_enemy_selector(enemy_name:String, health:int, distance:float, aims:Array[float])->void:
 	var enemySelector = load("res://Combat/EnemySelector.tscn").instantiate()
