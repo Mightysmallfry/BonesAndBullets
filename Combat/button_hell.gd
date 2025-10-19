@@ -112,9 +112,9 @@ func _on_attacking_pressed() -> void:
 		$"../AttackActions/MarginContainer/GridContainer/Shoot".disabled = false
 	
 	if $"..".player.improve_acuracy > 0:
-		$"../AttackActions/MarginContainer/GridContainer/Aim".disabled = false
-	else:
 		$"../AttackActions/MarginContainer/GridContainer/Aim".disabled = true
+	else:
+		$"../AttackActions/MarginContainer/GridContainer/Aim".disabled = false
 	
 	var _possible_melee:bool = false
 	for i in $"..".thisCombatEvent.enemies:

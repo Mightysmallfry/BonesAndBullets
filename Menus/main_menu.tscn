@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://d13yw33pf5jfv"]
+[gd_scene load_steps=14 format=3 uid="uid://d13yw33pf5jfv"]
 
 [ext_resource type="Theme" uid="uid://b7kybbmor2ml0" path="res://Assets/Themes/DisplayTheme.tres" id="1_cxdly"]
 [ext_resource type="Script" uid="uid://c31nidxfv8nf" path="res://Menus/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="2_7vrkn"]
 [ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_11gta"]
 [ext_resource type="Texture2D" uid="uid://so1dyfgtr2wu" path="res://Assets/WorldWallpaper/GameJamFall2025-Title.png" id="4_vxn86"]
-[ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="5_vxn86"]
+[ext_resource type="Script" path="res://Menus/continue_button.gd" id="5_vxn86"]
+[ext_resource type="AudioStream" uid="uid://baltmr5mjr26t" path="res://Assets/[Title Theme]-I Carry These Bones_v_1F_wtWind.mp3" id="7_gn11b"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vrkn"]
 blend_mode = 1
@@ -117,6 +118,11 @@ preprocess = 0.5
 visibility_rect = Rect2(-576, -324, 1152, 648)
 process_material = SubResource("ParticleProcessMaterial_qe12f")
 script = ExtResource("2_7vrkn")
+
+[node name="[titleTheme]ICarryTheseBonesV1fWtWind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_gn11b")
+autoplay = true
+parameters/looping = true
 
 [connection signal="mouse_entered" from="UiElements/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="UiElements/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
