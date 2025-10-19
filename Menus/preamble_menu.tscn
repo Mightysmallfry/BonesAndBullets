@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=3 uid="uid://ckcs7h1gq2ns6"]
+
+[ext_resource type="Script" uid="uid://bm3y50u8w83xv" path="res://Menus/preamble_menu.gd" id="1_ools6"]
+[ext_resource type="Texture2D" uid="uid://bfdclhvodt6kt" path="res://Assets/WorldWallpaper/GameJamFall2025-Dialog.png" id="2_6ra4v"]
+[ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="2_87x1b"]
+[ext_resource type="Script" uid="uid://ckf7oqtj1e72q" path="res://StoryEvents/dialog_box.gd" id="3_6ra4v"]
+[ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="5_6ra4v"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6bed1"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_1xkuc"]
+_data = [Vector2(0, 0.20621163), 0.0, 0.0, 0, 0, Vector2(0.16337523, 0.6841326), 2.0416834, 2.0416834, 0, 0, Vector2(0.49730703, 1), 0.0, 0.0, 0, 0, Vector2(0.83482945, 0.78575945), -1.6010544, -1.6010544, 0, 0, Vector2(1, 0.1869849), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_fu7sn"]
+curve = SubResource("Curve_1xkuc")
+
+[sub_resource type="Gradient" id="Gradient_x5ofu"]
+colors = PackedColorArray(1, 1, 1, 0.078431375, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jix8l"]
+gradient = SubResource("Gradient_x5ofu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_snjgd"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -324, 0)
+emission_shape = 3
+emission_box_extents = Vector3(648, 1, 1)
+gravity = Vector3(0, 30, 0)
+scale_min = 0.19999999
+color = Color(0.54509807, 0.8980392, 1, 1)
+color_initial_ramp = SubResource("GradientTexture1D_jix8l")
+alpha_curve = SubResource("CurveTexture_fu7sn")
+
+[node name="PreambleMenu" type="Control" node_paths=PackedStringArray("dateSegment", "loreSegment")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ools6")
+dateSegment = NodePath("PanelContainer/MarginContainer/VBoxContainer/DateLabel")
+loreSegment = NodePath("PanelContainer/MarginContainer/VBoxContainer/LoreLabel")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6ra4v")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -399.125
+offset_top = -220.625
+offset_right = 399.125
+offset_bottom = 220.625
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="DateLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 41
+text = "Date Scroll In"
+script = ExtResource("3_6ra4v")
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LoreLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Scrooled in text that
+sadnbaksdnl;sad
+s
+adsad
+sa
+fasf
+asfasdas
+da
+sd
+asd
+asdasdsadas
+asd
+asdasdsadas
+asd
+asdasdsadasasdasdsadasasdasdsadasasdasdsadasasdasdsadasasdasdsadas"
+script = ExtResource("3_6ra4v")
+
+[node name="ContinueButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 255.0
+offset_top = 232.0
+offset_right = 397.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_bottom = NodePath("../QuitButton")
+text = "Continue"
+script = ExtResource("2_87x1b")
+NextScenePath = "res://World/main.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer"]
+material = SubResource("CanvasItemMaterial_6bed1")
+position = Vector2(576, 320)
+amount = 1000
+lifetime = 7.0
+preprocess = 0.5
+visibility_rect = Rect2(-576, -324, 1152, 648)
+process_material = SubResource("ParticleProcessMaterial_snjgd")
+script = ExtResource("5_6ra4v")
+
+[connection signal="pressed" from="ContinueButton" to="ContinueButton" method="_on_pressed"]

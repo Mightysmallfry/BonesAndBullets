@@ -14,6 +14,7 @@ https://lospec.com/palette-list/wish-gb
 
 ## Canvas Sizing and Art
 - 380 x 160
+- 1152 x 648
 - 16x16 tiles (if any are present)
 - 16 frames for MC walk cycles
 

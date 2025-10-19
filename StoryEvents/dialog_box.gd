@@ -1,6 +1,9 @@
 extends RichTextLabel
 
-const TYPEWRITER_SPEED: float = 0.035
+@export var TYPEWRITER_SPEED: float = 0.035
+
+func _ready() -> void:
+	visible_characters = 0
 
 func set_dialog(string: String):
 	visible_characters = 0

@@ -19,17 +19,17 @@ func _ready() -> void:
 
 func update_particle_settings() -> void:
 	var viewport_size: Vector2 = get_viewport_rect().size
-	var screenHeight: float = viewport_size.y
-	var screenWidth: float = viewport_size.x
+	#var screenHeight: float = viewport_size.y
+	#var screenWidth: float = viewport_size.x
 
-	particleProcessMaterial.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
-	particleProcessMaterial.emission_box_extents = Vector3(screenWidth * 0.5, screenHeight * 0.5, 0.0)
+	# particleProcessMaterial.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
+	# particleProcessMaterial.emission_box_extents = Vector3(screenWidth * 0.5, screenHeight * 0.5, 0.0)
 
 	global_position = viewport_size * 0.5
 	
-	var half_size: Vector2 = viewport_size * 0.5
-	visibility_rect = Rect2(-half_size, viewport_size)
+	# var half_size: Vector2 = viewport_size * 0.5
+	# visibility_rect = Rect2(-half_size, viewport_size)
 	
-	amount = baseAmount
-	amount = clamp(amount, 100, 5000)
+	# amount = baseAmount
+	# amount = clamp(amount, 100, 5000)
 	
