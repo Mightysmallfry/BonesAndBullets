@@ -6,6 +6,7 @@ var action:String
 var _selectors_selectable:bool = false
 var _main_selectable:bool = true
 var _action_root = true
+var action_tree:int = 0
 
 @onready var selectorGrid:GridContainer = $"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"
 
@@ -109,6 +110,11 @@ func _on_attacking_pressed() -> void:
 	else:
 		$"../AttackActions/MarginContainer/GridContainer/Aim".disabled = false
 		$"../AttackActions/MarginContainer/GridContainer/Shoot".disabled = false
+	
+	if $"..".player.improve_acuracy > 0:
+		$"../AttackActions/MarginContainer/GridContainer/Aim".disabled = false
+	else:
+		$"../AttackActions/MarginContainer/GridContainer/Aim".disabled = true
 	
 	var _possible_melee:bool = false
 	for i in $"..".thisCombatEvent.enemies:

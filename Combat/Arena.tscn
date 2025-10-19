@@ -361,7 +361,7 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../GoBack")
 focus_next = NodePath("../GoBack")
 focus_previous = NodePath("../Cover")
-text = "Hit the Deck"
+text = "Hit the Deck (cover 20)"
 
 [node name="CoverActions2" type="PanelContainer" parent="."]
 visible = false

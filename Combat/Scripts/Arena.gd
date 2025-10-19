@@ -289,6 +289,7 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 		"MoveTo":
 			player.action_points -= 1
 			player.cover = 0
+			player.improve_acuracy = 0
 			if value1 == -1:
 				_move_towards_all()
 				_update_all_enemy_selectors()
@@ -298,6 +299,7 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 		"MoveAway":
 			player.action_points -= 1
 			player.cover = 0
+			player.improve_acuracy = 0
 			if value1 == -1:
 				_move_away_all()
 				_update_all_enemy_selectors()
