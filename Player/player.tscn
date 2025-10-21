@@ -1,7 +1,7 @@
 [gd_scene load_steps=38 format=3 uid="uid://6j000qlyjlus"]
 
 [ext_resource type="Texture2D" uid="uid://bsr7r6hlxq6en" path="res://Player/knight.png" id="1_l8h54"]
-[ext_resource type="Texture2D" uid="uid://c1m5ddaxgvv78" path="res://Player/Test/IdleSpriteSheet.png" id="2_btcbx"]
+[ext_resource type="Texture2D" uid="uid://bfsxbdrsbt5ee" path="res://Player/Test/IdleSpriteSheetv2.png" id="2_btcbx"]
 [ext_resource type="Texture2D" uid="uid://cejgml63w2eug" path="res://Player/Test/WalkSpriteSheet.png" id="3_gwnis"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
