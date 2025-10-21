@@ -76,8 +76,6 @@ func _on_story_event_timer_timeout() -> void:
 	storyEventDisplay.load_story_event_data(storyEventData)
 	storyEventDisplay.visible = true
 	
-	
-	
 func _on_finished_story_event() -> void:
 	# Continue Destination, restart eventTimer
 	# If we want slight variations in time, this is where we would implement it.
@@ -86,3 +84,7 @@ func _on_finished_story_event() -> void:
 	storyEventTimer.start()
 	
 	print("Game has resumed")
+
+
+func _on_story_progression_timer_timeout() -> void:
+	get_tree().change_scene_to_file("res://Menus/end_menu.tscn")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvjad2jradgig"]
+[gd_scene load_steps=3 format=3 uid="uid://cvjad2jradgig"]
 
 [ext_resource type="Script" uid="uid://c4ml4mda7dj05" path="res://Menus/pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="2_ik086"]
 
 [node name="PauseMenu" type="Control"]
 layout_mode = 3
@@ -59,6 +60,12 @@ focus_neighbor_top = NodePath("../ResumeButton")
 focus_next = NodePath("../ResumeButton")
 focus_previous = NodePath("../ResumeButton")
 text = "Quit"
+
+[node name="ReturnButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Menu"
+script = ExtResource("2_ik086")
+NextScenePath = "res://Menus/main_menu.tscn"
 
 [connection signal="mouse_entered" from="PanelContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]

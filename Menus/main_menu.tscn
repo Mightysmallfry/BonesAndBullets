@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="2_7vrkn"]
 [ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_11gta"]
 [ext_resource type="Texture2D" uid="uid://so1dyfgtr2wu" path="res://Assets/WorldWallpaper/GameJamFall2025-Title.png" id="4_vxn86"]
-[ext_resource type="Script" path="res://Menus/continue_button.gd" id="5_vxn86"]
+[ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="5_vxn86"]
 [ext_resource type="AudioStream" uid="uid://baltmr5mjr26t" path="res://Assets/[Title Theme]-I Carry These Bones_v_1F_wtWind.mp3" id="7_gn11b"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vrkn"]

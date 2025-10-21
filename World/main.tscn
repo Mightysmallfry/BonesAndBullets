@@ -165,4 +165,5 @@ visibility_rect = Rect2(-576, -324, 1152, 648)
 process_material = SubResource("ParticleProcessMaterial_1hcjw")
 script = ExtResource("4_d55jh")
 
+[connection signal="timeout" from="Timers/StoryProgressionTimer" to="." method="_on_story_progression_timer_timeout"]
 [connection signal="timeout" from="Timers/StoryEventTimer" to="." method="_on_story_event_timer_timeout"]

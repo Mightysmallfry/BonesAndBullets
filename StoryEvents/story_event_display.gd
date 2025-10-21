@@ -57,12 +57,19 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			return
 		StoryChoice.ChoiceTypeEnum.BULLET:
 			print("No man outsmarts bullet")
-			#Process effects of choice
+			if has_reward(choiceData):
+				Globals.bullets += choiceData.rewards[0];
+				clamp(Globals.bullets, 0, Globals.maxBullets)
 			finish_story_event()
 			# Emit continue signal
 			return
 		StoryChoice.ChoiceTypeEnum.HEALTH:
 			print("No man outsmarts Health")
+			if has_reward(choiceData):
+				Globals.playerHealth += choiceData.rewards[0];
+				clamp(Globals.playerHealth, 0, Globals.maxHealth)
+				if Globals.playerHealth == 0:
+					get_tree().change_scene_to_file("res://Menus/end_menu.tscn")
 			finish_story_event()
 			return
 		StoryChoice.ChoiceTypeEnum.PROGRESS:
@@ -79,3 +86,8 @@ func finish_story_event() -> void:
 	visible = false
 	Globals.currentDay += 1
 	emit_signal("finished_story_event")
+
+func has_reward(choiceData: StoryChoice) -> bool:
+	if choiceData.rewards == null or choiceData.rewards.is_empty():
+		return false
+	return true
