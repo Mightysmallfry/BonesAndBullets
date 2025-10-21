@@ -143,7 +143,7 @@ process_mode = 3
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("11_ps454")]
-position = Vector2(576, 471)
+position = Vector2(576, 485.00003)
 scale = Vector2(3.6, 3.6)
 
 [node name="[journeyTheme]ThroughTheDesolateJourneyHomeV0a" type="AudioStreamPlayer" parent="."]

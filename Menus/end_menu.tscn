@@ -77,7 +77,7 @@ layout_mode = 2
 text = "Light the Candle
 [Return to Main Menu]"
 script = ExtResource("1_xh4fv")
-NextScenePath = "res://World/main.tscn"
+NextScenePath = "res://Menus/main_menu.tscn"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

@@ -12,7 +12,7 @@ extends Node2D
 @export var foregroundScrollScale: float = 1
 
 @export_category("Scroll Speed")
-@export var speedConst:float = 200
+@export var speedConst:float = 80
 @export var parallaxSpeed: float = 1
 
 # Called when the node enters the scene tree for the first time.
