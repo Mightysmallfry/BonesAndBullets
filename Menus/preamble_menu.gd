@@ -5,20 +5,18 @@ extends Control
 
 const SEGMENT_DELAY: float = 1.5
 
-# Post Krill
-var initialDate: String = "542 PK"
-var lore: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Cras sodales nulla felis, vitae tristique libero porttitor at.
-Pellentesque habitant morbi tristique senectus et netus et malesuada 
-fames ac turpis egestas. Interdum et malesuada fames ac ante ipsum primis 
-in faucibus. Quisque vestibulum sollicitudin sem ac lobortis. Sed laoreet laoreet ligula sed maximus.
-Aenean sed quam id risus dictum porta. Cras a sapien id dui aliquet pulvinar.
-
-Nulla varius ac justo sed accumsan. Donec lectus odio, tincidunt in varius at,
-posuere id magna. Ut sit amet semper lacus. Vestibulum ante ipsum primis in
-faucibus orci luctus et ultrices posuere cubilia curae; Vivamus lacinia velit ac
-varius iaculis. Sed congue nibh vel consequat consectetur. Maecenas pellentesqueut
-velit sed hendrerit. Maecenas ut ullamcorper neque, non congue mauris."
+# Post Krill (lol)
+var initialDate: String = "20XX"
+var lore: String = "This land is eternal. 
+Shadows of grey mourning and visions of red remains litter the landscape. 
+Today I undertake a journey: Iron in hand, brass in pocket. 
+In this journal, my story will lay to rest. 
+In their honor, nothing is more important than this delivery. They were everything. 
+Now, just bones to be delivered to an ‘ancestral home’. 
+I never believed in that stuff. Still don’t. But I believed in them. 
+That’s good enough for me. 
+So whether it be raiders, frozen wastelands, or staggering constructs that get in my way, it doesn’t matter. 
+These bones and brass are getting me to the end. Or I’ll die trying."
 
 
 # Called when the node enters the scene tree for the first time.

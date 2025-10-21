@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bsr7r6hlxq6en" path="res://Player/knight.png" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://bfsxbdrsbt5ee" path="res://Player/Test/IdleSpriteSheetv2.png" id="2_btcbx"]
-[ext_resource type="Texture2D" uid="uid://cejgml63w2eug" path="res://Player/Test/WalkSpriteSheet.png" id="3_gwnis"]
+[ext_resource type="Texture2D" uid="uid://brju03royjgw1" path="res://Player/Test/WalkeSpireSheetV2.png" id="3_btcbx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ntmi"]
 atlas = ExtResource("1_l8h54")
@@ -41,35 +41,35 @@ atlas = ExtResource("2_btcbx")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sm0op"]
-atlas = ExtResource("3_gwnis")
+atlas = ExtResource("3_btcbx")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_76lrf"]
-atlas = ExtResource("3_gwnis")
+atlas = ExtResource("3_btcbx")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efx54"]
-atlas = ExtResource("3_gwnis")
+atlas = ExtResource("3_btcbx")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_755ss"]
-atlas = ExtResource("3_gwnis")
+atlas = ExtResource("3_btcbx")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbimk"]
-atlas = ExtResource("3_gwnis")
+atlas = ExtResource("3_btcbx")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m0h3t"]
-atlas = ExtResource("3_gwnis")
+atlas = ExtResource("3_btcbx")
 region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4o1l"]
-atlas = ExtResource("3_gwnis")
+atlas = ExtResource("3_btcbx")
 region = Rect2(0, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2n6q"]
-atlas = ExtResource("3_gwnis")
+atlas = ExtResource("3_btcbx")
 region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fhl08"]
@@ -262,6 +262,5 @@ animations = [{
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hshwv")
-animation = &"idle_actual"
+animation = &"run_actual"
 autoplay = "run_actual"
-frame_progress = 0.5239568
