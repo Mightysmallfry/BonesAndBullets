@@ -10,12 +10,24 @@ func update_battle_log(new_line:String)->void:
 	await get_tree().process_frame
 	scrollContainer.scroll_vertical = scrollContainer.get_v_scroll_bar().max_value
 
+var onLeft = true
 func _process(_delta: float) -> void:
 	var scrollContainer = $"Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/MarginContainer/PanelContainer/MarginContainer/ScrollContainer"
-	if Input.is_action_pressed("ui_text_scroll_up") and scrollContainer.scroll_vertical != 0:
-		scrollContainer.scroll_vertical -= 1
-	if Input.is_action_pressed("ui_text_scroll_down") and scrollContainer.scroll_vertical != scrollContainer.get_v_scroll_bar().max_value:
-		scrollContainer.scroll_vertical += 1
+	var combatScrollContainer = $"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer"
+	if Input.is_action_pressed("ui_text_scroll_up"):
+		if onLeft  and scrollContainer.scroll_vertical != 0:
+			scrollContainer.scroll_vertical -= 1
+		elif  combatScrollContainer.scroll_vertical != 0:
+			combatScrollContainer.scroll_vertical -= 1
+	if Input.is_action_pressed("ui_text_scroll_down"):
+		if onLeft and scrollContainer.scroll_vertical != scrollContainer.get_v_scroll_bar().max_value:
+			scrollContainer.scroll_vertical += 1
+		elif combatScrollContainer.scroll_vertical != combatScrollContainer.get_v_scroll_bar().max_value:
+			combatScrollContainer.scroll_vertical += 1
+	if Input.is_action_just_pressed("ui_scroll_left") and !onLeft:
+		onLeft = true
+	elif Input.is_action_just_pressed("ui_scroll_right") and onLeft:
+		onLeft = false
 
 
 func add_enemy_selector(enemy_name:String, health:int, distance:float, aims:Array[float])->void:
@@ -36,7 +48,6 @@ func update_player(player:Object)->void:
 	$Stats/MarginContainer/HBoxContainer/Label.text = ("Health: " + str(player.health))
 	$Stats/MarginContainer/HBoxContainer/Label2.text = ("Bullets " + str(player.bullets))
 	$"Point Counter/MarginContainer/HBoxContainer/Label".text = ("Action Points: " + str(player.action_points))
-	$"Point Counter/MarginContainer/HBoxContainer/Label2".text = ("React Points: " + str(player.reaction_point))
 
 func update_selector(index:int, health:int, distance:float, aims:Array[float])->void:
 	$"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer".get_child(index).update_Details(health, distance, aims)
@@ -53,7 +64,11 @@ func battle_lines(index:int)->void:
 	for i in container.get_children():
 		i.enable()
 	container.get_children()[index].enable(false)
+	scroll_focus_on(index)
 
+func scroll_focus_on(index:int)->void:
+	var combatScrollContainer = $"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer"
+	combatScrollContainer.scroll_vertical = 110 * (ceili((index+1)/2.0) - 1)
 
 func _update_focus_pairs()->void:
 	var container:GridContainer = $"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"

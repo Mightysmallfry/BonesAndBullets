@@ -2,6 +2,7 @@ extends MarginContainer
 
 signal pressed(index:int)
 signal hover(button:Button)
+signal focused(index:int)
 
 func createButton(_name:String, health:int, distance:float, aims:Array[float])->void:
 	$PanelContainer/MarginContainer/VBoxContainer/ProgressBar.max_value = health
@@ -37,3 +38,7 @@ func _on_control_mouse_entered() -> void:
 
 func enable(boolean:bool = true)->void:
 	$PanelContainer/MarginContainer/Control.disabled = !boolean
+
+
+func _on_control_focus_entered() -> void:
+	focused.emit(get_index())

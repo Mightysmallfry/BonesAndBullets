@@ -87,5 +87,6 @@ horizontal_alignment = 1
 layout_mode = 2
 theme = ExtResource("2_2o58d")
 
+[connection signal="focus_entered" from="PanelContainer/MarginContainer/Control" to="." method="_on_control_focus_entered"]
 [connection signal="mouse_entered" from="PanelContainer/MarginContainer/Control" to="." method="_on_control_mouse_entered"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Control" to="." method="_on_control_pressed"]

@@ -15,12 +15,15 @@ func _ready() -> void:
 	_deselect_main()
 
 func connect_enemySelectors()->void:
+	# I should fix this at some point
 	for i in range(selectorGrid.get_child_count()):
 		var selector = selectorGrid.get_child(i)
 		if !selector.is_connected("pressed", on_selector_pressed):
 			selector.connect("pressed", on_selector_pressed)
 		if !selector.is_connected("hover", on_selector_hover):
 			selector.connect("hover", on_selector_hover)
+		if !selector.is_connected("focused", on_selector_focused):
+			selector.connect("focused", on_selector_focused)
 		selector.enable(false)
 
 func player_turn()->void:
@@ -38,6 +41,9 @@ func on_selector_pressed(index:int)->void:
 	else:
 		_submit_action(action, index)
 		_reset_main()
+
+func on_selector_focused(index:int)->void:
+	$"../Control".scroll_focus_on(index)
 
 func _select_selectors()->void:
 	$"../Blocker".visible = false
@@ -222,9 +228,16 @@ func _on_move_to_pressed() -> void:
 	$"../MovementActions2".visible = true
 	$"../MovementActions2/MarginContainer/GridContainer/GoBack".grab_focus()
 
-
 func _on_move_aw_pressed() -> void:
 	$"../MovementActions3".visible = true
+	var flee_distance:bool = true
+	for i in $"..".thisCombatEvent.enemies:
+		if i.distance < 80:
+			flee_distance = false
+			break
+	
+	if flee_distance:
+		$"../MovementActions3/MarginContainer/GridContainer/Flee".disabled = false
 	$"../MovementActions3/MarginContainer/GridContainer/GoBack".grab_focus()
 
 func _on_move_2_goBack_pressed() ->void:
@@ -249,3 +262,8 @@ func _on_away_all_pressed() -> void:
 func _on_oneAway_pressed() -> void:
 	action = "MoveAway"
 	_select_selectors()
+
+func _on_flee_pressed() -> void:
+	_submit_action("flee")
+	_reset_main()
+	_deselect_main()

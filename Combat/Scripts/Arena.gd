@@ -9,8 +9,6 @@ class playerCombat:
 	var aim:int = Globals.combat_aim
 	var melee:int = Globals.combat_melee
 	var action_points:int = floor(Globals.combat_speed / 25.0) + 2
-	var reaction_point:int = 1
-	var movement:int = 1
 
 var player:playerCombat
 var thisCombatEvent:CombatEvent
@@ -22,12 +20,24 @@ const retreat_chance:Array[float] = [0.0, .33, .66, .98]
 
 const shot_damage:int = 80
 
+var combatEventPath:String = "res://Combat/CombatEvents/CombatExample.tres"
+
 @onready var combatUI:combatControl = $Control
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
-	loadCombat("res://Combat/CombatEvents/CombatExample.tres")
-	
+	loadCombat(combatEventPath)
+
+var end:bool = false
+func _on_buffer_timeout()->void:
+	if !end:
+		beginCombat()
+	else:
+		if player.health < 1:
+			get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+		else:
+			get_tree().change_scene_to_file("res://World/main.tscn")
+			
 
 ## Loads combat resource and initalizes combatants
 func loadCombat(combatScene:String)->void:
@@ -38,7 +48,8 @@ func loadCombat(combatScene:String)->void:
 	for i in range(thisCombatEvent.enemies.size()):
 		thisCombatEvent.enemies[i] = thisCombatEvent.enemies[i].duplicate(true)
 		_init_enemy(thisCombatEvent.enemies[i])
-	beginCombat()
+	$AnimationPlayer.play("fade")
+	$BufferTimer.start()
 
 func beginCombat()->void:
 	if players_turn:
@@ -49,8 +60,10 @@ func beginCombat()->void:
 
 ## Resolves the combat
 func resolveCombat()->void:
+	end = true
 	if player.health < 1:
-		return # Player dies, game over
+		$BufferTimer.start()
+		return
 	
 	# Update player's stats
 	Globals.playerHealth = player.health
@@ -60,7 +73,8 @@ func resolveCombat()->void:
 	
 	# return to main
 	print("WIN")
-	get_tree().change_scene_to_file("res://World/main.tscn")
+	$BufferTimer.start()
+	
 
 ## Adds variance to enemy stats
 func _init_enemy(a_enemy:enemy)->void:
@@ -102,6 +116,8 @@ var _current_turn = 0
 var _first:bool = true
 ## Processes Enemies Turn
 func _process_enemies_turn()->void:
+	if player.health < 1:
+		return
 	var numberLeft:int = thisCombatEvent.enemies.size()
 	if _current_turn == numberLeft:
 		players_turn = true
@@ -226,8 +242,9 @@ func _move(acting_enemy:enemy, away:bool=false)->void:
 func _attack(acting_enemy:enemy)->void:
 	if acting_enemy.attack_type == 1:
 		if rng.randf() < _calculate_aim_chance(acting_enemy):
-			combatUI.update_battle_log(acting_enemy.name + " shot you for " + str(shot_damage) + " health")
-			_take_damage(shot_damage)
+			var bullet_damage:int = randi_range(40,80)
+			combatUI.update_battle_log(acting_enemy.name + " shot you for " + str(bullet_damage) + " health")
+			_take_damage(bullet_damage)
 		else:
 			combatUI.update_battle_log(acting_enemy.name + " Shot at You but Missed")
 		return
@@ -235,12 +252,14 @@ func _attack(acting_enemy:enemy)->void:
 		var melee = _calculate_melee(acting_enemy)
 		if randf() < melee:
 			# Player Wins
-			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you but you won, causing " + str(melee) + " damage")
-			_enemy_take_damage(acting_enemy, melee * player.melee)
+			var damage:int = round(melee * player.melee)
+			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you but you won, causing " + str(damage) + " damage")
+			_enemy_take_damage(acting_enemy, damage)
 		else:
 			# Player Loses
-			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you and beat you up causing " + str(melee) + " damage")
-			_take_damage(melee * acting_enemy.melee)
+			var damage:int = round(melee * acting_enemy.melee)
+			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you and beat you up causing " + str(damage) + " damage")
+			_take_damage(damage)
 		return
 	combatUI.update_battle_log(acting_enemy.name + " stares at you angry")
 
@@ -253,8 +272,8 @@ func _take_damage(damage:int)->void:
 	player.health -= damage
 	combatUI.update_player(player)
 	if player.health < 1:
-		get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
-
+		combatUI.update_battle_log("You Died")
+		resolveCombat()
 func _start_turn()->void:
 	combatUI.update_selector_theme(false)
 	player.action_points = floor(Globals.combat_speed / 25.0) + 2
@@ -306,7 +325,8 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 			else:
 				_move_away(value1)
 				_update_enemy_selector(value1)
-				
+		"flee":
+			resolveCombat()
 	combatUI.update_player(player)
 
 func _move_towards_all()->void:
@@ -332,8 +352,9 @@ func _move_away(index:int)->void:
 func _shoot(index:int)->void:
 	player.bullets -= 1
 	if rng.randf() < _calculate_aim_chance(player, thisCombatEvent.enemies[index]):
-		combatUI.update_battle_log("You shoot " + thisCombatEvent.enemies[index].name + " for " + str(shot_damage) + " health")
-		_enemy_take_damage(thisCombatEvent.enemies[index], shot_damage)
+		var bullet_damage:int = randi_range(40,80)
+		combatUI.update_battle_log("You shoot " + thisCombatEvent.enemies[index].name + " for " + str(bullet_damage) + " health")
+		_enemy_take_damage(thisCombatEvent.enemies[index], bullet_damage)
 	else:
 		combatUI.update_battle_log("You shoot at " + thisCombatEvent.enemies[index].name + " but missed!")
 
@@ -341,12 +362,14 @@ func _melee(index:int)->void:
 	var melee = _calculate_melee(thisCombatEvent.enemies[index])
 	if rng.randf() < melee:
 		# Player Wins
-		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee and won, causing " + str(melee) + " damage")
-		_enemy_take_damage(thisCombatEvent.enemies[index], melee * player.melee)
+		var damage:int = round(melee * player.melee)
+		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee and won, causing " + str(damage) + " damage")
+		_enemy_take_damage(thisCombatEvent.enemies[index], damage)
 	else:
 		# Player Loses
-		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee but beat you up, causing " + str(melee) + " damage")
-		_take_damage(melee * thisCombatEvent.enemies[index].melee)
+		var damage:int = round(thisCombatEvent.enemies[index].melee)
+		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee but beat you up, causing " + str(damage) + " damage")
+		_take_damage(melee * damage)
 	pass
 
 func _hit_deck()->void:
