@@ -2,7 +2,7 @@ extends Node2D
 
 @export_category("Player Variables")
 @export var playerHealth: int = 100
-@export var startingBones: int = 319
+@export var startingBones: int = 206
 @export var bullets: int = 6
 @export var maxBullets: int = 12
 @export var maxHealth: int = 100
