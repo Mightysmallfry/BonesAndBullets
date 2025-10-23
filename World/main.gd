@@ -18,7 +18,6 @@ func _ready() -> void:
 	Globals.set_max_time(storyEventTimer, Globals.timeBetweenStoryEvents)
 	
 	destinationTimer.wait_time = Globals.get_max_time(destinationTimer)
-	destinationTimer.time = Globals.currentDestinationTime
 	storyEventTimer.wait_time = Globals.get_max_time(storyEventTimer)
 	
 	_cachedEventFiles = load_story_events(STORY_EVENT_DIR)

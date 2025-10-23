@@ -28,7 +28,7 @@ func _update_UI()->void:
 	$MarginContainer/VBoxContainer/Label.text = ("Points To Alocate: " + str(_skill_points))
 	$MarginContainer/VBoxContainer/GridContainer/Label.text = ("Speed: " + str(_speed))
 	$MarginContainer/VBoxContainer/GridContainer/Label2.text = ("Aim: " + str(_aim))
-	$MarginContainer/VBoxContainer/GridContainer/Label3.text = ("Speed: " + str(_melee))
+	$MarginContainer/VBoxContainer/GridContainer/Label3.text = ("Melee: " + str(_melee))
 
 func _on_button_mouse_entered(source: Control) -> void:
 	if Globals.IsPaused:

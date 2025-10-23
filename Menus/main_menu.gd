@@ -16,3 +16,7 @@ func _on_quit_button_mouse_entered() -> void:
 
 func _on_mouse_entered() -> void:
 	pass # Replace with function body.
+
+
+func _on_music_timer_timeout() -> void:
+	$"[titleTheme]ICarryTheseBones".play()

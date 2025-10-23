@@ -1,12 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://d13yw33pf5jfv"]
+[gd_scene load_steps=15 format=3 uid="uid://d13yw33pf5jfv"]
 
 [ext_resource type="Theme" uid="uid://b7kybbmor2ml0" path="res://Assets/Themes/DisplayTheme.tres" id="1_cxdly"]
 [ext_resource type="Script" uid="uid://c31nidxfv8nf" path="res://Menus/main_menu.gd" id="1_fu7sn"]
 [ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="2_7vrkn"]
 [ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_11gta"]
 [ext_resource type="Texture2D" uid="uid://so1dyfgtr2wu" path="res://Assets/WorldWallpaper/GameJamFall2025-Title.png" id="4_vxn86"]
-[ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="5_vxn86"]
-[ext_resource type="AudioStream" uid="uid://baltmr5mjr26t" path="res://Assets/[Title Theme]-I Carry These Bones_v_1F_wtWind.mp3" id="7_gn11b"]
+[ext_resource type="Script" path="res://Menus/continue_button.gd" id="5_vxn86"]
+[ext_resource type="AudioStream" uid="uid://6k22nv1wjtlq" path="res://Assets/SFX/wind-outside-sound-ambient-141989.mp3" id="8_2k0p2"]
+[ext_resource type="AudioStream" uid="uid://d3qw78oht04lw" path="res://Assets/Music/[Title Theme]-I Carry These Bones.mp3" id="8_y501u"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vrkn"]
 blend_mode = 1
@@ -119,10 +120,21 @@ visibility_rect = Rect2(-576, -324, 1152, 648)
 process_material = SubResource("ParticleProcessMaterial_qe12f")
 script = ExtResource("2_7vrkn")
 
-[node name="[titleTheme]ICarryTheseBonesV1fWtWind" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_gn11b")
+[node name="WindOutsideSoundAmbient141989" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_2k0p2")
+volume_db = -10.0
 autoplay = true
 parameters/looping = true
 
+[node name="[titleTheme]ICarryTheseBones" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_y501u")
+parameters/looping = true
+
+[node name="Music Timer" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+autostart = true
+
 [connection signal="mouse_entered" from="UiElements/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="UiElements/MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="timeout" from="Music Timer" to="." method="_on_music_timer_timeout"]

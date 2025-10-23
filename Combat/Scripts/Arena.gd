@@ -21,7 +21,14 @@ const cover_chance:Array[float] = [0.0, .33, .66, .98]
 const prefered_distance:Array[float] = [0.0, 10.0, 30.0, 50.0, 85.0]
 const retreat_chance:Array[float] = [0.0, .33, .66, .98]
 
-const shot_damage:int = 80
+
+@onready var _move_sound:AudioStreamMP3 = preload("res://Assets/SFX/SnowRun.mp3")
+@onready var _shot_hit_sound:AudioStreamMP3 = preload("res://Assets/SFX/ShotHit.mp3")
+@onready var _shot_miss_sound:AudioStreamMP3 = preload("res://Assets/SFX/ShotMiss.mp3")
+@onready var _cover_sound:AudioStreamMP3 = preload("res://Assets/SFX/Cover.mp3")
+@onready var _melee_sound:AudioStreamMP3 = preload("res://Assets/SFX/melee.mp3")
+
+
 
 var combatEventPath:String = "res://Combat/CombatEvents/CombatExample.tres"
 
@@ -234,10 +241,14 @@ func action(acting_enemy:enemy)->void:
 func _seek_cover(acting_enemy:enemy)->void:
 	acting_enemy.cover = _get_cover_type()
 	acting_enemy.action_points = max(acting_enemy.action_points -randi_range(1,4), 0)
+	$AudioStreamPlayer2D.stream = _cover_sound
+	$AudioStreamPlayer2D.play()
 
 ## Move enemy relative to player
 func _move(acting_enemy:enemy, away:bool=false)->void:
 	acting_enemy.movement -= 1
+	$AudioStreamPlayer2D.stream = _move_sound
+	$AudioStreamPlayer2D.play()
 	if !away:
 		combatUI.update_battle_log(acting_enemy.name + " moved towards You")
 		acting_enemy.distance = move_toward(acting_enemy.distance, prefered_distance[acting_enemy.prefered_distance], (acting_enemy.speed / 10.0))
@@ -252,8 +263,11 @@ func _attack(acting_enemy:enemy)->void:
 			var bullet_damage:int = randi_range(40,80)
 			combatUI.update_battle_log(acting_enemy.name + " shot You for " + str(bullet_damage) + " health")
 			_take_damage(bullet_damage)
+			$AudioStreamPlayer2D.stream = _shot_hit_sound
 		else:
 			combatUI.update_battle_log(acting_enemy.name + " shot at You but missed")
+			$AudioStreamPlayer2D.stream = _shot_miss_sound
+		$AudioStreamPlayer2D.play()
 		return
 	elif acting_enemy.distance < 1:
 		var melee = _calculate_melee(acting_enemy)
@@ -267,6 +281,8 @@ func _attack(acting_enemy:enemy)->void:
 			var damage:int = round(melee * acting_enemy.melee)
 			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with You and beat You up causing " + str(damage) + " damage")
 			_take_damage(damage)
+		$AudioStreamPlayer2D.stream = _melee_sound
+		$AudioStreamPlayer2D.play()
 		return
 	combatUI.update_battle_log(acting_enemy.name + " stares at You angry")
 
@@ -316,6 +332,8 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 			player.action_points -= 1
 			player.cover = 0
 			player.improve_acuracy = 0
+			$AudioStreamPlayer2D.stream = _move_sound
+			$AudioStreamPlayer2D.play()
 			if value1 == -1:
 				_move_towards_all()
 				_update_all_enemy_selectors()
@@ -326,6 +344,8 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 			player.action_points -= 1
 			player.cover = 0
 			player.improve_acuracy = 0
+			$AudioStreamPlayer2D.stream = _move_sound
+			$AudioStreamPlayer2D.play()
 			if value1 == -1:
 				_move_away_all()
 				_update_all_enemy_selectors()
@@ -347,6 +367,8 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 					printerr("ERROR: UNKNOWN SACRIFICE VALUE")
 		"flee":
 			combatUI.update_battle_log("You escaped the battle")
+			$AudioStreamPlayer2D.stream = _move_sound
+			$AudioStreamPlayer2D.play()
 			resolveCombat()
 	combatUI.update_player(player)
 
@@ -376,8 +398,12 @@ func _shoot(index:int)->void:
 		var bullet_damage:int = randi_range(40,80)
 		combatUI.update_battle_log("You shoot " + thisCombatEvent.enemies[index].name + " for " + str(bullet_damage) + " health")
 		_enemy_take_damage(thisCombatEvent.enemies[index], bullet_damage)
+		$AudioStreamPlayer2D.stream = _shot_hit_sound
 	else:
 		combatUI.update_battle_log("You shoot at " + thisCombatEvent.enemies[index].name + " but missed!")
+		$AudioStreamPlayer2D.stream = _shot_miss_sound
+	$AudioStreamPlayer2D.play()
+		
 
 func _melee(index:int)->void:
 	var melee = _calculate_melee(thisCombatEvent.enemies[index])
@@ -402,6 +428,8 @@ func _find_cover(cover:int, action_points_spent:int)->void:
 	combatUI.update_battle_log("You find and take cover")
 	player.cover = cover
 	player.action_points -= action_points_spent
+	$AudioStreamPlayer2D.stream = _cover_sound
+	$AudioStreamPlayer2D.play()
 
 func _steady_aim()->void:
 	combatUI.update_battle_log("You take a breath and steady your aim")

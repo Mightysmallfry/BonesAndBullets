@@ -1,5 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://6j000qlyjlus"]
+[gd_scene load_steps=39 format=3 uid="uid://6j000qlyjlus"]
 
+[ext_resource type="Script" uid="uid://bc4crel0nnwwu" path="res://Player/player_sound.gd" id="1_gwnis"]
 [ext_resource type="Texture2D" uid="uid://bsr7r6hlxq6en" path="res://Player/knight.png" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://bfsxbdrsbt5ee" path="res://Player/Test/IdleSpriteSheetv2.png" id="2_btcbx"]
 [ext_resource type="Texture2D" uid="uid://brju03royjgw1" path="res://Player/Test/WalkeSpireSheetV2.png" id="3_btcbx"]
@@ -259,8 +260,17 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D"]
+script = ExtResource("1_gwnis")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hshwv")
 animation = &"run_actual"
 autoplay = "run_actual"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = -20.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+volume_db = -20.0
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
