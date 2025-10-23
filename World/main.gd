@@ -26,6 +26,10 @@ func _ready() -> void:
 	
 	_cachedEventFiles = load_story_events(STORY_EVENT_DIR)
 
+	$UI/Stats/Label.text= str(Globals.playerHealth)
+	$UI/Stats/Label2.text = str(Globals.bullets)
+	$UI/Stats/Label3.text = str(Globals.startingBones)
+
 	if (Globals.has_timer(destinationTimer)):
 		destinationTimer.start()
 	if (Globals.has_timer(storyEventTimer)):
@@ -84,6 +88,9 @@ func _on_finished_story_event() -> void:
 	# Continue Destination, restart eventTimer
 	# If we want slight variations in time, this is where we would implement it.
 	# then we also have to update the bars
+	$UI/Stats/Label.text= str(Globals.playerHealth)
+	$UI/Stats/Label2.text = str(Globals.bullets)
+	$UI/Stats/Label3.text = str(Globals.startingBones)
 	destinationTimer.set_paused(false)
 	storyEventTimer.start()
 	

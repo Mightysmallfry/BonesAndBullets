@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b3tioju63ftu0"]
+[gd_scene load_steps=27 format=3 uid="uid://b3tioju63ftu0"]
 
 [ext_resource type="Script" uid="uid://c7hcmvqfxa2fy" path="res://Combat/Scripts/Arena.gd" id="1_y84q4"]
 [ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="2_1mj86"]
@@ -6,9 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_wtktk"]
 [ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="3_obj01"]
 [ext_resource type="Script" uid="uid://jxm3k2ac7oqr" path="res://Combat/Scripts/combatUI.gd" id="4_wtktk"]
+[ext_resource type="Texture2D" uid="uid://bj5bmtyfvti18" path="res://Assets/HealthIcon.png" id="6_gr0aw"]
 [ext_resource type="Script" uid="uid://bx35vmfikgmrj" path="res://Combat/Scripts/button_hell.gd" id="6_o6ykf"]
-[ext_resource type="Texture2D" uid="uid://ct8jsv8axjcwe" path="res://icon.svg" id="6_tc6bs"]
+[ext_resource type="Texture2D" uid="uid://cnj57ulu1hd2j" path="res://Assets/BulletsIcon.png" id="7_l10vd"]
 [ext_resource type="AudioStream" uid="uid://c1uofb6whj18f" path="res://Assets/Music/[Fight Theme]-Fighting Against Despair.mp3" id="8_1uhy4"]
+[ext_resource type="Texture2D" uid="uid://be8x4eldlh4wl" path="res://Assets/BoneIcon.png" id="8_ja031"]
 [ext_resource type="Script" uid="uid://ciilte8rtixnx" path="res://Combat/Scripts/combat_win.gd" id="10_1uhy4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eemgk"]
@@ -187,7 +189,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="Control/Stats/MarginContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_tc6bs")
+texture = ExtResource("6_gr0aw")
 expand_mode = 2
 
 [node name="Label" type="Label" parent="Control/Stats/MarginContainer/HBoxContainer"]
@@ -196,7 +198,7 @@ text = "Health"
 
 [node name="TextureRect2" type="TextureRect" parent="Control/Stats/MarginContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_tc6bs")
+texture = ExtResource("7_l10vd")
 expand_mode = 2
 
 [node name="Label2" type="Label" parent="Control/Stats/MarginContainer/HBoxContainer"]
@@ -205,7 +207,7 @@ text = "Bullets"
 
 [node name="TextureRect3" type="TextureRect" parent="Control/Stats/MarginContainer/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("6_tc6bs")
+texture = ExtResource("8_ja031")
 expand_mode = 2
 
 [node name="Label3" type="Label" parent="Control/Stats/MarginContainer/HBoxContainer"]

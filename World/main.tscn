@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bes2m1ih8wyfj"]
+[gd_scene load_steps=24 format=3 uid="uid://bes2m1ih8wyfj"]
 
 [ext_resource type="Script" uid="uid://b2u0b1aphoqw8" path="res://World/main.gd" id="1_njf5y"]
 [ext_resource type="Script" uid="uid://da8p27yhbpckh" path="res://World/parallax_manager.gd" id="2_1hcjw"]
@@ -12,7 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://dwpg8r38p66fd" path="res://Assets/WorldWallpaper/GameJamFocus.png" id="6_6qnxk"]
 [ext_resource type="PackedScene" uid="uid://cvjad2jradgig" path="res://Menus/pause_menu.tscn" id="8_6qnxk"]
 [ext_resource type="PackedScene" uid="uid://6j000qlyjlus" path="res://Player/player.tscn" id="11_ps454"]
+[ext_resource type="Texture2D" uid="uid://bj5bmtyfvti18" path="res://Assets/HealthIcon.png" id="11_r6hqv"]
+[ext_resource type="Texture2D" uid="uid://cnj57ulu1hd2j" path="res://Assets/BulletsIcon.png" id="12_lh7yw"]
 [ext_resource type="AudioStream" uid="uid://6k22nv1wjtlq" path="res://Assets/SFX/wind-outside-sound-ambient-141989.mp3" id="12_sfxlf"]
+[ext_resource type="Texture2D" uid="uid://be8x4eldlh4wl" path="res://Assets/BoneIcon.png" id="13_scvq1"]
 [ext_resource type="AudioStream" uid="uid://cxxofg1fhm2lm" path="res://Assets/Music/[Journey Theme]-Through the Desolate Journey Home.mp3" id="13_sfxlf"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h5rms"]
@@ -142,6 +145,42 @@ timer = NodePath("../../Timers/StoryProgressionTimer")
 [node name="PauseMenu" parent="UI" instance=ExtResource("8_6qnxk")]
 process_mode = 3
 visible = false
+
+[node name="Stats" type="HBoxContainer" parent="UI"]
+offset_left = 227.0
+offset_top = 34.0
+offset_right = 454.0
+offset_bottom = 73.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Stats"]
+layout_mode = 2
+texture = ExtResource("11_r6hqv")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UI/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "100"
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Stats"]
+layout_mode = 2
+texture = ExtResource("12_lh7yw")
+expand_mode = 3
+
+[node name="Label2" type="Label" parent="UI/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "100"
+
+[node name="TextureRect3" type="TextureRect" parent="UI/Stats"]
+layout_mode = 2
+texture = ExtResource("13_scvq1")
+expand_mode = 3
+
+[node name="Label3" type="Label" parent="UI/Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "100"
 
 [node name="Player" parent="." instance=ExtResource("11_ps454")]
 position = Vector2(576, 485.00003)

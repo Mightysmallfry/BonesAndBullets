@@ -67,7 +67,7 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			print("No man outsmarts Health")
 			if has_reward(choiceData):
 				Globals.playerHealth += choiceData.rewards[0];
-				clamp(Globals.playerHealth, 0, Globals.maxHealth)
+				Globals.playerHealth = clamp(Globals.playerHealth, 0, Globals.maxHealth)
 				if Globals.playerHealth == 0:
 					get_tree().change_scene_to_file("res://Menus/end_menu.tscn")
 			finish_story_event()
