@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://jxm3k2ac7oqr" path="res://Combat/Scripts/combatUI.gd" id="4_wtktk"]
 [ext_resource type="Script" uid="uid://bx35vmfikgmrj" path="res://Combat/Scripts/button_hell.gd" id="6_o6ykf"]
 [ext_resource type="Texture2D" uid="uid://ct8jsv8axjcwe" path="res://icon.svg" id="6_tc6bs"]
-[ext_resource type="AudioStream" uid="uid://bemxngtaip3b0" path="res://Assets/[Fight Theme]-Fighting Against Despair_v_0B.mp3" id="8_d331y"]
+[ext_resource type="AudioStream" uid="uid://c1uofb6whj18f" path="res://Assets/Music/[Fight Theme]-Fighting Against Despair.mp3" id="8_1uhy4"]
 [ext_resource type="Script" uid="uid://ciilte8rtixnx" path="res://Combat/Scripts/combat_win.gd" id="10_1uhy4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eemgk"]
@@ -738,7 +738,7 @@ offset_right = 1017.0
 offset_bottom = 522.0
 
 [node name="[fightTheme]FightingAgainstDespairV0b" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_d331y")
+stream = ExtResource("8_1uhy4")
 autoplay = true
 parameters/looping = true
 
