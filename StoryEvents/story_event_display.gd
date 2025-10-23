@@ -82,6 +82,7 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			return
 		StoryChoice.ChoiceTypeEnum.NEXT:
 			load_story_event_data(choiceData.nextEvent)
+			return
 		StoryChoice.ChoiceTypeEnum.COMBAT:
 			var arena = load("res://Combat/Arena.tscn").instantiate()
 			arena.thisCombatEvent = choiceData.combatPath
@@ -90,6 +91,7 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			get_tree().root.add_child(arena)
 			get_tree().current_scene = arena
 			current.queue_free()
+			return
 		_:
 			print("UNKNOWN CHOICE!!!")
 			finish_story_event()
