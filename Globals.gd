@@ -14,12 +14,14 @@ extends Node2D
 
 @export_category("Timing Variables")
 # Measured in seconds ~5 minutes
-@export var destinationTime: float = 10
+@export var destinationTime: float = 300
 # This could change as a range of 20-40 seconds
 # When story event happens, pause the time until destination.
-@export var timeBetweenStoryEvents: float = 10
+@export var timeBetweenStoryEvents: float = 15
 @export var startingDay: int = 1
 @export var currentDay: int
+
+var currentDestinationTime:float = destinationTime
 
 var IsPaused: bool = false
 

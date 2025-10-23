@@ -11,6 +11,8 @@ class playerCombat:
 	var melee:int = Globals.combat_melee
 	var action_points:int = floor(Globals.combat_speed / 25.0) + 2
 
+var skills_to_earn:int = 0
+
 var player:playerCombat
 var thisCombatEvent:CombatEvent
 var players_turn:bool
@@ -37,8 +39,8 @@ func _on_buffer_timeout()->void:
 		if player.health < 1:
 			get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
 		else:
-			get_tree().change_scene_to_file("res://World/main.tscn")
-			
+			print(skills_to_earn)
+			$WIN._setup(skills_to_earn)
 
 ## Loads combat resource and initalizes combatants
 func loadCombat(combatScene:String)->void:
@@ -71,9 +73,6 @@ func resolveCombat()->void:
 	Globals.bullets = player.bullets
 	Globals.startingBones = player.bones
 	
-	# Update Skills
-	
-	# return to main
 	print("WIN")
 	$BufferTimer.start()
 	
@@ -94,6 +93,8 @@ func _init_enemy(a_enemy:enemy)->void:
 		a_enemy.distance = thisCombatEvent.avg_starting_distance
 	a_enemy.distance = vary.call(a_enemy.distance, a_enemy.distance_variance, 0, 85)
 	
+	if thisCombatEvent.avg_starting_cover > -1:
+		a_enemy.cover = thisCombatEvent.avg_starting_cover
 	a_enemy.cover = vary.call(a_enemy.cover, a_enemy.cover_variance, 0)
 	combatUI.add_enemy_selector(a_enemy.name, a_enemy.health, a_enemy.distance, [_calculate_aim_chance(player, a_enemy), _calculate_aim_chance(a_enemy), _calculate_melee(a_enemy)])
 
@@ -103,6 +104,10 @@ func _free_enemy(a_enemy:enemy)->void:
 	var index:int = get_enemy_index(a_enemy)
 	if index == -1:
 		return
+	skills_to_earn += floor((a_enemy.health/101.0) + (a_enemy.speed/50.0) + (a_enemy.aim/50.0) + (a_enemy.melee/50.0))
+	for i in thisCombatEvent.enemies:
+			i.moral -= 10
+
 	combatUI.remove_enemy_selector(index)
 	if thisCombatEvent.enemies.pop_at(index) == null || thisCombatEvent.enemies.size() == 0:
 		resolveCombat()
@@ -234,10 +239,10 @@ func _seek_cover(acting_enemy:enemy)->void:
 func _move(acting_enemy:enemy, away:bool=false)->void:
 	acting_enemy.movement -= 1
 	if !away:
-		combatUI.update_battle_log(acting_enemy.name + " moved towards you")
+		combatUI.update_battle_log(acting_enemy.name + " moved towards You")
 		acting_enemy.distance = move_toward(acting_enemy.distance, prefered_distance[acting_enemy.prefered_distance], (acting_enemy.speed / 10.0))
 	else:
-		combatUI.update_battle_log(acting_enemy.name + " moved away from you")
+		combatUI.update_battle_log(acting_enemy.name + " moved away from You")
 		acting_enemy.distance += (acting_enemy.speed / 10.0)
 
 ## Attack player if capible
@@ -245,25 +250,25 @@ func _attack(acting_enemy:enemy)->void:
 	if acting_enemy.attack_type == 1:
 		if rng.randf() < _calculate_aim_chance(acting_enemy):
 			var bullet_damage:int = randi_range(40,80)
-			combatUI.update_battle_log(acting_enemy.name + " shot you for " + str(bullet_damage) + " health")
+			combatUI.update_battle_log(acting_enemy.name + " shot You for " + str(bullet_damage) + " health")
 			_take_damage(bullet_damage)
 		else:
-			combatUI.update_battle_log(acting_enemy.name + " Shot at You but Missed")
+			combatUI.update_battle_log(acting_enemy.name + " shot at You but missed")
 		return
 	elif acting_enemy.distance < 1:
 		var melee = _calculate_melee(acting_enemy)
 		if randf() < melee:
 			# Player Wins
 			var damage:int = round(melee * player.melee)
-			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you but you won, causing " + str(damage) + " damage")
+			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with You but You won, causing " + str(damage) + " damage")
 			_enemy_take_damage(acting_enemy, damage)
 		else:
 			# Player Loses
 			var damage:int = round(melee * acting_enemy.melee)
-			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with you and beat you up causing " + str(damage) + " damage")
+			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with You and beat You up causing " + str(damage) + " damage")
 			_take_damage(damage)
 		return
-	combatUI.update_battle_log(acting_enemy.name + " stares at you angry")
+	combatUI.update_battle_log(acting_enemy.name + " stares at You angry")
 
 
 func _on_EnemyAction_timeout()->void:
@@ -341,6 +346,7 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 				_:
 					printerr("ERROR: UNKNOWN SACRIFICE VALUE")
 		"flee":
+			combatUI.update_battle_log("You escaped the battle")
 			resolveCombat()
 	combatUI.update_player(player)
 
@@ -362,7 +368,7 @@ func _move_away_all()->void:
 
 func _move_away(index:int)->void:
 	combatUI.update_battle_log("You run away from " + thisCombatEvent.enemies[index].name)
-	thisCombatEvent.enemies[index].distance -= (player.speed / 10.0)
+	thisCombatEvent.enemies[index].distance += (player.speed / 10.0)
 
 func _shoot(index:int)->void:
 	player.bullets -= 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b3tioju63ftu0"]
+[gd_scene load_steps=25 format=3 uid="uid://b3tioju63ftu0"]
 
 [ext_resource type="Script" uid="uid://c7hcmvqfxa2fy" path="res://Combat/Scripts/Arena.gd" id="1_y84q4"]
 [ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="2_1mj86"]
@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_wtktk"]
 [ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="3_obj01"]
 [ext_resource type="Script" uid="uid://jxm3k2ac7oqr" path="res://Combat/Scripts/combatUI.gd" id="4_wtktk"]
-[ext_resource type="Script" uid="uid://bx35vmfikgmrj" path="res://Combat/button_hell.gd" id="6_o6ykf"]
+[ext_resource type="Script" uid="uid://bx35vmfikgmrj" path="res://Combat/Scripts/button_hell.gd" id="6_o6ykf"]
 [ext_resource type="Texture2D" uid="uid://ct8jsv8axjcwe" path="res://icon.svg" id="6_tc6bs"]
 [ext_resource type="AudioStream" uid="uid://bemxngtaip3b0" path="res://Assets/[Fight Theme]-Fighting Against Despair_v_0B.mp3" id="8_d331y"]
+[ext_resource type="Script" uid="uid://ciilte8rtixnx" path="res://Combat/Scripts/combat_win.gd" id="10_1uhy4"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_eemgk"]
 blend_mode = 1
@@ -818,6 +819,90 @@ If you get to a distance of 80 or greater from ALL ENEMIES you can
 layout_mode = 2
 text = "Return"
 
+[node name="WIN" type="PanelContainer" parent="."]
+visible = false
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 650.0
+theme = SubResource("Theme_1uhy4")
+script = ExtResource("10_1uhy4")
+
+[node name="MarginContainer" type="MarginContainer" parent="WIN"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WIN/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="WIN/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Points To Alocate: 10"
+
+[node name="GridContainer" type="GridContainer" parent="WIN/MarginContainer/VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="WIN/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Speed: 50"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WIN/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Speed-" type="Button" parent="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="Speed+" type="Button" parent="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+
+[node name="Label2" type="Label" parent="WIN/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Aim: 50"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="WIN/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Aim-" type="Button" parent="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="Aim+" type="Button" parent="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+
+[node name="Label3" type="Label" parent="WIN/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+text = "Melee : 50"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="WIN/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Melee-" type="Button" parent="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "-"
+
+[node name="Melee+" type="Button" parent="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+"
+
+[node name="Return" type="Button" parent="WIN/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("Sprite2D")
 libraries = {
@@ -897,3 +982,17 @@ texture = SubResource("CurveTexture_aqfcs")
 [connection signal="pressed" from="Sacrifice/MarginContainer/GridContainer/Ammo" to="Container" method="_on_ammo_pressed"]
 [connection signal="mouse_entered" from="RULES/MarginContainer/VBoxContainer/Button" to="Container" method="_on_button_mouse_entered" flags=18]
 [connection signal="pressed" from="RULES/MarginContainer/VBoxContainer/Button" to="Container" method="_on_button_pressed"]
+[connection signal="mouse_entered" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer/Speed-" to="WIN" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer/Speed-" to="WIN" method="_on_Nspeed_pressed"]
+[connection signal="mouse_entered" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer/Speed+" to="WIN" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer/Speed+" to="WIN" method="_on_Pspeed_pressed"]
+[connection signal="mouse_entered" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2/Aim-" to="WIN" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2/Aim-" to="WIN" method="_on_Naim_pressed"]
+[connection signal="mouse_entered" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2/Aim+" to="WIN" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer2/Aim+" to="WIN" method="_on_Paim_pressed"]
+[connection signal="mouse_entered" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3/Melee-" to="WIN" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3/Melee-" to="WIN" method="_on_melee_pressed"]
+[connection signal="mouse_entered" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3/Melee+" to="WIN" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="WIN/MarginContainer/VBoxContainer/GridContainer/HBoxContainer3/Melee+" to="WIN" method="_on_Pmelee_pressed"]
+[connection signal="mouse_entered" from="WIN/MarginContainer/VBoxContainer/Return" to="WIN" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="WIN/MarginContainer/VBoxContainer/Return" to="WIN" method="_on_return_pressed"]
