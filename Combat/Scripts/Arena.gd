@@ -30,8 +30,8 @@ const retreat_chance:Array[float] = [0.0, .33, .66, .98]
 
 
 
-#var combatEventPath:String = "res://Combat/CombatEvents/CombatExample.tres"
-var combatEventPath:String
+var combatEventPath:String = "res://Combat/CombatEvents/CombatExample.tres"
+#var combatEventPath:String
 
 @onready var combatUI:combatControl = $Control
 var rng = RandomNumberGenerator.new()
@@ -76,7 +76,7 @@ func beginCombat()->void:
 func resolveCombat()->void:
 	end = true
 	if player.health < 1:
-		$BufferTimer.start()
+		$BufferTimer.start(4.0)
 		return
 	
 	# Update player's stats
@@ -299,6 +299,7 @@ func _take_damage(damage:int)->void:
 	combatUI.update_player(player)
 	if player.health < 1:
 		combatUI.update_battle_log("You Died")
+		$AnimationPlayer.play("Death")
 		resolveCombat()
 func _start_turn()->void:
 	combatUI.update_selector_theme(false)

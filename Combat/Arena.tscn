@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b3tioju63ftu0"]
+[gd_scene load_steps=28 format=3 uid="uid://b3tioju63ftu0"]
 
 [ext_resource type="Script" uid="uid://c7hcmvqfxa2fy" path="res://Combat/Scripts/Arena.gd" id="1_y84q4"]
 [ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="2_1mj86"]
@@ -66,6 +66,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../[fightTheme]FightingAgainstDespairV0b:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_d331y"]
 resource_name = "fade"
@@ -83,8 +95,38 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_gr0aw"]
+resource_name = "Death"
+length = 3.0
+step = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../[fightTheme]FightingAgainstDespairV0b:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.98),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -80.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1uhy4"]
 _data = {
+&"Death": SubResource("Animation_gr0aw"),
 &"RESET": SubResource("Animation_tc6bs"),
 &"fade": SubResource("Animation_d331y")
 }
@@ -919,6 +961,7 @@ texture = SubResource("CurveTexture_aqfcs")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -5.0
+autoplay = true
 panning_strength = 0.0
 
 [connection signal="timeout" from="BackButtonTimer" to="Container" method="_on_back_button_timer_timeout"]
