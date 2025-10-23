@@ -80,7 +80,20 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			print("No man outsmarts Gamble")
 			finish_story_event()
 			return
-			
+		StoryChoice.ChoiceTypeEnum.NEXT:
+			load_story_event_data(choiceData.nextEvent)
+		StoryChoice.ChoiceTypeEnum.COMBAT:
+			var arena = load("res://Combat/Arena.tscn").instantiate()
+			arena.thisCombatEvent = choiceData.combatPath
+			Globals.current_time = %StoryProgressionTimer.time_left
+			var current = get_tree().current_scene
+			get_tree().root.add_child(arena)
+			get_tree().current_scene = arena
+			current.queue_free()
+		_:
+			print("UNKNOWN CHOICE!!!")
+			finish_story_event()
+			return
 			
 func finish_story_event() -> void:
 	visible = false

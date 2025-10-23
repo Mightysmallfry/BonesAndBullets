@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://c2wlnvkshc8xa"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://cfrxduue8mhl4"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/StoryChoice.gd" id="1_1ns65"]
 [ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/StoryEventData.gd" id="2_fupl6"]
@@ -12,7 +12,9 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [sub_resource type="Resource" id="Resource_fupl6"]
 script = ExtResource("1_1ns65")
+choiceType = null
 choiceDescription = "I left quickly, scavengers could still be around. I didn't want to make any enemies."
+rewards = null
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [resource]

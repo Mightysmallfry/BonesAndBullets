@@ -21,7 +21,7 @@ extends Node2D
 @export var startingDay: int = 1
 @export var currentDay: int
 
-var currentDestinationTime:float = destinationTime
+var current_time:float = 0.0
 
 var IsPaused: bool = false
 

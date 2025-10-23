@@ -11,7 +11,7 @@ func _ready() -> void:
 		push_error("TimedProgressBar lacks a timer!")
 		return
 	
-	max_value = Globals.get_max_time(timer)
+	max_value = Globals.destinationTime
 	value = 0.0
 	
 	if Globals.has_timer(timer):

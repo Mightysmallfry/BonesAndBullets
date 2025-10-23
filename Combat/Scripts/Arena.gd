@@ -30,13 +30,18 @@ const retreat_chance:Array[float] = [0.0, .33, .66, .98]
 
 
 
-var combatEventPath:String = "res://Combat/CombatEvents/CombatExample.tres"
+#var combatEventPath:String = "res://Combat/CombatEvents/CombatExample.tres"
+var combatEventPath:String
 
 @onready var combatUI:combatControl = $Control
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
-	loadCombat(combatEventPath)
+	if thisCombatEvent != null:
+		loadCombat()
+	else:
+		thisCombatEvent = load(combatEventPath) as CombatEvent
+		loadCombat()
 
 var end:bool = false
 func _on_buffer_timeout()->void:
@@ -50,9 +55,8 @@ func _on_buffer_timeout()->void:
 			$WIN._setup(skills_to_earn)
 
 ## Loads combat resource and initalizes combatants
-func loadCombat(combatScene:String)->void:
+func loadCombat()->void:
 	player = playerCombat.new()
-	thisCombatEvent = load(combatScene) as CombatEvent
 	players_turn = thisCombatEvent.player_moves_first
 	combatUI.update_player(player)
 	for i in range(thisCombatEvent.enemies.size()):
@@ -202,7 +206,6 @@ func _get_cover_type() -> int:
 func _enemy_take_damage(a_enemy:enemy, damage:int)->void:
 	a_enemy.health -= damage
 	if a_enemy.health < 1:
-		print("YOU DIED!!!")
 		combatUI.update_battle_log(a_enemy.name + " died")
 		_free_enemy(a_enemy)
 	else:
