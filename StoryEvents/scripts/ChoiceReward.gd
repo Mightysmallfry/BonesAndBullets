@@ -1,5 +1,6 @@
 extends Resource
-class_name StoryChoice
+class_name ChoiceReward
+
 
 # Rewards can also be subtractive
 enum ChoiceTypeEnum { CONTINUE, BULLET, HEALTH, PROGRESS, GAMBLE, NEXT, COMBAT }
@@ -10,8 +11,11 @@ enum ChoiceTypeEnum { CONTINUE, BULLET, HEALTH, PROGRESS, GAMBLE, NEXT, COMBAT }
 # Progress - effects progress, +- time on the timer
 # Gamble - better or worse future outcomes. It's ok if we fail to implement
 
-@export var choiceType: ChoiceTypeEnum
-@export var choiceDescription: String
-@export var rewards: Array[int]
+## The Type of Reward the choice does
+@export var rewardType: ChoiceTypeEnum
+## The value of the reward if chosen Bullet, Health, Progress, or Gamble
+@export var rewardValue:int
+## The next event if chosen NEXT
 @export var nextEvent:StoryEventData
+## The combat if chosen COMBAT
 @export var combatPath:CombatEvent

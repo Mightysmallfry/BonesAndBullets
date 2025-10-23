@@ -1,9 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://ckcs7h1gq2ns6"]
+[gd_scene load_steps=12 format=3 uid="uid://b0nnep7fwtlf6"]
 
 [ext_resource type="Script" uid="uid://bm3y50u8w83xv" path="res://Menus/preamble_menu.gd" id="1_ools6"]
 [ext_resource type="Texture2D" uid="uid://bfdclhvodt6kt" path="res://Assets/WorldWallpaper/GameJamFall2025-Dialog.png" id="2_6ra4v"]
-[ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="2_87x1b"]
-[ext_resource type="Script" uid="uid://ckf7oqtj1e72q" path="res://StoryEvents/dialog_box.gd" id="3_6ra4v"]
+[ext_resource type="Script" path="res://Menus/continue_button.gd" id="2_87x1b"]
+[ext_resource type="Script" uid="uid://ckf7oqtj1e72q" path="res://StoryEvents/scripts/dialog_box.gd" id="3_6ra4v"]
 [ext_resource type="Script" uid="uid://dy65ldlqe2cvl" path="res://Assets/VFX/SnowEffect.gd" id="5_6ra4v"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6bed1"]

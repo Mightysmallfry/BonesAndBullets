@@ -1,23 +1,29 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://det6b5q58tkmn"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=7 format=3 uid="uid://chvugow0us0lr"]
 
-[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/StoryChoice.gd" id="1_l7rrf"]
-[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/StoryEventData.gd" id="2_ag16w"]
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_ag16w"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_8eoq1"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="3_2lhyp"]
 
 [sub_resource type="Resource" id="Resource_l7rrf"]
-script = ExtResource("1_l7rrf")
+script = ExtResource("1_ag16w")
 choiceDescription = "I carried on though, I have a long journey still ahead"
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
+[sub_resource type="Resource" id="Resource_mvte0"]
+script = ExtResource("2_8eoq1")
+rewardType = 2
+rewardValue = 10
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
 [sub_resource type="Resource" id="Resource_ag16w"]
-script = ExtResource("1_l7rrf")
-choiceType = 2
+script = ExtResource("1_ag16w")
 choiceDescription = "The Bellkeepers could be friendly. As long as I don’t get in their way I should be fine right? I’ll go see if I can spend the night "
-rewards = Array[int]([10])
+rewards = Array[ExtResource("2_8eoq1")]([SubResource("Resource_mvte0")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [resource]
-script = ExtResource("2_ag16w")
+script = ExtResource("3_2lhyp")
 title = "The Old Bell Tower"
 dialog = "You can barely see it, but about 15km away from the stone spire forest is a beautiful old bell tower. Part of some old refinery, with a few Bellkeepers still working it. Those little fellows are always keeping themselves busy. A little part of me wants to get closer. You know, admire the clockwork. From here you can really only see the hands of ice grasping at the tower walls. "
-choices = Array[ExtResource("1_l7rrf")]([SubResource("Resource_l7rrf"), SubResource("Resource_ag16w")])
+choices = Array[ExtResource("1_ag16w")]([SubResource("Resource_l7rrf"), SubResource("Resource_ag16w")])
 metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

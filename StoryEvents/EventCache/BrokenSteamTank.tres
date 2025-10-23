@@ -1,18 +1,23 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://cfrxduue8mhl4"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=7 format=3 uid="uid://cfrxduue8mhl4"]
 
-[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/StoryChoice.gd" id="1_1ns65"]
-[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/StoryEventData.gd" id="2_fupl6"]
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_1ns65"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_fupl6"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_qrsjb"]
+
+[sub_resource type="Resource" id="Resource_royi6"]
+script = ExtResource("2_qrsjb")
+rewardType = 1
+rewardValue = 2
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_1ns65"]
 script = ExtResource("1_1ns65")
-choiceType = 1
 choiceDescription = "Nice cozy fire going, I had found some leftover ammunition, I’ll have some nice R&R tonight"
-rewards = Array[int]([2])
+rewards = Array[ExtResource("2_qrsjb")]([SubResource("Resource_royi6")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [sub_resource type="Resource" id="Resource_fupl6"]
 script = ExtResource("1_1ns65")
-choiceType = null
 choiceDescription = "I left quickly, scavengers could still be around. I didn't want to make any enemies."
 rewards = null
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"

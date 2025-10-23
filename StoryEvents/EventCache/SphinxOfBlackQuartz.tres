@@ -1,19 +1,24 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://kmfe4sr0nmaq"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=7 format=3 uid="uid://c6dnf8gd2vhr1"]
 
-[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/StoryChoice.gd" id="1_uhbfq"]
-[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/StoryEventData.gd" id="2_i1twa"]
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_uhbfq"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_5oq7n"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_i1twa"]
 
 [sub_resource type="Resource" id="Resource_rj7cn"]
 script = ExtResource("1_uhbfq")
-choiceType = 1
 choiceDescription = "Accept Thy Judgement"
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
+[sub_resource type="Resource" id="Resource_l6sta"]
+script = ExtResource("2_5oq7n")
+rewardType = 2
+rewardValue = -25
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
 [sub_resource type="Resource" id="Resource_5gmtl"]
 script = ExtResource("1_uhbfq")
-choiceType = 2
 choiceDescription = "Deny Thy Judgement"
-rewards = Array[int]([-25])
+rewards = Array[ExtResource("2_5oq7n")]([SubResource("Resource_l6sta")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [resource]

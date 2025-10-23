@@ -1,18 +1,24 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://daao8mqc871p7"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=7 format=3 uid="uid://cfeg3bxow6gs4"]
 
-[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/StoryChoice.gd" id="1_l7rrf"]
-[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/StoryEventData.gd" id="2_ag16w"]
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_l7rrf"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_ag16w"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_pg6wy"]
 
 [sub_resource type="Resource" id="Resource_l7rrf"]
 script = ExtResource("1_l7rrf")
 choiceDescription = "Passed by each other without saying much"
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
+[sub_resource type="Resource" id="Resource_8guum"]
+script = ExtResource("2_pg6wy")
+rewardType = 2
+rewardValue = 10
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
 [sub_resource type="Resource" id="Resource_ag16w"]
 script = ExtResource("1_l7rrf")
-choiceType = 2
 choiceDescription = " I asked for their aid, trading brass for medicine. They are more selfless than I thought."
-rewards = Array[int]([10])
+rewards = Array[ExtResource("2_pg6wy")]([SubResource("Resource_8guum")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [resource]

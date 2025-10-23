@@ -49,54 +49,52 @@ func create_choice_list() -> void:
 func _on_choice_pressed(choiceData: StoryChoice):
 	print("Choices have been made as: " + choiceData.choiceDescription)
 	# Here is where we do a switch based off of the enum
-
-	match choiceData.choiceType:
-		StoryChoice.ChoiceTypeEnum.CONTINUE:
-			finish_story_event()
-			# Emit continue signal to resume immediately
-			return
-		StoryChoice.ChoiceTypeEnum.BULLET:
-			print("No man outsmarts bullet")
-			if has_reward(choiceData):
-				Globals.bullets += choiceData.rewards[0];
+	for rewards in choiceData.rewards:
+		match rewards.rewardType:
+			rewards.ChoiceTypeEnum.CONTINUE:
+				finish_story_event()
+				# Emit continue signal to resume immediately
+				return
+			rewards.ChoiceTypeEnum.BULLET:
+				print("No man outsmarts bullet")
+				Globals.bullets += rewards.rewardValue;
 				clamp(Globals.bullets, 0, Globals.maxBullets)
-			finish_story_event()
-			# Emit continue signal
-			return
-		StoryChoice.ChoiceTypeEnum.HEALTH:
-			print("No man outsmarts Health")
-			if has_reward(choiceData):
-				Globals.playerHealth += choiceData.rewards[0];
+				finish_story_event()
+				# Emit continue signal
+				return
+			rewards.ChoiceTypeEnum.HEALTH:
+				print("No man outsmarts Health")
+				Globals.playerHealth += rewards.rewardValue;
 				Globals.playerHealth = clamp(Globals.playerHealth, 0, Globals.maxHealth)
 				if Globals.playerHealth == 0:
 					get_tree().change_scene_to_file("res://Menus/end_menu.tscn")
-			finish_story_event()
-			return
-		StoryChoice.ChoiceTypeEnum.PROGRESS:
-			print("No man outsmarts Progress")
-			finish_story_event()
-			return
-		StoryChoice.ChoiceTypeEnum.GAMBLE:
-			print("No man outsmarts Gamble")
-			finish_story_event()
-			return
-		StoryChoice.ChoiceTypeEnum.NEXT:
-			load_story_event_data(choiceData.nextEvent)
-			return
-		StoryChoice.ChoiceTypeEnum.COMBAT:
-			var arena = load("res://Combat/Arena.tscn").instantiate()
-			arena.thisCombatEvent = choiceData.combatPath
-			Globals.current_time = %StoryProgressionTimer.time_left
-			var current = get_tree().current_scene
-			get_tree().root.add_child(arena)
-			get_tree().current_scene = arena
-			current.queue_free()
-			return
-		_:
-			print("UNKNOWN CHOICE!!!")
-			finish_story_event()
-			return
-			
+				finish_story_event()
+				return
+			rewards.ChoiceTypeEnum.PROGRESS:
+				print("No man outsmarts Progress")
+				finish_story_event()
+				return
+			rewards.ChoiceTypeEnum.GAMBLE:
+				print("No man outsmarts Gamble")
+				finish_story_event()
+				return
+			rewards.ChoiceTypeEnum.NEXT:
+				load_story_event_data(rewards.nextEvent)
+				return
+			rewards.ChoiceTypeEnum.COMBAT:
+				var arena = load("res://Combat/Arena.tscn").instantiate()
+				arena.thisCombatEvent = rewards.combatPath
+				Globals.current_time = %StoryProgressionTimer.time_left
+				var current = get_tree().current_scene
+				get_tree().root.add_child(arena)
+				get_tree().current_scene = arena
+				current.queue_free()
+				return
+			_:
+				print("UNKNOWN CHOICE!!!")
+				finish_story_event()
+				return
+		
 func finish_story_event() -> void:
 	visible = false
 	Globals.currentDay += 1
