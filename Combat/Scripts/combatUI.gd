@@ -47,7 +47,13 @@ func remove_enemy_selector(index:int)->void:
 func update_player(player:Object)->void:
 	$Stats/MarginContainer/HBoxContainer/Label.text = ("Health: " + str(player.health))
 	$Stats/MarginContainer/HBoxContainer/Label2.text = ("Bullets " + str(player.bullets))
+	$Stats/MarginContainer/HBoxContainer/Label3.text = ("Bones " + str(player.bones))
 	$"Point Counter/MarginContainer/HBoxContainer/Label".text = ("Action Points: " + str(player.action_points))
+	$"Point Counter/MarginContainer/HBoxContainer/Label2".text = ("Cover: " + str(player.cover) + "/100")
+	if player.improve_acuracy:
+		$"Point Counter/MarginContainer/HBoxContainer/Label3".text = ("Steady Aim: True")
+	else:
+		$"Point Counter/MarginContainer/HBoxContainer/Label3".text = ("Steady Aim: False")
 
 func update_selector(index:int, health:int, distance:float, aims:Array[float])->void:
 	$"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer".get_child(index).update_Details(health, distance, aims)

@@ -19,6 +19,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			Engine.time_scale = 1
 			get_tree().paused = false
 			visible = false
+			$PanelContainer/MarginContainer/VBoxContainer/ResumeButton.release_focus()
 		get_tree().root.get_viewport().set_input_as_handled()
 
 func _on_resume_button_pressed() -> void:

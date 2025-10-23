@@ -3,6 +3,7 @@ extends Node
 class playerCombat:
 	var health:int = Globals.playerHealth
 	var bullets:int = Globals.bullets
+	var bones:int = Globals.startingBones
 	var cover:int = 0
 	var improve_acuracy:float = 0.0
 	var speed:int = Globals.combat_speed
@@ -68,6 +69,7 @@ func resolveCombat()->void:
 	# Update player's stats
 	Globals.playerHealth = player.health
 	Globals.bullets = player.bullets
+	Globals.startingBones = player.bones
 	
 	# Update Skills
 	
@@ -325,6 +327,19 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 			else:
 				_move_away(value1)
 				_update_enemy_selector(value1)
+		"Sacrifice":
+			match value1:
+				0:
+					player.bones -= 20
+					player.health += 10
+				1:
+					player.bones -= 10
+					player.action_points += 1
+				2:
+					player.bones -= 80
+					player.bullets += 1
+				_:
+					printerr("ERROR: UNKNOWN SACRIFICE VALUE")
 		"flee":
 			resolveCombat()
 	combatUI.update_player(player)

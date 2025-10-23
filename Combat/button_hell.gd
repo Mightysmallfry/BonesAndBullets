@@ -4,9 +4,10 @@ signal selected_action(action:String, value1:int, value2:int)
 var action:String
 
 var _selectors_selectable:bool = false
-var _main_selectable:bool = true
+var _main_selectable:bool = false
 var _action_root = true
-var action_tree:int = 0
+# 0 Root 1 Cover 2 Move 3 Move To 4 Move Away 5 M
+var _action_tree:int = 0
 
 @onready var selectorGrid:GridContainer = $"../PanelContainer2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"
 
@@ -62,20 +63,22 @@ func _deselect_selectors()->void:
 	_selectors_selectable = false
 
 func _deselect_main()->void:
+	_main_selectable = false
 	$"../Blocker2".visible = true
-	$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Attacking".disabled = true
-	$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Cover".disabled = true
-	$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Moving".disabled = true
-	$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/EndTurn".disabled = true
+	for buttons:Button in $"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer".get_children():
+		buttons.disabled = true
 	get_viewport().gui_release_focus()
 	#disable_buttons(self)
 
 func _select_main()->void:
+	_main_selectable = true
 	$"../Blocker2".visible = false
 	self.visible = false
 	_action_root = true
 	action = ""
 	$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/EndTurn".disabled = false
+	$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Sacrifice".disabled = false
+	$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Rules".disabled = false
 	if $"..".player.action_points == 0:
 		$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Attacking".disabled = true
 		$"../Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Cover".disabled = true
@@ -94,12 +97,44 @@ func disable_buttons(node, boolean = true)->void:
 		elif i.get_child_count() > 0:
 			disable_buttons(i)
 
+var _backed:bool = false
 func _input(_event: InputEvent) -> void:
-	if _event.is_action("ui_cancel") and !_action_root:
+	if _event.is_action("ui_cancel") and !_action_root and !_backed:
 		_selectors_selectable = false
 		_main_selectable = true
+		var _action_state = _action_tree
 		_reset_main()
+		_action_tree = _action_state
+		match _action_tree:
+			0:
+				pass
+			1: # Cover
+				_action_root = false
+				_action_tree = 0
+				_on_cover_pressed()
+			2: # Move
+				_action_root = false
+				_action_tree = 0
+				_on_move_2_goBack_pressed()
+			3: # Move To
+				_action_root = false
+				_action_tree = 2
+				_on_move_to_pressed()
+			4: # Move Away
+				_action_root = false
+				_action_tree = 2
+				_on_move_aw_pressed()
+			5: # Shoot
+				_action_root = false
+				_action_tree = 0
+				_on_attacking_pressed()
+			_:
+				pass
+		_backed = true
+		$"../BackButtonTimer".start()
 		get_viewport().set_input_as_handled()
+	if _event.is_action("ui_cancel") and _action_root and _main_selectable:
+		_reset_main()
 
 func _submit_action(taken_action:String=action, value:int=-1, second_value:int = -1)->void:
 	selected_action.emit(taken_action, value, second_value)
@@ -160,6 +195,7 @@ func _on_button_mouse_entered(source: Control) -> void:
 	source.grab_focus()
 
 func _reset_main()->void:
+	_action_tree = 0
 	$"../Blocker".visible = true
 	$"../AttackActions".visible = false
 	$"../CoverActions".visible = false
@@ -167,6 +203,7 @@ func _reset_main()->void:
 	$"../MovementActions".visible = false
 	$"../MovementActions2".visible = false
 	$"../MovementActions3".visible = false
+	$"../Sacrifice".visible = false
 	_deselect_selectors()
 	_select_main()
 
@@ -179,6 +216,7 @@ func _on_aim_pressed() -> void:
 	_reset_main()
 
 func _on_shoot_pressed() -> void:
+	_action_tree = 5
 	action = "shoot"
 	_select_selectors()
 
@@ -193,6 +231,7 @@ func _on_melee_pressed() -> void:
 var options:Array[int] = []
 var ap:Array[int] = []
 func _on_find_cover_pressed() -> void:
+	_action_tree = 1
 	if options.is_empty():
 		for i in range(4):
 			options.append($".."._get_cover_type())
@@ -225,10 +264,12 @@ func _on_cover_option_pressed(source: BaseButton) -> void:
 # MOVEMENT OPTIONS 1
 
 func _on_move_to_pressed() -> void:
+	_action_tree = 2
 	$"../MovementActions2".visible = true
 	$"../MovementActions2/MarginContainer/GridContainer/GoBack".grab_focus()
 
 func _on_move_aw_pressed() -> void:
+	_action_tree = 2
 	$"../MovementActions3".visible = true
 	var flee_distance:bool = true
 	for i in $"..".thisCombatEvent.enemies:
@@ -243,6 +284,7 @@ func _on_move_aw_pressed() -> void:
 func _on_move_2_goBack_pressed() ->void:
 	$"../MovementActions2".visible = false
 	$"../MovementActions3".visible = false
+	$"../MovementActions".visible = true
 	$"../MovementActions/MarginContainer/GridContainer/GoBack".grab_focus()
 
 # MOVEMENT TO OPTIONS
@@ -251,6 +293,7 @@ func _on_move_all_pressed() -> void:
 	_reset_main()
 
 func _on_one_pressed() -> void:
+	_action_tree = 3
 	action = "MoveTo"
 	_select_selectors()
 
@@ -260,6 +303,7 @@ func _on_away_all_pressed() -> void:
 	_reset_main()
 
 func _on_oneAway_pressed() -> void:
+	_action_tree = 4
 	action = "MoveAway"
 	_select_selectors()
 
@@ -267,3 +311,47 @@ func _on_flee_pressed() -> void:
 	_submit_action("flee")
 	_reset_main()
 	_deselect_main()
+
+# SACRIFICE OPTIONS
+func _on_sacrifice_pressed() -> void:
+	action = "Sacrifice"
+	_action_root = false
+	$"../Sacrifice".visible = true
+	$"../Sacrifice/MarginContainer/GridContainer/ActionPoint".disabled = true
+	$"../Sacrifice/MarginContainer/GridContainer/Health".disabled = true
+	$"../Sacrifice/MarginContainer/GridContainer/Ammo".disabled = true
+	
+	if $"..".player.bones > 9:
+		$"../Sacrifice/MarginContainer/GridContainer/ActionPoint".disabled = false
+	if $"..".player.bones > 19:
+		$"../Sacrifice/MarginContainer/GridContainer/Health".disabled = false
+	if $"..".player.bones > 79:
+		$"../Sacrifice/MarginContainer/GridContainer/Ammo".disabled = false
+	$"../Sacrifice/MarginContainer/GridContainer/GoBack".grab_focus()
+
+func _on_health_pressed() -> void:
+	_submit_action(action, 0)
+	_reset_main()
+
+func _on_action_point_pressed() -> void:
+	_submit_action(action, 1)
+	_reset_main()
+
+func _on_ammo_pressed() -> void:
+	_submit_action(action, 2)
+	_reset_main()
+
+# RULES
+func _on_rules_pressed() -> void:
+	_action_root = false
+	$"../RULES".visible = true
+	$"../RULES/MarginContainer/VBoxContainer/Button".grab_focus()
+
+
+func _on_button_pressed() -> void:
+	$"../RULES".visible = false
+	_reset_main()
+
+
+func _on_back_button_timer_timeout() -> void:
+	_backed = false

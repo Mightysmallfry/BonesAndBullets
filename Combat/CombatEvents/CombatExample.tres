@@ -8,5 +8,5 @@
 [resource]
 script = ExtResource("3_uf4b2")
 player_moves_first = false
-enemies = Array[ExtResource("1_uapx2")]([ExtResource("2_nnl5b"), ExtResource("2_nnl5b"), ExtResource("3_nnl5b"), ExtResource("2_nnl5b"), ExtResource("2_nnl5b"), ExtResource("2_nnl5b"), ExtResource("2_nnl5b"), ExtResource("2_nnl5b")])
+enemies = Array[ExtResource("1_uapx2")]([ExtResource("2_nnl5b"), ExtResource("2_nnl5b"), ExtResource("3_nnl5b")])
 metadata/_custom_type_script = "uid://cylvhb4uifafa"

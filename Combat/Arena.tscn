@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b3tioju63ftu0"]
+[gd_scene load_steps=24 format=3 uid="uid://b3tioju63ftu0"]
 
 [ext_resource type="Script" uid="uid://c7hcmvqfxa2fy" path="res://Combat/Scripts/Arena.gd" id="1_y84q4"]
 [ext_resource type="Texture2D" uid="uid://b668crseuf56f" path="res://Assets/WorldWallpaper/GameJamBackground.png" id="2_1mj86"]
@@ -42,6 +42,12 @@ bg_color = Color(0.21176471, 0.12941177, 0.1764706, 1)
 
 [sub_resource type="Theme" id="Theme_o6ykf"]
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_wtktk")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tc6bs"]
+bg_color = Color(0.38431373, 0.18039216, 0.29803923, 1)
+
+[sub_resource type="Theme" id="Theme_1uhy4"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_tc6bs")
 
 [sub_resource type="Animation" id="Animation_tc6bs"]
 length = 0.001
@@ -87,6 +93,10 @@ script = ExtResource("1_y84q4")
 
 [node name="CrossInputHandler" parent="." instance=ExtResource("2_wtktk")]
 
+[node name="BackButtonTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [node name="BufferTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
@@ -127,10 +137,9 @@ texture = ExtResource("2_1mj86")
 
 [node name="Point Counter" type="PanelContainer" parent="Control"]
 layout_mode = 0
-offset_left = 8.0
 offset_top = 75.0
-offset_right = 107.0
-offset_bottom = 96.0
+offset_right = 108.0
+offset_bottom = 138.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/Point Counter"]
 layout_mode = 2
@@ -144,8 +153,18 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Control/Point Counter/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Action Points: 9"
-horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Point Counter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Cover: "
+
+[node name="Label3" type="Label" parent="Control/Point Counter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Steady Aim: False"
 
 [node name="Stats" type="PanelContainer" parent="Control"]
 layout_mode = 0
@@ -181,6 +200,15 @@ expand_mode = 2
 [node name="Label2" type="Label" parent="Control/Stats/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Bullets"
+
+[node name="TextureRect3" type="TextureRect" parent="Control/Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_tc6bs")
+expand_mode = 2
+
+[node name="Label3" type="Label" parent="Control/Stats/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Bones"
 
 [node name="Main Console" type="MarginContainer" parent="Control"]
 layout_mode = 0
@@ -614,6 +642,56 @@ layout_mode = 2
 disabled = true
 text = "Flee"
 
+[node name="Sacrifice" type="PanelContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(470, 0)
+offset_left = 125.0
+offset_top = 458.0
+offset_right = 595.0
+offset_bottom = 542.0
+theme = SubResource("Theme_o6ykf")
+
+[node name="MarginContainer" type="MarginContainer" parent="Sacrifice"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="GridContainer" type="GridContainer" parent="Sacrifice/MarginContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="GoBack" type="Button" parent="Sacrifice/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_right = NodePath("../Health")
+focus_neighbor_bottom = NodePath("../ActionPoint")
+focus_next = NodePath("../Health")
+focus_previous = NodePath("../ActionPoint")
+text = "Go Back"
+
+[node name="Health" type="Button" parent="Sacrifice/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_neighbor_left = NodePath("../GoBack")
+focus_next = NodePath("../ActionPoint")
+focus_previous = NodePath("../GoBack")
+text = "Sacrifice 20 bones for +10 health"
+
+[node name="ActionPoint" type="Button" parent="Sacrifice/MarginContainer/GridContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../GoBack")
+focus_next = NodePath("../GoBack")
+focus_previous = NodePath("../Health")
+text = "Sacrifice 10 bones for +1 A.P."
+
+[node name="Ammo" type="Button" parent="Sacrifice/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Sacrifice 80 bones for +1 bullet"
+
 [node name="Blocker2" type="Container" parent="."]
 visible = false
 offset_left = 116.0
@@ -667,9 +745,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 589.0
-offset_top = 37.0
+offset_top = 310.0
 offset_right = 589.0
-offset_bottom = 37.0
+offset_bottom = 310.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
@@ -678,6 +756,68 @@ stream = ExtResource("8_d331y")
 autoplay = true
 parameters/looping = true
 
+[node name="RULES" type="PanelContainer" parent="."]
+visible = false
+offset_left = -1.0
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 650.0
+theme = SubResource("Theme_1uhy4")
+
+[node name="MarginContainer" type="MarginContainer" parent="RULES"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RULES/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="RULES/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="RULES/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 0.3882353)
+
+[node name="MarginContainer" type="MarginContainer" parent="RULES/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="RULES/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Combat is turned base. 
+When it is your turn you can do ACTIONS
+You have a LIMITED amount of ACTION POINTS (AP) each turn
+
+Cover:
+Makes you harder to hit.
+You can take cover as long as you DONT move after.
+Cover is LESS EFFECTIVE when distance is less than 20
+
+Aim Chances:
+Calculated on skill, distance, and cover.
+Your chance to hit to hit an enemy is represented as \"My shot odds\"
+Enemies that CAN SHOOT YOU are represented as \"Thier shot odds\"
+
+Melee Chances:
+Yout chance to win a melee if either you or they initiate a melee.
+Represented as \"My melee odds:\".
+The stronger you are compared to  the enemy the higher 
+the chances to win and damage delt.
+
+FLEE:
+If you get to a distance of 80 or greater from ALL ENEMIES you can
+\"FLEE\" and end the combat"
+
+[node name="Button" type="Button" parent="RULES/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("Sprite2D")
 libraries = {
@@ -685,11 +825,11 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimationPlayer"]
-visible = false
 position = Vector2(576, 319)
 scale = Vector2(5, 700)
 texture = SubResource("CurveTexture_aqfcs")
 
+[connection signal="timeout" from="BackButtonTimer" to="Container" method="_on_back_button_timer_timeout"]
 [connection signal="timeout" from="BufferTimer" to="." method="_on_buffer_timeout"]
 [connection signal="timeout" from="EnemyAction" to="." method="_on_EnemyAction_timeout"]
 [connection signal="mouse_entered" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Attacking" to="Container" method="_on_button_mouse_entered" flags=18]
@@ -700,6 +840,10 @@ texture = SubResource("CurveTexture_aqfcs")
 [connection signal="pressed" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Moving" to="Container" method="_on_moving_pressed"]
 [connection signal="mouse_entered" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/EndTurn" to="Container" method="_on_button_mouse_entered" flags=18]
 [connection signal="pressed" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/EndTurn" to="Container" method="_on_end_turn_pressed"]
+[connection signal="mouse_entered" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Sacrifice" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Sacrifice" to="Container" method="_on_sacrifice_pressed"]
+[connection signal="mouse_entered" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Rules" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Control/Main Console/HBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PanelContainer2/GridContainer/Rules" to="Container" method="_on_rules_pressed"]
 [connection signal="selected_action" from="Container" to="." method="_on_action_submitted"]
 [connection signal="mouse_entered" from="AttackActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
 [connection signal="pressed" from="AttackActions/MarginContainer/GridContainer/GoBack" to="Container" method="_on_go_back_pressed"]
@@ -743,3 +887,13 @@ texture = SubResource("CurveTexture_aqfcs")
 [connection signal="pressed" from="MovementActions3/MarginContainer/GridContainer/One" to="Container" method="_on_oneAway_pressed"]
 [connection signal="mouse_entered" from="MovementActions3/MarginContainer/GridContainer/Flee" to="Container" method="_on_button_mouse_entered" flags=18]
 [connection signal="pressed" from="MovementActions3/MarginContainer/GridContainer/Flee" to="Container" method="_on_flee_pressed"]
+[connection signal="mouse_entered" from="Sacrifice/MarginContainer/GridContainer/GoBack" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Sacrifice/MarginContainer/GridContainer/GoBack" to="Container" method="_on_go_back_pressed"]
+[connection signal="mouse_entered" from="Sacrifice/MarginContainer/GridContainer/Health" to="Container" method="_on_cover_option_pressed" flags=18]
+[connection signal="pressed" from="Sacrifice/MarginContainer/GridContainer/Health" to="Container" method="_on_health_pressed"]
+[connection signal="mouse_entered" from="Sacrifice/MarginContainer/GridContainer/ActionPoint" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Sacrifice/MarginContainer/GridContainer/ActionPoint" to="Container" method="_on_action_point_pressed"]
+[connection signal="mouse_entered" from="Sacrifice/MarginContainer/GridContainer/Ammo" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="Sacrifice/MarginContainer/GridContainer/Ammo" to="Container" method="_on_ammo_pressed"]
+[connection signal="mouse_entered" from="RULES/MarginContainer/VBoxContainer/Button" to="Container" method="_on_button_mouse_entered" flags=18]
+[connection signal="pressed" from="RULES/MarginContainer/VBoxContainer/Button" to="Container" method="_on_button_pressed"]
