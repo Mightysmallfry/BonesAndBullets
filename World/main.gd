@@ -26,9 +26,7 @@ func _ready() -> void:
 	
 	_cachedEventFiles = load_story_events(STORY_EVENT_DIR)
 
-	$UI/Stats/Label.text= str(Globals.playerHealth)
-	$UI/Stats/Label2.text = str(Globals.bullets)
-	$UI/Stats/Label3.text = str(Globals.startingBones)
+	update_current_stats()
 
 	if (Globals.has_timer(destinationTimer)):
 		destinationTimer.start()
@@ -38,7 +36,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	pass
+	update_current_stats()
+
+func update_current_stats() -> void:
+	$UI/Stats/Label.text= str(Globals.playerHealth)
+	$UI/Stats/Label2.text = str(Globals.bullets)
+	$UI/Stats/Label3.text = str(Globals.currentBones)
 
 func load_story_events(dirPath: String) -> Array[String]:
 	var dir: DirAccess = DirAccess.open(dirPath)

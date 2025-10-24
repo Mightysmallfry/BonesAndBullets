@@ -49,6 +49,9 @@ func create_choice_list() -> void:
 func _on_choice_pressed(choiceData: StoryChoice):
 	print("Choices have been made as: " + choiceData.choiceDescription)
 	# Here is where we do a switch based off of the enum
+	if choiceData.rewards == null or choiceData.rewards.size() == 0:
+		finish_story_event()
+		
 	for rewards in choiceData.rewards:
 		match rewards.rewardType:
 			rewards.ChoiceTypeEnum.CONTINUE:

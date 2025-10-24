@@ -3,9 +3,15 @@ extends Node2D
 @export_category("Player Variables")
 @export var playerHealth: int = 100
 @export var startingBones: int = 206
+@export var currentBones: int = startingBones
 @export var bullets: int = 6
 @export var maxBullets: int = 12
 @export var maxHealth: int = 100
+
+var totalBulletsUsed: int = 0
+var totalBulletsFound: int = 0
+var totalHealthLost: int = 0
+var totalHealthGained: int = 0
 
 @export_category("Player Combat Skills")
 @export_range(1,100,1) var combat_speed:int = 50
@@ -14,17 +20,17 @@ extends Node2D
 
 @export_category("Timing Variables")
 # Measured in seconds ~5 minutes
-@export var destinationTime: float = 300
+@export var destinationTime: float = 3 # 00
 # This could change as a range of 20-40 seconds
 # When story event happens, pause the time until destination.
 @export var timeBetweenStoryEvents: float = 15
 @export var startingDay: int = 1
 @export var currentDay: int
 
+var deceasedName : String = "Randy"
+
 var current_time:float = 0.0
-
 var IsPaused: bool = false
-
 ## Boolean if player is using a controler or keyboard
 var on_controller:bool = false
 

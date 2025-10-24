@@ -13,9 +13,6 @@ func _ready() -> void:
 		push_error("Missing scene assignment on continue button at " + str(get_tree_string))
 	grab_focus()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func _on_pressed() -> void:
 	if ResourceLoader.exists(NextScenePath):

@@ -22,8 +22,11 @@ These bones and brass are getting me to the end. Or I’ll die trying."
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	await get_tree().create_timer(SEGMENT_DELAY).timeout
-	dateSegment.TYPEWRITER_SPEED = 0.25
-	dateSegment.set_dialog(initialDate)
+	
+	if dateSegment:
+		dateSegment.TYPEWRITER_SPEED = 0.25
+		dateSegment.set_dialog(initialDate)
 	await get_tree().create_timer(SEGMENT_DELAY).timeout
-	dateSegment.TYPEWRITER_SPEED = 0.035
-	loreSegment.set_dialog(lore)
+	if dateSegment:
+		dateSegment.TYPEWRITER_SPEED = 0.035
+		loreSegment.set_dialog(lore)

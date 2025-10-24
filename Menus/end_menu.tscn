@@ -1,14 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://5xjdaf78cqwa"]
+[gd_scene load_steps=4 format=3 uid="uid://5xjdaf78cqwa"]
 
+[ext_resource type="Script" uid="uid://dats0lkistv2y" path="res://Menus/end_menu.gd" id="1_a1fqc"]
 [ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="1_xh4fv"]
+[ext_resource type="Script" uid="uid://ckf7oqtj1e72q" path="res://StoryEvents/scripts/dialog_box.gd" id="2_24yaa"]
 
-[node name="EndMenu" type="Control"]
+[node name="EndMenu" type="Control" node_paths=PackedStringArray("endGameButton", "statsBody", "endingLabel", "endingBody")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_a1fqc")
+endGameButton = NodePath("MarginContainer/EndGameButton")
+statsBody = NodePath("PanelContainer3/VBoxContainer/MarginContainer2/StatsBody")
+endingLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/MarginContainer/EndingLabel")
+endingBody = NodePath("PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/EndingBody")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -57,13 +64,14 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer3/VBoxContainer/MarginContainer2"]
+[node name="StatsBody" type="RichTextLabel" parent="PanelContainer3/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 22
 text = "- Stat 1
 - Stat 2
 - Stat 3
 - Stat 4"
+script = ExtResource("2_24yaa")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -72,7 +80,7 @@ offset_top = 430.0
 offset_right = 1044.0
 offset_bottom = 588.0
 
-[node name="Button" type="Button" parent="MarginContainer"]
+[node name="EndGameButton" type="Button" parent="MarginContainer"]
 layout_mode = 2
 text = "Light the Candle
 [Return to Main Menu]"
@@ -103,7 +111,7 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="EndingLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 41
 text = "Ending: Good"
@@ -116,7 +124,8 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2"]
+[node name="EndingBody" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 22
 text = "I'm sorry I couldn't return all of you. But you should know your sacrifice brought us back. Thank you for helping me return, It would have been too difficult otherwise. I'm sure you understand"
+script = ExtResource("2_24yaa")
