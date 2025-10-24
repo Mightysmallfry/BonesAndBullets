@@ -106,7 +106,7 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			rewards.ChoiceTypeEnum.BONE:
 				if Globals.currentBones > 0:
 					Globals.currentBones += rewards.rewardValue
-					clamp(Globals.currentBones, 0, Globals.startingBones)
+					Globals.currentBones = clamp(Globals.currentBones, 0, Globals.startingBones)
 				finish_story_event()
 				return
 			_:
