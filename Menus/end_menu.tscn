@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://5xjdaf78cqwa"]
+[gd_scene load_steps=5 format=3 uid="uid://5xjdaf78cqwa"]
 
 [ext_resource type="Script" uid="uid://dats0lkistv2y" path="res://Menus/end_menu.gd" id="1_a1fqc"]
 [ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="1_xh4fv"]
 [ext_resource type="Script" uid="uid://ckf7oqtj1e72q" path="res://StoryEvents/scripts/dialog_box.gd" id="2_24yaa"]
+[ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_rmsvc"]
 
 [node name="EndMenu" type="Control" node_paths=PackedStringArray("endGameButton", "statsBody", "endingLabel", "endingBody")]
 layout_mode = 3
@@ -16,6 +17,8 @@ endGameButton = NodePath("MarginContainer/EndGameButton")
 statsBody = NodePath("PanelContainer3/VBoxContainer/MarginContainer2/StatsBody")
 endingLabel = NodePath("PanelContainer/MarginContainer/VBoxContainer/MarginContainer/EndingLabel")
 endingBody = NodePath("PanelContainer/MarginContainer/VBoxContainer/MarginContainer2/EndingBody")
+
+[node name="CrossInputHandler" parent="." instance=ExtResource("2_rmsvc")]
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1

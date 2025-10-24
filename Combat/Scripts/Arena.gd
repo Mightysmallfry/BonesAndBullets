@@ -49,6 +49,7 @@ func _on_buffer_timeout()->void:
 		beginCombat()
 	else:
 		if player.health < 1:
+			Globals.playerHealth = 0
 			get_tree().change_scene_to_file("res://Menus/end_menu.tscn")
 		else:
 			print(skills_to_earn)
