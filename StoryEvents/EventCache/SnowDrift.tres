@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 [sub_resource type="Resource" id="Resource_d54l6"]
 script = ExtResource("2_j2gu2")
 rewardType = 3
-rewardValue = 6
+rewardValue = 10
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_6xu5q"]
@@ -25,6 +25,8 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [sub_resource type="Resource" id="Resource_7v7di"]
 script = ExtResource("2_j2gu2")
+rewardType = 3
+rewardValue = -10
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_4os6a"]

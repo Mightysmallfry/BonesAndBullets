@@ -25,12 +25,12 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 [sub_resource type="Resource" id="Resource_xqnba"]
 script = ExtResource("2_06hiv")
 rewardType = 1
-rewardValue = -1
+rewardValue = -3
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_0hjw2"]
 script = ExtResource("1_hp6lh")
-choiceDescription = "I fired a warning shot to scare them off. Simple creatures."
+choiceDescription = "I fired a warning shots to scare them off. Simple creatures."
 rewards = Array[ExtResource("2_06hiv")]([SubResource("Resource_xqnba")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
