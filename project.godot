@@ -13,7 +13,9 @@ config_version=5
 config/name="BonesAndBullets"
 run/main_scene="uid://d13yw33pf5jfv"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+config/icon="uid://j01l0hos58ok"
 
 [autoload]
 
@@ -22,6 +24,7 @@ EndingData="*res://Globals/EndingData.gd"
 
 [display]
 
+window/size/mode=2
 window/stretch/mode="viewport"
 
 [dotnet]
