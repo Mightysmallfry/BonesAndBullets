@@ -55,7 +55,9 @@ func load_story_events(dirPath: String) -> Array[String]:
 	var fileName: String = dir.get_next()
 	
 	while fileName != "":
-		if not dir.current_is_dir() and fileName.ends_with(".tres"):
+		if not dir.current_is_dir() and (fileName.ends_with(".tres") or fileName.ends_with(".tres.remap")):
+			if fileName.ends_with(".remap"):
+				fileName = fileName.trim_suffix(".remap")
 			files.append(dirPath + "/" + fileName)
 		fileName = dir.get_next()
 	
