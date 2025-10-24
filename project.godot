@@ -11,6 +11,8 @@ config_version=5
 [application]
 
 config/name="BonesAndBrass"
+config/description="Made for WWU GDC Fall 2025 Game Jam. Themes: Bones, 4 Colors, Frost Punk.
+Return your dead friend's bones back home through the perilous waste. "
 run/main_scene="uid://d13yw33pf5jfv"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
