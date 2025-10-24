@@ -92,8 +92,10 @@ func _on_finished_story_event() -> void:
 	$UI/Stats/Label2.text = str(Globals.bullets)
 	$UI/Stats/Label3.text = str(Globals.startingBones)
 	destinationTimer.set_paused(false)
-	storyEventTimer.start(randi_range(10,20))
-	
+	var _event_time = randi_range(10,20)
+	Globals.set_max_time(storyEventTimer, _event_time)
+	$UI/StoryEventBar.max_value = _event_time
+	storyEventTimer.start()
 	print("Game has resumed")
 
 
