@@ -22,10 +22,11 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 [sub_resource type="Resource" id="Resource_3ks46"]
 script = ExtResource("3_bbcw4")
 name = "Krillian Contruct"
-health = 150
+health = 200
 health_variance = 5
+moral = 300
 speed = 25
-melee = 75
+melee = 80
 cover_seeking = 1
 distance = 0.0
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
