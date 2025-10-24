@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://5xjdaf78cqwa"]
+[gd_scene load_steps=6 format=3 uid="uid://5xjdaf78cqwa"]
 
 [ext_resource type="Script" uid="uid://dats0lkistv2y" path="res://Menus/end_menu.gd" id="1_a1fqc"]
 [ext_resource type="Script" uid="uid://tuhxeb2yiexd" path="res://Menus/continue_button.gd" id="1_xh4fv"]
 [ext_resource type="Script" uid="uid://ckf7oqtj1e72q" path="res://StoryEvents/scripts/dialog_box.gd" id="2_24yaa"]
 [ext_resource type="PackedScene" uid="uid://uppqbbrbo8c1" path="res://Player/cross_input_handler.tscn" id="2_rmsvc"]
+[ext_resource type="AudioStream" uid="uid://c3a21kceeg6vt" path="res://Assets/Music/[Death Theme]-Embraced by the Frost.mp3" id="5_ymgua"]
 
 [node name="EndMenu" type="Control" node_paths=PackedStringArray("endGameButton", "statsBody", "endingLabel", "endingBody")]
 layout_mode = 3
@@ -132,3 +133,7 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 22
 text = "I'm sorry I couldn't return all of you. But you should know your sacrifice brought us back. Thank you for helping me return, It would have been too difficult otherwise. I'm sure you understand"
 script = ExtResource("2_24yaa")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ymgua")
+volume_db = -8.0

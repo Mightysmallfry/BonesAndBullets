@@ -11,6 +11,8 @@ extends Control
 @export var goodEnding: int = 103
 @export var terribleEnding: int = 0
 
+const _deathStream:AudioStreamMP3 = preload("res://Assets/Music/[Death Theme]-Embraced by the Frost.mp3")
+
 const BUTTON_HINT : String = "[Return to Main Menu]"
 enum Ending {PERFECT, GOOD, BAD, TERRIBLE, DEAD}
 var endingType : Ending
@@ -34,6 +36,8 @@ func _ready() -> void:
 	
 func get_ending(boneCount : int) -> Ending:
 	if Globals.playerHealth < 1:
+		$AudioStreamPlayer2D.stream = _deathStream
+		$AudioStreamPlayer2D.play()
 		endingType = Ending.DEAD
 	elif boneCount == perfectEnding:
 		endingType = Ending.PERFECT
