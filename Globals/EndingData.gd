@@ -6,6 +6,7 @@ const PERFECT_ENDING_HEADER: String = "Perfect Ending"
 const GOOD_ENDING_HEADER: String = "Good Ending"
 const BAD_ENDING_HEADER: String = "Bad Ending"
 const TERRIBLE_ENDING_HEADER: String = "Terrible Ending"
+const DEAD_ENDING_HEADER: String = "DEATH"
 
 
 const PERFECT_ENDING_BODY: String = "You deserve this, my friend.
@@ -32,8 +33,17 @@ Now, you are scattered, lost, and desecrated.
 
 It wasn’t supposed to be this way. I’m sorry, {PERISHED_ONE}."
 
+const DEAD_ENDING_BODY: String = "A body lies limp in the snow.
+Crows pick at the meat left after days of harvest for other scavengers.
+A sliver of silver peaks from the remains.
+The pack is empty.
+Whatever was once here has been taken. 
+No one will remember this traveler. 
+They are simply one of many, and they will not be the last"
+
 const AFTERWORD_PERFECT: String = "You hear {PERISHED_ONE}'s voice speak softly: “Thank you…”" 
 const AFTERWORD_GOOD: String = "You light the candles, honoring %s’s passing."
 const AFTERWORD_BAD: String = "You have survived. 
 {PERISHED_ONE}’s spirit drifts through the wasteland, alone."
 const AFTERWORD_TERRIBLE: String = "You are alone. {PERISHED_ONE} is lost."
+const AFTERWORD_DEAD : String = "The Ice takes you"

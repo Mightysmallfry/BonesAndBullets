@@ -12,14 +12,12 @@ extends Control
 @export var terribleEnding: int = 0
 
 const BUTTON_HINT : String = "[Return to Main Menu]"
-enum Ending {PERFECT, GOOD, BAD, TERRIBLE}
+enum Ending {PERFECT, GOOD, BAD, TERRIBLE, DEAD}
 var endingType : Ending
 var stats : String = ""
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	Globals.currentBones = 0
-	
+func _ready() -> void:	
 	if endGameButton == null:
 		push_error("endGameButton Missing")
 	if statsBody == null:
@@ -35,13 +33,15 @@ func _ready() -> void:
 	print_button()
 	
 func get_ending(boneCount : int) -> Ending:
-	if boneCount == perfectEnding:
+	if Globals.playerHealth < 1:
+		endingType = Ending.DEAD
+	elif boneCount == perfectEnding:
 		endingType = Ending.PERFECT
-	if boneCount < perfectEnding && boneCount >= goodEnding:
+	elif boneCount < perfectEnding && boneCount >= goodEnding:
 		endingType = Ending.GOOD
-	if boneCount < goodEnding: # bad ending else
+	elif boneCount < goodEnding: # bad ending else
 		endingType = Ending.BAD
-	if boneCount == terribleEnding:
+	elif boneCount == terribleEnding:
 		endingType = Ending.TERRIBLE
 		
 	print("ending: " + str(endingType))
@@ -59,6 +59,8 @@ func print_button() -> void:
 			buttonDesc = EndingData.AFTERWORD_BAD
 		Ending.TERRIBLE:
 			buttonDesc = EndingData.AFTERWORD_TERRIBLE
+		Ending.DEAD:
+			buttonDesc = EndingData.AFTERWORD_DEAD
 	
 	endGameButton.text =  buttonDesc.format({"PERISHED_ONE" : Globals.deceasedName})+ "\n" + BUTTON_HINT 
 	
@@ -79,6 +81,9 @@ func print_ending(boneCount : int) -> void:
 		Ending.BAD:
 			endingHeader = EndingData.BAD_ENDING_HEADER
 			endingToWrite = EndingData.BAD_ENDING_BODY
+		Ending.DEAD:
+			endingHeader = EndingData.DEAD_ENDING_HEADER
+			endingToWrite = EndingData.DEAD_ENDING_BODY
 	
 	endingToWrite = endingToWrite.format({"PERISHED_ONE" : Globals.deceasedName})
 	endingBody.set_dialog(endingToWrite)

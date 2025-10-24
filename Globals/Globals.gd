@@ -20,7 +20,7 @@ var totalHealthGained: int = 0
 
 @export_category("Timing Variables")
 # Measured in seconds ~5 minutes
-@export var destinationTime: float = 3 # 00
+@export var destinationTime: float = 300
 # This could change as a range of 20-40 seconds
 # When story event happens, pause the time until destination.
 @export var timeBetweenStoryEvents: float = 15

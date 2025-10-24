@@ -49,7 +49,7 @@ func _on_buffer_timeout()->void:
 		beginCombat()
 	else:
 		if player.health < 1:
-			get_tree().change_scene_to_file("res://Menus/main_menu.tscn")
+			get_tree().change_scene_to_file("res://Menus/end_menu.tscn")
 		else:
 			print(skills_to_earn)
 			$WIN._setup(skills_to_earn)
@@ -296,6 +296,7 @@ func _on_EnemyAction_timeout()->void:
 # PLAYER ACTIONS
 func _take_damage(damage:int)->void:
 	player.health -= damage
+	Globals.totalHealthLost += damage
 	combatUI.update_player(player)
 	if player.health < 1:
 		combatUI.update_battle_log("You Died")
@@ -361,6 +362,7 @@ func _on_action_submitted(selected_action: String, value1: int, value2: int) -> 
 				0:
 					player.bones -= 20
 					player.health += 10
+					Globals.totalHealthGained += 10
 				1:
 					player.bones -= 10
 					player.action_points += 1
@@ -398,6 +400,7 @@ func _move_away(index:int)->void:
 
 func _shoot(index:int)->void:
 	player.bullets -= 1
+	Globals.totalBulletsUsed -= 1
 	if rng.randf() < _calculate_aim_chance(player, thisCombatEvent.enemies[index]):
 		var bullet_damage:int = randi_range(40,80)
 		combatUI.update_battle_log("You shoot " + thisCombatEvent.enemies[index].name + " for " + str(bullet_damage) + " health")

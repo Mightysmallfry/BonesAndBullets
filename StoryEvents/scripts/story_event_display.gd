@@ -61,6 +61,10 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			rewards.ChoiceTypeEnum.BULLET:
 				print("No man outsmarts bullet")
 				Globals.bullets += rewards.rewardValue;
+				if rewards.rewardValue > 0:
+					Globals.totalBulletsFound += rewards.rewardValue
+				else:
+					Globals.totalBulletsUsed += rewards.rewardValue
 				clamp(Globals.bullets, 0, Globals.maxBullets)
 				finish_story_event()
 				# Emit continue signal
@@ -69,6 +73,10 @@ func _on_choice_pressed(choiceData: StoryChoice):
 				print("No man outsmarts Health")
 				Globals.playerHealth += rewards.rewardValue;
 				Globals.playerHealth = clamp(Globals.playerHealth, 0, Globals.maxHealth)
+				if rewards.rewardValue > 0:
+					Globals.totalHealthGained += rewards.rewardValue
+				else:
+					Globals.totalHealthLost += rewards.rewardValue
 				if Globals.playerHealth == 0:
 					get_tree().change_scene_to_file("res://Menus/end_menu.tscn")
 				finish_story_event()
