@@ -83,6 +83,8 @@ func _on_choice_pressed(choiceData: StoryChoice):
 				return
 			rewards.ChoiceTypeEnum.PROGRESS:
 				print("No man outsmarts Progress")
+				Globals.current_time = %StoryProgressionTimer.time_left
+				Globals.current_time -= rewards.rewardValue
 				finish_story_event()
 				return
 			rewards.ChoiceTypeEnum.GAMBLE:

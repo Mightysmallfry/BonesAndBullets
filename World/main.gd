@@ -19,7 +19,6 @@ func _ready() -> void:
 	
 	if Globals.current_time > 0.0:
 		destinationTimer.wait_time = Globals.current_time
-		print(destinationTimer.wait_time, destinationTimer.time_left)
 	else:
 		destinationTimer.wait_time = Globals.get_max_time(destinationTimer)
 	storyEventTimer.wait_time = Globals.get_max_time(storyEventTimer)
@@ -96,7 +95,13 @@ func _on_finished_story_event() -> void:
 	$UI/Stats/Label.text= str(Globals.playerHealth)
 	$UI/Stats/Label2.text = str(Globals.bullets)
 	$UI/Stats/Label3.text = str(Globals.startingBones)
-	destinationTimer.set_paused(false)
+	if Globals.current_time > 0.0:
+		destinationTimer.stop()
+		destinationTimer.wait_time = Globals.current_time
+		destinationTimer.start()
+		Globals.current_time = 0.0
+	else:
+		destinationTimer.set_paused(false)
 	var _event_time = randi_range(10,20)
 	Globals.set_max_time(storyEventTimer, _event_time)
 	$UI/StoryEventBar.max_value = _event_time
