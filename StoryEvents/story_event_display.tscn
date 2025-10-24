@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://b7kybbmor2ml0" path="res://Assets/Themes/DisplayTheme.tres" id="1_cp4jr"]
 [ext_resource type="Script" uid="uid://dxngyqdhchio2" path="res://StoryEvents/scripts/story_event_display.gd" id="1_gtd4a"]
 [ext_resource type="Script" uid="uid://ckf7oqtj1e72q" path="res://StoryEvents/scripts/dialog_box.gd" id="2_hbgmf"]
+[ext_resource type="Resource" uid="uid://bplt53ciknggg" path="res://StoryEvents/EventCache/OutlawStoryEvent.tres" id="3_bg2dx"]
 [ext_resource type="PackedScene" uid="uid://dq587ufv1bnf8" path="res://StoryEvents/ChoiceButton.tscn" id="3_q4lvn"]
 
 [node name="StoryEventDisplay" type="Control"]
@@ -76,9 +77,6 @@ layout_mode = 2
 size_flags_vertical = 8
 
 [node name="ChoiceButton" parent="PanelContainer/MarginContainer/VBoxContainer/ChoiceList" instance=ExtResource("3_q4lvn")]
-layout_mode = 2
-
-[node name="ChoiceButton4" parent="PanelContainer/MarginContainer/VBoxContainer/ChoiceList" instance=ExtResource("3_q4lvn")]
 layout_mode = 2
 
 [node name="ChoiceButton2" parent="PanelContainer/MarginContainer/VBoxContainer/ChoiceList" instance=ExtResource("3_q4lvn")]
