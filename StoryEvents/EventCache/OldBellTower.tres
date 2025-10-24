@@ -1,12 +1,19 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=7 format=3 uid="uid://chvugow0us0lr"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=8 format=3 uid="uid://chvugow0us0lr"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_ag16w"]
 [ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_8eoq1"]
 [ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="3_2lhyp"]
 
+[sub_resource type="Resource" id="Resource_8eoq1"]
+script = ExtResource("2_8eoq1")
+rewardType = 3
+rewardValue = 5
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
 [sub_resource type="Resource" id="Resource_l7rrf"]
 script = ExtResource("1_ag16w")
 choiceDescription = "I carried on though, I have a long journey still ahead"
+rewards = Array[ExtResource("2_8eoq1")]([SubResource("Resource_8eoq1")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [sub_resource type="Resource" id="Resource_mvte0"]

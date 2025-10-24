@@ -52,6 +52,7 @@ metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_4s7mk"]
 script = ExtResource("3_1kxbe")
+name = "Brute"
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
 [sub_resource type="Resource" id="Resource_5om01"]

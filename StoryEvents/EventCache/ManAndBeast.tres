@@ -23,7 +23,6 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 script = ExtResource("3_q362c")
 name = "Mutant? Man?"
 health = 150
-speed = 25
 melee = 75
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
