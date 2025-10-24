@@ -12,6 +12,10 @@ extends Control
 @export var terribleEnding: int = 0
 
 const _deathStream:AudioStreamMP3 = preload("res://Assets/Music/[Death Theme]-Embraced by the Frost.mp3")
+const _terribleStream:AudioStreamMP3 = preload("res://Assets/Music/[Terrible Ending]-The Instinct to Survive.mp3")
+const _badStream:AudioStreamMP3 = preload("res://Assets/Music/[Bad Ending]-The difficult burden.mp3")
+const _goodStream:AudioStreamMP3 = preload("res://Assets/Music/[Good Ending]-Sacrifices to be made.mp3")
+const _bestStream:AudioStreamMP3 = preload("res://Assets/Music/[Best Ending]-I Will Never Give Up These Bones.mp3")
 
 const BUTTON_HINT : String = "[Return to Main Menu]"
 enum Ending {PERFECT, GOOD, BAD, TERRIBLE, DEAD}
@@ -37,17 +41,21 @@ func _ready() -> void:
 func get_ending(boneCount : int) -> Ending:
 	if Globals.playerHealth < 1:
 		$AudioStreamPlayer2D.stream = _deathStream
-		$AudioStreamPlayer2D.play()
 		endingType = Ending.DEAD
 	elif boneCount == perfectEnding:
+		$AudioStreamPlayer2D.stream = _bestStream
 		endingType = Ending.PERFECT
 	elif boneCount < perfectEnding && boneCount >= goodEnding:
+		$AudioStreamPlayer2D.stream = _goodStream
 		endingType = Ending.GOOD
 	elif boneCount < goodEnding: # bad ending else
+		$AudioStreamPlayer2D.stream = _badStream
 		endingType = Ending.BAD
 	elif boneCount == terribleEnding:
+		$AudioStreamPlayer2D.stream = _terribleStream
 		endingType = Ending.TERRIBLE
-		
+	
+	$AudioStreamPlayer2D.play()
 	print("ending: " + str(endingType))
 	return endingType
 	
