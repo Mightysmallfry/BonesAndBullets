@@ -7,13 +7,13 @@
 [sub_resource type="Resource" id="Resource_dmshs"]
 script = ExtResource("2_s783d")
 rewardType = 1
-rewardValue = 1
+rewardValue = 2
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_7dky8"]
 script = ExtResource("2_s783d")
 rewardType = 2
-rewardValue = -10
+rewardValue = -15
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_102na"]

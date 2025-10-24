@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=19 format=3 uid="uid://bplt53ciknggg"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=20 format=3 uid="uid://bplt53ciknggg"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_hdv1j"]
 [ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_6lk70"]
@@ -9,19 +9,25 @@
 [sub_resource type="Resource" id="Resource_6lk70"]
 script = ExtResource("2_ts6ci")
 rewardType = 3
+rewardValue = -30
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_dd723"]
+script = ExtResource("2_ts6ci")
+rewardType = 2
 rewardValue = -10
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_upm4q"]
 script = ExtResource("1_hdv1j")
 choiceDescription = "They can’t catch me. I’ll use the rocks for cover."
-rewards = Array[ExtResource("2_ts6ci")]([SubResource("Resource_6lk70")])
+rewards = Array[ExtResource("2_ts6ci")]([SubResource("Resource_6lk70"), SubResource("Resource_dd723")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [sub_resource type="Resource" id="Resource_ts6ci"]
 script = ExtResource("2_ts6ci")
 rewardType = 7
-rewardValue = -10
+rewardValue = -20
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_prbhq"]
@@ -47,7 +53,7 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 [sub_resource type="Resource" id="Resource_ufmw6"]
 script = ExtResource("2_ts6ci")
 rewardType = 3
-rewardValue = 8
+rewardValue = 15
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_4s7mk"]

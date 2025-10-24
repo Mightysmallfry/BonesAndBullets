@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=9 format=3 uid="uid://cfrxduue8mhl4"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=10 format=3 uid="uid://cfrxduue8mhl4"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_1ns65"]
 [ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_fupl6"]
@@ -16,15 +16,22 @@ choiceDescription = "Nice cozy fire going, I had found some leftover ammunition,
 rewards = Array[ExtResource("2_qrsjb")]([SubResource("Resource_royi6")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
+[sub_resource type="Resource" id="Resource_hwrwd"]
+script = ExtResource("2_qrsjb")
+rewardType = 3
+rewardValue = 5
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
 [sub_resource type="Resource" id="Resource_fupl6"]
 script = ExtResource("1_1ns65")
 choiceDescription = "I left quickly, scavengers could still be around. I didn't want to make any enemies."
+rewards = Array[ExtResource("2_qrsjb")]([SubResource("Resource_hwrwd")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [sub_resource type="Resource" id="Resource_qrsjb"]
 script = ExtResource("2_qrsjb")
 rewardType = 2
-rewardValue = 10
+rewardValue = 5
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_yvcbt"]

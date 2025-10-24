@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_x4iyl"]
 script = ExtResource("2_06hiv")
 rewardType = 2
-rewardValue = -10
+rewardValue = -25
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_sp6gl"]
@@ -30,14 +30,15 @@ metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_0hjw2"]
 script = ExtResource("1_hp6lh")
-choiceDescription = "I fired a warning shots to scare them off. Simple creatures."
+choiceDescription = "I fired warning shots to scare them off. Simple creatures."
+requresResource = 1
 rewards = Array[ExtResource("2_06hiv")]([SubResource("Resource_xqnba")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [sub_resource type="Resource" id="Resource_qmiha"]
 script = ExtResource("2_06hiv")
 rewardType = 7
-rewardValue = -10
+rewardValue = -20
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_382wl"]
@@ -50,11 +51,18 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 [sub_resource type="Resource" id="Resource_0bicq"]
 script = ExtResource("3_x4iyl")
 name = "Wolf"
+speed = 70
+speed_variance = 5
+melee = 60
+melee_variance = 3
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
 [sub_resource type="Resource" id="Resource_c5geh"]
 script = ExtResource("3_x4iyl")
 name = "Wolf"
+speed = 70
+speed_variance = 3
+melee_variance = 4
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
 [sub_resource type="Resource" id="Resource_bjxcl"]

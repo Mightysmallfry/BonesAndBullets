@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_33l8o"]
 script = ExtResource("2_gx7py")
 rewardType = 7
-rewardValue = -20
+rewardValue = -30
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_0pdu6"]
@@ -23,7 +23,9 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 script = ExtResource("3_q362c")
 name = "Mutant? Man?"
 health = 150
+speed = 70
 melee = 75
+distance = 30.0
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
 [sub_resource type="Resource" id="Resource_dcgcm"]

@@ -12,7 +12,10 @@ func _ready() -> void:
 		return
 	
 	max_value = Globals.destinationTime
-	value = 0.0
+	if Globals.current_time > 0.0:
+		value = Globals.current_time
+	else:
+		value = 0.0
 	
 	if Globals.has_timer(timer):
 		max_value = Globals.get_max_time(timer)
@@ -27,6 +30,7 @@ func _process(_delta: float) -> void:
 			initialized = true
 	else:
 		if timer.time_left > 0:
+				max_value = Globals.get_max_time(timer)
 				value = clamp(max_value - timer.time_left, min_value, max_value)
 		# print("time_left:", timer.time_left, "value:", value, "max_value:", max_value)
 	

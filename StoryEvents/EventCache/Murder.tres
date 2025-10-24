@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 [sub_resource type="Resource" id="Resource_wmfnl"]
 script = ExtResource("2_2kpud")
 rewardType = 2
-rewardValue = 10
+rewardValue = 15
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_y8hab"]
