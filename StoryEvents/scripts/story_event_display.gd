@@ -92,6 +92,7 @@ func _on_choice_pressed(choiceData: StoryChoice):
 				get_tree().root.add_child(arena)
 				get_tree().current_scene = arena
 				current.queue_free()
+				return
 			rewards.ChoiceTypeEnum.BONE:
 				if Globals.currentBones > 0:
 					Globals.currentBones += rewards.rewardValue
