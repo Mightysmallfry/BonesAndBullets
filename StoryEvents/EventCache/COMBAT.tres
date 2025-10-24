@@ -1,12 +1,20 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://box3hlthve5x5"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=7 format=3 uid="uid://box3hlthve5x5"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_gvtax"]
 [ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_afoqx"]
 [ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_wklxa"]
+[ext_resource type="Resource" uid="uid://dv7ovnm131l8r" path="res://Combat/CombatEvents/CombatExample.tres" id="3_wklxa"]
+
+[sub_resource type="Resource" id="Resource_jqcij"]
+script = ExtResource("2_wklxa")
+rewardType = 6
+combatPath = ExtResource("3_wklxa")
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_gvtax"]
 script = ExtResource("1_gvtax")
 choiceDescription = "I can take them"
+rewards = Array[ExtResource("2_wklxa")]([SubResource("Resource_jqcij")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [resource]
