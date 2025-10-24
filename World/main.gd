@@ -103,7 +103,9 @@ func _on_finished_story_event() -> void:
 	else:
 		destinationTimer.set_paused(false)
 	var _event_time = randi_range(10,20)
+	%StoryEventTimer.stop()
 	Globals.set_max_time(storyEventTimer, _event_time)
+	%StoryEventTimer.wait_time = _event_time
 	$UI/StoryEventBar.max_value = _event_time
 	storyEventTimer.start()
 	print("Game has resumed")
