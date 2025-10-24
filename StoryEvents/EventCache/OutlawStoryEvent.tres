@@ -1,22 +1,92 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=6 format=3 uid="uid://bplt53ciknggg"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=19 format=3 uid="uid://bplt53ciknggg"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_hdv1j"]
 [ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_6lk70"]
 [ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_ts6ci"]
+[ext_resource type="Script" uid="uid://bmvj0urqjcfch" path="res://Combat/Scripts/enemy_class.gd" id="3_1kxbe"]
+[ext_resource type="Script" uid="uid://cylvhb4uifafa" path="res://Combat/Scripts/Combat.gd" id="4_g3pgk"]
+
+[sub_resource type="Resource" id="Resource_6lk70"]
+script = ExtResource("2_ts6ci")
+rewardType = 3
+rewardValue = -4
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_upm4q"]
 script = ExtResource("1_hdv1j")
-choiceDescription = "Sprint onwards like a madman (continue)"
+choiceDescription = "They can’t catch me. I’ll use the rocks for cover."
+rewards = Array[ExtResource("2_ts6ci")]([SubResource("Resource_6lk70")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_ts6ci"]
+script = ExtResource("2_ts6ci")
+rewardType = 7
+rewardValue = -10
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_prbhq"]
 script = ExtResource("1_hdv1j")
-choiceDescription = "Fire surely can't hurt, just stand here, menacingly"
+choiceDescription = "“I’m just passing through, and I’m in a hurry. Do you perhaps take bones?"
+requresResource = 2
+rewards = Array[ExtResource("2_ts6ci")]([SubResource("Resource_ts6ci")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_1kxbe"]
+script = ExtResource("2_ts6ci")
+rewardType = 1
+rewardValue = -3
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_g3pgk"]
+script = ExtResource("1_hdv1j")
+choiceDescription = "“At least one will die if we fight. Perhaps a trade? Bullets for life.”"
+requresResource = 1
+rewards = Array[ExtResource("2_ts6ci")]([SubResource("Resource_1kxbe")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_ufmw6"]
+script = ExtResource("2_ts6ci")
+rewardType = 3
+rewardValue = 8
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_4s7mk"]
+script = ExtResource("3_1kxbe")
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
+
+[sub_resource type="Resource" id="Resource_5om01"]
+script = ExtResource("3_1kxbe")
+name = "Outlaw"
+attack_type = 1
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
+
+[sub_resource type="Resource" id="Resource_o75t8"]
+script = ExtResource("3_1kxbe")
+name = "Chief"
+attack_type = 1
+prefered_distance = 2
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
+
+[sub_resource type="Resource" id="Resource_qcda8"]
+script = ExtResource("4_g3pgk")
+enemies = Array[ExtResource("3_1kxbe")]([SubResource("Resource_4s7mk"), SubResource("Resource_5om01"), SubResource("Resource_o75t8")])
+metadata/_custom_type_script = "uid://cylvhb4uifafa"
+
+[sub_resource type="Resource" id="Resource_1y6ie"]
+script = ExtResource("2_ts6ci")
+rewardType = 6
+combatPath = SubResource("Resource_qcda8")
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_fhfo2"]
+script = ExtResource("1_hdv1j")
+choiceDescription = "“You will not impede my journey. This will be your end.”"
+rewards = Array[ExtResource("2_ts6ci")]([SubResource("Resource_ufmw6"), SubResource("Resource_1y6ie")])
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
 [resource]
 script = ExtResource("2_6lk70")
-title = "Outlaws!!"
-dialog = "Yarg!!! There be pirates, it be best that I run for cover. Oh boy does my but feel on fire!!!"
-choices = Array[ExtResource("1_hdv1j")]([SubResource("Resource_upm4q"), SubResource("Resource_prbhq")])
+title = "Danger, is everpresent"
+dialog = "Today, a voice echoed out against the dilapidated buildings of the past: “Stop right there.” A man steps out from one of the broken windows. Then another. Two to three, then three to five. The closest one had no mask, and the sight caused me to slide my hand to my weapon. Outlaws. I have no idea who started it, but they often sharpen their teeth to points to bite into tough meat. Or tough bones. The first Outlaw, presumably their leader, spoke again.“Hand over all your food, and maybe we’ll let you leave with the rest.”My response, as always, was simple:"
+choices = Array[ExtResource("1_hdv1j")]([SubResource("Resource_upm4q"), SubResource("Resource_prbhq"), SubResource("Resource_g3pgk"), SubResource("Resource_fhfo2")])
 metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

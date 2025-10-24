@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 [sub_resource type="Resource" id="Resource_mvte0"]
 script = ExtResource("2_8eoq1")
 rewardType = 2
-rewardValue = 10
+rewardValue = 30
 metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 
 [sub_resource type="Resource" id="Resource_ag16w"]

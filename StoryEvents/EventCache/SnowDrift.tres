@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=9 format=3 uid="uid://ce3x5koimv415"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_qiwfc"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_j2gu2"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_t5tbn"]
+
+[sub_resource type="Resource" id="Resource_wm4cx"]
+script = ExtResource("2_j2gu2")
+rewardType = 7
+rewardValue = -10
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_d54l6"]
+script = ExtResource("2_j2gu2")
+rewardType = 3
+rewardValue = 6
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_6xu5q"]
+script = ExtResource("1_qiwfc")
+choiceDescription = "I’ll lighten my load for the rest of the journey, just a bit."
+requresResource = 2
+rewards = Array[ExtResource("2_j2gu2")]([SubResource("Resource_wm4cx"), SubResource("Resource_d54l6")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_7v7di"]
+script = ExtResource("2_j2gu2")
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_4os6a"]
+script = ExtResource("1_qiwfc")
+choiceDescription = " I’m keeping my word, for one more day at least."
+rewards = Array[ExtResource("2_j2gu2")]([SubResource("Resource_7v7di")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_t5tbn")
+title = "Snowdrift"
+dialog = "Yesterday’s snow was so nice to walk through. It felt like walking, today was just a damn slog. Kept pulling me deeper into the snow, I struggled for hours to just get back onto something more solid. My mind keeps wanting me to turn back. I don’t know if I can or should at this point. The sun decided to set a bit earlier, or maybe I spent more time than I thought in that snow."
+choices = Array[ExtResource("1_qiwfc")]([SubResource("Resource_6xu5q"), SubResource("Resource_4os6a")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

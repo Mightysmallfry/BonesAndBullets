@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=5 format=3 uid="uid://bull45pv68mr6"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_oj03f"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_pf6rc"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_tx1jo"]
+
+[sub_resource type="Resource" id="Resource_w6oeg"]
+script = ExtResource("1_oj03f")
+choiceDescription = "Continue on my way, their belongings could drag me down with them."
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_pf6rc")
+title = "What's Left Behind"
+dialog = "A mountain was in my path. I knew that the only way to my destination was around the steep cliffs I had heard about. Upon my arrival to their start. I found a couple of travelers much like myself hanging precariously from a branch on the side of the mountain. They had gone cold. Too far gone to be saved. Nearby, a couple of rocks had fallen into the snow. Blood smeared on two of them. A choice lay before me:"
+choices = Array[ExtResource("1_oj03f")]([SubResource("Resource_w6oeg")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

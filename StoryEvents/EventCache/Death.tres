@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=8 format=3 uid="uid://dl5gioshnxd6w"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_5qk8t"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_biy6h"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_tcchf"]
+
+[sub_resource type="Resource" id="Resource_0kkfv"]
+script = ExtResource("2_biy6h")
+rewardType = 2
+rewardValue = 40
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_da3ho"]
+script = ExtResource("2_biy6h")
+rewardType = 7
+rewardValue = 40
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_q56s0"]
+script = ExtResource("1_5qk8t")
+choiceDescription = "I choose to forgo some of their bones, to ensure my journey’s end"
+requresResource = 2
+rewards = Array[ExtResource("2_biy6h")]([SubResource("Resource_0kkfv"), SubResource("Resource_da3ho")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_txp7i"]
+script = ExtResource("1_5qk8t")
+choiceDescription = "I did not need to give up their bones here. I knew I would reach the end."
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_tcchf")
+title = "Taste of Death"
+dialog = "As I stood on a cliff before an open prairie with small mounds of ice and snow, I felt a presence hidden amongst the deposits. Something was hungry, but it also felt intelligent. Then, I questioned those notions. Why did I have those thoughts? Where were they coming from? The presence had slipped those feelings into my head. And an offer. “Bones. Recovery. Choice” So I made one."
+choices = Array[ExtResource("1_5qk8t")]([SubResource("Resource_q56s0"), SubResource("Resource_txp7i")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=6 format=3 uid="uid://b3sx8mgugddh5"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_5278e"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_1fyca"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_jxkka"]
+
+[sub_resource type="Resource" id="Resource_l55yd"]
+script = ExtResource("2_jxkka")
+rewardType = 7
+rewardValue = 5
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_opnua"]
+script = ExtResource("1_5278e")
+choiceDescription = "The next morning, my pack grew heavier."
+rewards = Array[ExtResource("2_jxkka")]([SubResource("Resource_l55yd")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_1fyca")
+title = "Gift From Beyond"
+dialog = "One evening, before the small embers of my fire went out, somebody visited my resting spot. A presence stood behind my back as I lay towards the fire. Yet, in my heart, I knew they were not a threat. I was not one to put my faith in chance or emotion, but perhaps, just this once, I let go of control."
+choices = Array[ExtResource("1_5278e")]([SubResource("Resource_opnua")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

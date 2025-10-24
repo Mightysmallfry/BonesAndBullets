@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=12 format=3 uid="uid://qklj5tvtn7rn"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_17fff"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_gx7py"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_w84ou"]
+[ext_resource type="Script" uid="uid://bmvj0urqjcfch" path="res://Combat/Scripts/enemy_class.gd" id="3_q362c"]
+[ext_resource type="Script" uid="uid://cylvhb4uifafa" path="res://Combat/Scripts/Combat.gd" id="4_72gpv"]
+
+[sub_resource type="Resource" id="Resource_33l8o"]
+script = ExtResource("2_gx7py")
+rewardType = 7
+rewardValue = -20
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_0pdu6"]
+script = ExtResource("1_17fff")
+choiceDescription = "Throw some bones away to distract it. Make a run for it!"
+requresResource = 2
+rewards = Array[ExtResource("2_gx7py")]([SubResource("Resource_33l8o")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_ogxyl"]
+script = ExtResource("3_q362c")
+name = "Mutant? Man?"
+health = 150
+speed = 25
+melee = 75
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
+
+[sub_resource type="Resource" id="Resource_dcgcm"]
+script = ExtResource("4_72gpv")
+enemies = Array[ExtResource("3_q362c")]([SubResource("Resource_ogxyl")])
+metadata/_custom_type_script = "uid://cylvhb4uifafa"
+
+[sub_resource type="Resource" id="Resource_h35oy"]
+script = ExtResource("2_gx7py")
+rewardType = 6
+combatPath = SubResource("Resource_dcgcm")
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_ardcu"]
+script = ExtResource("1_17fff")
+choiceDescription = "Make a stand. These bones are not this creature’s to take"
+rewards = Array[ExtResource("2_gx7py")]([SubResource("Resource_h35oy")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_w84ou")
+title = "The Line Between Man and Beast"
+dialog = "Passing through a glacial ravine, I began to hear shifting in the surrounding snow. At first, I paid it no heed. Then I heard that sound. A crunch, as if somebody had just cracked through bone with bare teeth. A glance backward revealed a behemoth of a creature that had made its place next to me. In my mind, I heard an echo ring out. “Bones! Give!” A mutation. A creature that had developed in a way incomprehensible during the time before the long winter. I had two choices:"
+choices = Array[ExtResource("1_17fff")]([SubResource("Resource_0pdu6"), SubResource("Resource_ardcu")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

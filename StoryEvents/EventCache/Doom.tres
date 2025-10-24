@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=8 format=3 uid="uid://v3bq7rpfdmh"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_l4pd6"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_ns32s"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_yj51v"]
+
+[sub_resource type="Resource" id="Resource_gcfqk"]
+script = ExtResource("2_ns32s")
+rewardType = 2
+rewardValue = -25
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_2awgi"]
+script = ExtResource("1_l4pd6")
+choiceDescription = "When I stepped, I felt a delay. So, I dived as far away as I could."
+rewards = Array[ExtResource("2_ns32s")]([SubResource("Resource_gcfqk")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_tdxyu"]
+script = ExtResource("2_ns32s")
+rewardType = 1
+rewardValue = -1
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_us61x"]
+script = ExtResource("1_l4pd6")
+choiceDescription = "I took out my weapon. I had seen designs like this before. So, I shot the mine."
+requresResource = 1
+rewards = Array[ExtResource("2_ns32s")]([SubResource("Resource_tdxyu")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_yj51v")
+title = "Sound of Doom"
+dialog = "It was my mistake. I didn’t expect it to still be accessible below the snow and ice, let alone still active. While I walked up a hill before me, I stoped in my tracks when I heard the noise. *Click* Luckily, it was a pressure sensor mine. At least half a century old. The boom comes after I make my decision. Not before. That’s all the luck I had in this situation. I knew what I had to do, given my state:"
+choices = Array[ExtResource("1_l4pd6")]([SubResource("Resource_2awgi"), SubResource("Resource_us61x")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

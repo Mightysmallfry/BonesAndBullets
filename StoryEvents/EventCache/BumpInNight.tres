@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=18 format=3 uid="uid://b8s5yv2bc0yu8"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_hp6lh"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_06hiv"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_flifa"]
+[ext_resource type="Script" uid="uid://bmvj0urqjcfch" path="res://Combat/Scripts/enemy_class.gd" id="3_x4iyl"]
+[ext_resource type="Script" uid="uid://cylvhb4uifafa" path="res://Combat/Scripts/Combat.gd" id="4_sp6gl"]
+
+[sub_resource type="Resource" id="Resource_x4iyl"]
+script = ExtResource("2_06hiv")
+rewardType = 2
+rewardValue = -10
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_sp6gl"]
+script = ExtResource("2_06hiv")
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_eqlcm"]
+script = ExtResource("1_hp6lh")
+choiceDescription = "One must always look for a way to escape"
+rewards = Array[ExtResource("2_06hiv")]([SubResource("Resource_x4iyl"), SubResource("Resource_sp6gl")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_xqnba"]
+script = ExtResource("2_06hiv")
+rewardType = 1
+rewardValue = -1
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_0hjw2"]
+script = ExtResource("1_hp6lh")
+choiceDescription = "I fired a warning shot to scare them off. Simple creatures."
+rewards = Array[ExtResource("2_06hiv")]([SubResource("Resource_xqnba")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_qmiha"]
+script = ExtResource("2_06hiv")
+rewardType = 7
+rewardValue = -10
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_382wl"]
+script = ExtResource("1_hp6lh")
+choiceDescription = "From my bag, I tossed a portion of the bones. Let’s hope I have enough left"
+requresResource = 2
+rewards = Array[ExtResource("2_06hiv")]([SubResource("Resource_qmiha")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_0bicq"]
+script = ExtResource("3_x4iyl")
+name = "Wolf"
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
+
+[sub_resource type="Resource" id="Resource_c5geh"]
+script = ExtResource("3_x4iyl")
+name = "Wolf"
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
+
+[sub_resource type="Resource" id="Resource_bjxcl"]
+script = ExtResource("4_sp6gl")
+enemies = Array[ExtResource("3_x4iyl")]([SubResource("Resource_0bicq"), SubResource("Resource_c5geh")])
+metadata/_custom_type_script = "uid://cylvhb4uifafa"
+
+[sub_resource type="Resource" id="Resource_flifa"]
+script = ExtResource("2_06hiv")
+rewardType = 6
+combatPath = SubResource("Resource_bjxcl")
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_06hiv"]
+script = ExtResource("1_hp6lh")
+choiceDescription = "They wanted a fight and food. So did I."
+rewards = Array[ExtResource("2_06hiv")]([SubResource("Resource_flifa")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_flifa")
+title = "Bump in the Night"
+dialog = "A howling woke me from light sleep. Wolves. In my wake, I noticed yellow eyes staring at me in the dark. A gaze I recognized in my own reflection. Hunger. Yet something caught my attention. A smell. Decay, festering and pungent, coming from the eyes closest to my position. I did what I had to do:"
+choices = Array[ExtResource("1_hp6lh")]([SubResource("Resource_eqlcm"), SubResource("Resource_0hjw2"), SubResource("Resource_382wl"), SubResource("Resource_06hiv")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

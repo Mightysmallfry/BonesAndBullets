@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=7 format=3 uid="uid://cfrxduue8mhl4"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=9 format=3 uid="uid://cfrxduue8mhl4"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_1ns65"]
 [ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_fupl6"]
@@ -21,9 +21,21 @@ script = ExtResource("1_1ns65")
 choiceDescription = "I left quickly, scavengers could still be around. I didn't want to make any enemies."
 metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 
+[sub_resource type="Resource" id="Resource_qrsjb"]
+script = ExtResource("2_qrsjb")
+rewardType = 2
+rewardValue = 10
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_yvcbt"]
+script = ExtResource("1_1ns65")
+choiceDescription = "Removing the dangerous elements, this place turned out to be a pretty good shelter."
+rewards = Array[ExtResource("2_qrsjb")]([SubResource("Resource_qrsjb")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
 [resource]
 script = ExtResource("2_fupl6")
 title = "Sleeping Giant"
 dialog = "My foot got snagged on something early today. At first I thought it was just some branch, or my pants freezing to the tundra floor. Color me surprised when I saw one of those old Krillian Empire steam tanks. It was one of the smaller gasket pipe connectors that got me. Not the first time seeing Krillian tech, hopefully the last. I can keep hoping right? Anyway The whole thing froze over and while it was blown to bits during its last engagement, has the making for a decent shelter tonight."
-choices = Array[ExtResource("1_1ns65")]([SubResource("Resource_1ns65"), SubResource("Resource_fupl6")])
+choices = Array[ExtResource("1_1ns65")]([SubResource("Resource_1ns65"), SubResource("Resource_fupl6"), SubResource("Resource_yvcbt")])
 metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

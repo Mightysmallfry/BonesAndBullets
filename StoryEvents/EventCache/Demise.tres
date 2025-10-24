@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=8 format=3 uid="uid://p5raiu1fuhje"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_mq1q8"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_6rlrc"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_s783d"]
+
+[sub_resource type="Resource" id="Resource_dmshs"]
+script = ExtResource("2_s783d")
+rewardType = 1
+rewardValue = 1
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_7dky8"]
+script = ExtResource("2_s783d")
+rewardType = 2
+rewardValue = -10
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_102na"]
+script = ExtResource("1_mq1q8")
+choiceDescription = "I waded through the waste to see if munitions still remained."
+rewards = Array[ExtResource("2_s783d")]([SubResource("Resource_dmshs"), SubResource("Resource_7dky8")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_03qjp"]
+script = ExtResource("1_mq1q8")
+choiceDescription = "I choose to avoid the land. No reason to endanger my constitution further."
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_6rlrc")
+title = "The Smell of Demise"
+dialog = "A foul scent assaulted my nose. It was a mile before I found its source. Tens of furrows filled with waste. Ten acres of spoiled farm land were spread before me. Large steam machines littered the space, flanking an old farmhouse. Often farmers had more of a reason to hold munitions; Food had become scarce even before the long winter began. "
+choices = Array[ExtResource("1_mq1q8")]([SubResource("Resource_102na"), SubResource("Resource_03qjp")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://bplt53ciknggg" path="res://StoryEvents/EventCache/OutlawStoryEvent.tres" id="3_bg2dx"]
 [ext_resource type="PackedScene" uid="uid://dq587ufv1bnf8" path="res://StoryEvents/ChoiceButton.tscn" id="3_q4lvn"]
 
-
 [node name="StoryEventDisplay" type="Control"]
 layout_mode = 3
 anchors_preset = 8

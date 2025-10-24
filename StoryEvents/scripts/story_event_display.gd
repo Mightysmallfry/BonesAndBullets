@@ -103,6 +103,12 @@ func _on_choice_pressed(choiceData: StoryChoice):
 				get_tree().current_scene = arena
 				current.queue_free()
 				return
+			rewards.ChoiceTypeEnum.BONE:
+				if Globals.currentBones > 0:
+					Globals.currentBones += rewards.rewardValue
+					clamp(Globals.currentBones, 0, Globals.startingBones)
+				finish_story_event()
+				return
 			_:
 				print("UNKNOWN CHOICE!!!")
 				finish_story_event()

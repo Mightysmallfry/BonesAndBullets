@@ -3,7 +3,7 @@ class_name ChoiceReward
 
 
 # Rewards can also be subtractive
-enum ChoiceTypeEnum { CONTINUE, BULLET, HEALTH, PROGRESS, GAMBLE, NEXT, COMBAT }
+enum ChoiceTypeEnum { CONTINUE, BULLET, HEALTH, PROGRESS, GAMBLE, NEXT, COMBAT, BONE }
 
 # Continue - Move on
 # Bullet - Gain or lose bullets instead of health etc.
