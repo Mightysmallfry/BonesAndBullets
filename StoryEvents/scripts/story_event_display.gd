@@ -66,9 +66,6 @@ func _on_choice_pressed(choiceData: StoryChoice):
 				else:
 					Globals.totalBulletsUsed += rewards.rewardValue
 				clamp(Globals.bullets, 0, Globals.maxBullets)
-				finish_story_event()
-				# Emit continue signal
-				return
 			rewards.ChoiceTypeEnum.HEALTH:
 				print("No man outsmarts Health")
 				Globals.playerHealth += rewards.rewardValue;
@@ -79,21 +76,14 @@ func _on_choice_pressed(choiceData: StoryChoice):
 					Globals.totalHealthLost += rewards.rewardValue
 				if Globals.playerHealth == 0:
 					get_tree().change_scene_to_file("res://Menus/end_menu.tscn")
-				finish_story_event()
-				return
 			rewards.ChoiceTypeEnum.PROGRESS:
 				print("No man outsmarts Progress")
 				Globals.current_time = %StoryProgressionTimer.time_left
 				Globals.current_time -= rewards.rewardValue
-				finish_story_event()
-				return
 			rewards.ChoiceTypeEnum.GAMBLE:
 				print("No man outsmarts Gamble")
-				finish_story_event()
-				return
 			rewards.ChoiceTypeEnum.NEXT:
 				load_story_event_data(rewards.nextEvent)
-				return
 			rewards.ChoiceTypeEnum.COMBAT:
 				var arena = load("res://Combat/Arena.tscn").instantiate()
 				arena.thisCombatEvent = rewards.combatPath
@@ -102,17 +92,14 @@ func _on_choice_pressed(choiceData: StoryChoice):
 				get_tree().root.add_child(arena)
 				get_tree().current_scene = arena
 				current.queue_free()
-				return
 			rewards.ChoiceTypeEnum.BONE:
 				if Globals.currentBones > 0:
 					Globals.currentBones += rewards.rewardValue
 					Globals.currentBones = clamp(Globals.currentBones, 0, Globals.startingBones)
-				finish_story_event()
-				return
 			_:
 				print("UNKNOWN CHOICE!!!")
 				finish_story_event()
-				return
+	finish_story_event()
 		
 func finish_story_event() -> void:
 	visible = false
