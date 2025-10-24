@@ -53,7 +53,7 @@ script = ExtResource("3_x4iyl")
 name = "Wolf"
 speed = 70
 speed_variance = 5
-melee = 60
+melee = 80
 melee_variance = 3
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
@@ -62,6 +62,7 @@ script = ExtResource("3_x4iyl")
 name = "Wolf"
 speed = 70
 speed_variance = 3
+melee = 80
 melee_variance = 4
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 

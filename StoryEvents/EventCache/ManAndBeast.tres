@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=12 format=3 uid="uid://qklj5tvtn7rn"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=12 format=3 uid="uid://dobevrqhptjv8"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_17fff"]
 [ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_gx7py"]
@@ -23,9 +23,9 @@ metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
 script = ExtResource("3_q362c")
 name = "Mutant? Man?"
 health = 150
-speed = 70
+speed = 65
 melee = 75
-distance = 30.0
+distance = 40.0
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
 [sub_resource type="Resource" id="Resource_dcgcm"]

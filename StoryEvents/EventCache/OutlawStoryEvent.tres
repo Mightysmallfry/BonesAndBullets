@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StoryEventData" load_steps=20 format=3 uid="uid://bplt53ciknggg"]
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=20 format=3 uid="uid://bkvayxy6qjndq"]
 
 [ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_hdv1j"]
 [ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_6lk70"]
@@ -59,23 +59,30 @@ metadata/_custom_type_script = "uid://clpq4hx62ng3d"
 [sub_resource type="Resource" id="Resource_4s7mk"]
 script = ExtResource("3_1kxbe")
 name = "Brute"
+melee = 60
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
 [sub_resource type="Resource" id="Resource_5om01"]
 script = ExtResource("3_1kxbe")
 name = "Outlaw"
 attack_type = 1
+cover_seeking = 1
+movement_reaction = 1
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
 [sub_resource type="Resource" id="Resource_o75t8"]
 script = ExtResource("3_1kxbe")
 name = "Chief"
+aim = 55
 attack_type = 1
+cover_seeking = 2
 prefered_distance = 2
+movement_reaction = 2
 metadata/_custom_type_script = "uid://bmvj0urqjcfch"
 
 [sub_resource type="Resource" id="Resource_qcda8"]
 script = ExtResource("4_g3pgk")
+player_moves_first = false
 enemies = Array[ExtResource("3_1kxbe")]([SubResource("Resource_4s7mk"), SubResource("Resource_5om01"), SubResource("Resource_o75t8")])
 metadata/_custom_type_script = "uid://cylvhb4uifafa"
 

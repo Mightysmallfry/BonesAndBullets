@@ -61,11 +61,11 @@ func _on_choice_pressed(choiceData: StoryChoice):
 			rewards.ChoiceTypeEnum.BULLET:
 				print("No man outsmarts bullet")
 				Globals.bullets += rewards.rewardValue;
+				Globals.bullets = clamp(Globals.bullets, 0, Globals.maxBullets)
 				if rewards.rewardValue > 0:
 					Globals.totalBulletsFound += rewards.rewardValue
 				else:
-					Globals.totalBulletsUsed += rewards.rewardValue
-				clamp(Globals.bullets, 0, Globals.maxBullets)
+					Globals.totalBulletsUsed -= rewards.rewardValue
 			rewards.ChoiceTypeEnum.HEALTH:
 				print("No man outsmarts Health")
 				Globals.playerHealth += rewards.rewardValue;

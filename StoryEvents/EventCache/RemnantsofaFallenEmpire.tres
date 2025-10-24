@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="StoryEventData" load_steps=12 format=3 uid="uid://1r3kd8xi41k"]
+
+[ext_resource type="Script" uid="uid://cb7lgkcg0kxuh" path="res://StoryEvents/scripts/StoryChoice.gd" id="1_miud0"]
+[ext_resource type="Script" uid="uid://clpq4hx62ng3d" path="res://StoryEvents/scripts/ChoiceReward.gd" id="2_pxskf"]
+[ext_resource type="Script" uid="uid://b4ar7kp5o36hb" path="res://StoryEvents/scripts/StoryEventData.gd" id="2_wnr18"]
+[ext_resource type="Script" uid="uid://bmvj0urqjcfch" path="res://Combat/Scripts/enemy_class.gd" id="3_bbcw4"]
+[ext_resource type="Script" uid="uid://cylvhb4uifafa" path="res://Combat/Scripts/Combat.gd" id="4_nbnws"]
+
+[sub_resource type="Resource" id="Resource_bbcw4"]
+script = ExtResource("2_pxskf")
+rewardType = 7
+rewardValue = -40
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_nbnws"]
+script = ExtResource("1_miud0")
+choiceDescription = "The hulk of a construct was too much to contended with, I had to give up a part of them"
+requresResource = 2
+rewards = Array[ExtResource("2_pxskf")]([SubResource("Resource_bbcw4")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[sub_resource type="Resource" id="Resource_3ks46"]
+script = ExtResource("3_bbcw4")
+name = "Krillian Contruct"
+health = 150
+health_variance = 5
+speed = 25
+melee = 75
+cover_seeking = 1
+distance = 0.0
+metadata/_custom_type_script = "uid://bmvj0urqjcfch"
+
+[sub_resource type="Resource" id="Resource_s0efn"]
+script = ExtResource("4_nbnws")
+enemies = Array[ExtResource("3_bbcw4")]([SubResource("Resource_3ks46")])
+metadata/_custom_type_script = "uid://cylvhb4uifafa"
+
+[sub_resource type="Resource" id="Resource_3tsqh"]
+script = ExtResource("2_pxskf")
+rewardType = 6
+combatPath = SubResource("Resource_s0efn")
+metadata/_custom_type_script = "uid://clpq4hx62ng3d"
+
+[sub_resource type="Resource" id="Resource_hh1ug"]
+script = ExtResource("1_miud0")
+choiceDescription = "The only choice was to fight. It was time for the Krillian empire to truly die"
+rewards = Array[ExtResource("2_pxskf")]([SubResource("Resource_3tsqh")])
+metadata/_custom_type_script = "uid://cb7lgkcg0kxuh"
+
+[resource]
+script = ExtResource("2_wnr18")
+title = "Remnants of a Fallen Empire"
+dialog = "Passing through an industrial district of some forgotten place, I passed by a poster that hadn’t fully faded. I’ve studied the language in passing for many years, so I recognized a few words. It was Krillian:“Join” “War” “Enemy” “Destroy” “For Krill”I traced the each word as I remember what I learned. Big Mistake. The poster wasn’t just on some wall, but on a construct of the past. It’s request echoed through the surround space.“CALCIUM OR ANNIALATION. CHOICE”"
+choices = Array[ExtResource("1_miud0")]([SubResource("Resource_nbnws"), SubResource("Resource_hh1ug")])
+metadata/_custom_type_script = "uid://b4ar7kp5o36hb"

@@ -147,9 +147,9 @@ func _process_enemies_turn()->void:
 		var current_enemy = thisCombatEvent.enemies[_current_turn]
 		current_enemy.action_points = floor(current_enemy.speed / 33.0) + 1
 		if current_enemy.attack_type == 0:
-			current_enemy.movement = 2
+			current_enemy.movement = floor(current_enemy.speed / 20) + 1
 		else:
-			current_enemy.movement = 1
+			current_enemy.movement = floor(current_enemy.speed / 25) + 1
 		combatUI.battle_lines(_current_turn)
 		action(current_enemy)
 		current_enemy.action_points -= 1
@@ -277,12 +277,12 @@ func _attack(acting_enemy:enemy)->void:
 		var melee = _calculate_melee(acting_enemy)
 		if randf() < melee:
 			# Player Wins
-			var damage:int = round(melee * player.melee)
+			var damage:int = round(melee * player.melee * 2)
 			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with You but You won, causing " + str(damage) + " damage")
 			_enemy_take_damage(acting_enemy, damage)
 		else:
 			# Player Loses
-			var damage:int = round(melee * acting_enemy.melee)
+			var damage:int = round(melee * acting_enemy.melee * 2)
 			combatUI.update_battle_log(acting_enemy.name + " engaged in a melee with You and beat You up causing " + str(damage) + " damage")
 			_take_damage(damage)
 		$AudioStreamPlayer2D.stream = _melee_sound
@@ -401,7 +401,7 @@ func _move_away(index:int)->void:
 
 func _shoot(index:int)->void:
 	player.bullets -= 1
-	Globals.totalBulletsUsed -= 1
+	Globals.totalBulletsUsed += 1
 	if rng.randf() < _calculate_aim_chance(player, thisCombatEvent.enemies[index]):
 		var bullet_damage:int = randi_range(40,80)
 		combatUI.update_battle_log("You shoot " + thisCombatEvent.enemies[index].name + " for " + str(bullet_damage) + " health")
@@ -417,12 +417,12 @@ func _melee(index:int)->void:
 	var melee = _calculate_melee(thisCombatEvent.enemies[index])
 	if rng.randf() < melee:
 		# Player Wins
-		var damage:int = round(melee * player.melee)
+		var damage:int = round(melee * player.melee * 2)
 		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee and won, causing " + str(damage) + " damage")
 		_enemy_take_damage(thisCombatEvent.enemies[index], damage)
 	else:
 		# Player Loses
-		var damage:int = round(thisCombatEvent.enemies[index].melee)
+		var damage:int = round(thisCombatEvent.enemies[index].melee * 2)
 		combatUI.update_battle_log("You engaged " + thisCombatEvent.enemies[index].name + " in a melee but beat you up, causing " + str(damage) + " damage")
 		_take_damage(melee * damage)
 	pass

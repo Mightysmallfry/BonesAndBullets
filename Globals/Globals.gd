@@ -5,7 +5,7 @@ extends Node2D
 @export var startingBones: int = 206
 @export var currentBones: int = startingBones
 @export var bullets: int = 6
-@export var maxBullets: int = 12
+@export var maxBullets: int = 16
 @export var maxHealth: int = 100
 
 var totalBulletsUsed: int = 0
